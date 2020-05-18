@@ -52,6 +52,8 @@ locale/
 *.cbp
 *.layout
 *.o
+*.d
+*.so.*
 *.a
 *.ninja
 .ninja*
