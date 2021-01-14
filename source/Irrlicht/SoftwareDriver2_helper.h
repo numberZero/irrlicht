@@ -13,7 +13,6 @@
 #include "SoftwareDriver2_compile_config.h"
 #include "irrMath.h"
 #include "irrMathFastCompat.h"
-#include "CSoftwareTexture2.h"
 #include "SMaterial.h"
 
 
@@ -822,7 +821,7 @@ struct sInternalTexture
 
 	size_t pitchlog2;
 
-	video::CSoftwareTexture2 *Texture;
+	//video::CSoftwareTexture2 *Texture;
 	s32 lodFactor; // magnify/minify
 };
 

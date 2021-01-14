@@ -24,7 +24,7 @@ namespace irr
 		//! Constructs a SIrrlichtCreationParameters structure with default values.
 		SIrrlichtCreationParameters() :
 			DeviceType(EIDT_BEST),
-			DriverType(video::EDT_BURNINGSVIDEO),
+			DriverType(video::EDT_OPENGL),
 			WindowSize(core::dimension2d<u32>(800, 600)),
 			WindowPosition(core::position2di(-1,-1)),
 			Bits(32),
@@ -108,9 +108,7 @@ namespace irr
 		E_DEVICE_TYPE DeviceType;
 
 		//! Type of video driver used to render graphics.
-		/** This can currently be video::EDT_NULL, video::EDT_SOFTWARE,
-		video::EDT_BURNINGSVIDEO, video::EDT_DIRECT3D9, and video::EDT_OPENGL.
-		Default: EDT_BURNINGSVIDEO. */
+		/** Default: EDT_OPENGL. */
 		video::E_DRIVER_TYPE DriverType;
 
 		//! Size of the window or the video mode in fullscreen mode. Default: 800x600

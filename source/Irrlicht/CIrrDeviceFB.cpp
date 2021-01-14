@@ -207,22 +207,6 @@ void CIrrDeviceFB::createDriver()
 {
 	switch(CreationParams.DriverType)
 	{
-	case video::EDT_SOFTWARE:
-		#ifdef _IRR_COMPILE_WITH_SOFTWARE_
-		VideoDriver = video::createSoftwareDriver(CreationParams.WindowSize, CreationParams.Fullscreen, FileSystem, this);
-		#else
-		os::Printer::log("No Software driver support compiled in.", ELL_WARNING);
-		#endif
-		break;
-
-	case video::EDT_BURNINGSVIDEO:
-		#ifdef _IRR_COMPILE_WITH_BURNINGSVIDEO_
-		VideoDriver = video::createBurningVideoDriver(CreationParams, FileSystem, this);
-		#else
-		os::Printer::log("Burning's video driver was not compiled in.", ELL_WARNING);
-		#endif
-		break;
-
 	case video::EDT_OGLES2:
 		#ifdef _IRR_COMPILE_WITH_OGLES2_
 		{
@@ -436,30 +420,8 @@ void CIrrDeviceFB::sleep(u32 timeMs, bool pauseTimer=false)
 //! presents a surface in the client area
 bool CIrrDeviceFB::present(video::IImage* image, void* windowId, core::rect<s32>* src )
 {
-	// this is only necessary for software drivers.
-	if (CreationParams.DriverType != video::EDT_SOFTWARE && CreationParams.DriverType != video::EDT_BURNINGSVIDEO)
-		return false;
-
-	if (!SoftwareImage)
-		return false;
-
-	u8* destData = SoftwareImage;
-	u32 srcwidth = (u32)image->getDimension().Width;
-	u32 srcheight = (u32)image->getDimension().Height;
-	// clip images
-	srcheight = core::min_(srcheight, CreationParams.WindowSize.Height);
-	srcwidth = core::min_(srcwidth, CreationParams.WindowSize.Width);
-
-	u8* srcdata = (u8*)image->lock();
-	for (u32 y=0; y<srcheight; ++y)
-	{
-		video::CColorConverter::convert_viaFormat(srcdata, image->getColorFormat(), srcwidth, destData, FBColorFormat);
-		srcdata+=image->getPitch();
-		destData+=Pitch;
-	}
-	image->unlock();
-	msync(SoftwareImage,CreationParams.WindowSize.Width*CreationParams.WindowSize.Height,MS_ASYNC);
-	return true;
+	// this is only necessary for software drivers which were dropped
+	return false;
 }
 
 

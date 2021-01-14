@@ -383,7 +383,6 @@ namespace irr
 		Window XWindow;
 		XSetWindowAttributes WndAttributes;
 		XSizeHints* StdHints;
-		XImage* SoftwareImage;
 		XIM XInputMethod;
 		XIC XInputContext;
 		bool HasNetWM;

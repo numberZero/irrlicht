@@ -820,8 +820,6 @@ namespace irr
 #endif
 				break;
 
-            case video::EDT_SOFTWARE:
-            case video::EDT_BURNINGSVIDEO:
             case video::EDT_OPENGL:
                 os::Printer::log("This driver is not available in iOS. Try OpenGL ES.", ELL_ERROR);
                 break;

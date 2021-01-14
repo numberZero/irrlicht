@@ -31,7 +31,6 @@ LOCAL_SRC_FILES := \
 					aesGladman/pwd2key.cpp \
 					aesGladman/sha1.cpp \
 					aesGladman/sha2.cpp \
-					burning_shader_color.cpp \
 					C3DSMeshFileLoader.cpp \
 					CAnimatedMeshHalfLife.cpp \
 					CAnimatedMeshMD2.cpp \
@@ -43,7 +42,6 @@ LOCAL_SRC_FILES := \
 					CBillboardSceneNode.cpp \
 					CBoneSceneNode.cpp \
 					CBSPMeshFileLoader.cpp \
-					CBurningShader_Raster_Reference.cpp \
 					CCameraSceneNode.cpp \
 					CColladaFileLoader.cpp \
 					CColladaMeshWriter.cpp \
@@ -53,7 +51,6 @@ LOCAL_SRC_FILES := \
 					CDefaultGUIElementFactory.cpp \
 					CDefaultSceneNodeAnimatorFactory.cpp \
 					CDefaultSceneNodeFactory.cpp \
-					CDepthBuffer.cpp \
 					CDMFLoader.cpp \
 					CDummyTransformationSceneNode.cpp \
 					CEmptySceneNode.cpp \
@@ -196,10 +193,6 @@ LOCAL_SRC_FILES := \
 					CSkyBoxSceneNode.cpp \
 					CSkyDomeSceneNode.cpp \
 					CSMFMeshFileLoader.cpp \
-					CSoftwareDriver.cpp \
-					CSoftwareDriver2.cpp \
-					CSoftwareTexture.cpp \
-					CSoftwareTexture2.cpp \
 					CSphereSceneNode.cpp \
 					CSTLMeshFileLoader.cpp \
 					CSTLMeshWriter.cpp \
@@ -207,40 +200,8 @@ LOCAL_SRC_FILES := \
 					CTerrainSceneNode.cpp \
 					CTerrainTriangleSelector.cpp \
 					CTextSceneNode.cpp \
-					CTRFlat.cpp \
-					CTRFlatWire.cpp \
-					CTRGouraud.cpp \
-					CTRGouraud2.cpp \
-					CTRGouraudAlpha2.cpp \
-					CTRGouraudAlphaNoZ2.cpp \
-					CTRGouraudWire.cpp \
 					CTriangleBBSelector.cpp \
 					CTriangleSelector.cpp \
-					CTRGouraudNoZ2.cpp \
-					CTRNormalMap.cpp \
-					CTRStencilShadow.cpp \
-					CTRTextureBlend.cpp \
-					CTRTextureDetailMap2.cpp \
-					CTRTextureFlat.cpp \
-					CTRTextureFlatWire.cpp \
-					CTRTextureGouraud.cpp \
-					CTRTextureGouraud2.cpp \
-					CTRTextureGouraudAdd.cpp \
-					CTRTextureGouraudAdd2.cpp \
-					CTRTextureGouraudAddNoZ2.cpp \
-					CTRTextureGouraudAlpha.cpp \
-					CTRTextureGouraudAlphaNoZ.cpp \
-					CTRTextureGouraudNoZ.cpp \
-					CTRTextureGouraudNoZ2.cpp \
-					CTRTextureGouraudVertexAlpha2.cpp \
-					CTRTextureGouraudWire.cpp \
-					CTRTextureLightMap2_Add.cpp \
-					CTRTextureLightMap2_M1.cpp \
-					CTRTextureLightMap2_M2.cpp \
-					CTRTextureLightMap2_M4.cpp \
-					CTRTextureLightMapGouraud2_M4.cpp \
-					CTRTextureWire2.cpp \
-					CTR_transparent_reflection_2_layer.cpp \
 					CVideoModeList.cpp \
 					CVolumeLightSceneNode.cpp \
 					CWADReader.cpp \
@@ -249,9 +210,7 @@ LOCAL_SRC_FILES := \
 					CXMeshFileLoader.cpp \
 					CXMLReader.cpp \
 					CXMLWriter.cpp \
-					CZBuffer.cpp \
 					CZipReader.cpp \
-					IBurningShader.cpp \
 					Irrlicht.cpp \
 					irrXML.cpp \
 					os.cpp	 \
