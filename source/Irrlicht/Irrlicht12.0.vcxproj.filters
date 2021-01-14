@@ -1080,6 +1080,9 @@
     <ClInclude Include="bzip2\bzlib_private.h">
       <Filter>Irrlicht\irr\extern\bzip2</Filter>
     </ClInclude>
+    <ClInclude Include="CIrrDeviceConsole.h">
+      <Filter>Irrlicht\irr\device</Filter>
+    </ClInclude>
     <ClInclude Include="CIrrDeviceFB.h">
       <Filter>Irrlicht\irr\device</Filter>
     </ClInclude>
@@ -2086,6 +2089,9 @@
     </ClCompile>
     <ClCompile Include="bzip2\randtable.c">
       <Filter>Irrlicht\irr\extern\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="CIrrDeviceConsole.cpp">
+      <Filter>Irrlicht\irr\device</Filter>
     </ClCompile>
     <ClCompile Include="CIrrDeviceFB.cpp">
       <Filter>Irrlicht\irr\device</Filter>
