@@ -755,8 +755,6 @@
 		<Unit filename="CImageWriterPSD.h" />
 		<Unit filename="CImageWriterTGA.cpp" />
 		<Unit filename="CImageWriterTGA.h" />
-		<Unit filename="CIrrDeviceConsole.cpp" />
-		<Unit filename="CIrrDeviceConsole.h" />
 		<Unit filename="CIrrDeviceLinux.cpp" />
 		<Unit filename="CIrrDeviceLinux.h" />
 		<Unit filename="CIrrDeviceSDL.cpp" />

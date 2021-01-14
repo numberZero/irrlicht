@@ -397,7 +397,6 @@
 		5E5733101C18E212003F664E /* jdmerge.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E34C8521B7F561400F212E8 /* jdmerge.c */; };
 		5E5733111C18E212003F664E /* jdpostct.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E34C8531B7F561400F212E8 /* jdpostct.c */; };
 		5E5733121C18E212003F664E /* jdsample.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E34C8541B7F561400F212E8 /* jdsample.c */; };
-		5E5733131C18E212003F664E /* CIrrDeviceConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8570BA1B7F9AC400B267D2 /* CIrrDeviceConsole.cpp */; };
 		5E5733141C18E212003F664E /* jdtrans.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E34C8551B7F561400F212E8 /* jdtrans.c */; };
 		5E5733151C18E212003F664E /* jerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E34C8561B7F561400F212E8 /* jerror.c */; };
 		5E5733161C18E212003F664E /* jfdctflt.c in Sources */ = {isa = PBXBuildFile; fileRef = 5E34C8581B7F568200F212E8 /* jfdctflt.c */; };
@@ -611,7 +610,6 @@
 		5E5734141C18E2E2003F664E /* COGLES2Renderer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E5734051C18E2E2003F664E /* COGLES2Renderer2D.cpp */; };
 		5E7908971C10EF3F00DFE7FE /* COpenGLCacheHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E7908911C10EEC000DFE7FE /* COpenGLCacheHandler.cpp */; };
 		5E79089B1C10FEF900DFE7FE /* CB3DMeshWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E7908981C10FE4A00DFE7FE /* CB3DMeshWriter.cpp */; };
-		5E8570BC1B7F9AC400B267D2 /* CIrrDeviceConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E8570BA1B7F9AC400B267D2 /* CIrrDeviceConsole.cpp */; };
 		5E9573D71C18E9E600C27989 /* CEAGLManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E9573D61C18E9E600C27989 /* CEAGLManager.mm */; };
 		84A219B7249F82E800E189FC /* burning_shader_color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A219B6249F82E800E189FC /* burning_shader_color.cpp */; };
 		84A219B9249F834000E189FC /* CTRGouraudNoZ2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A219B8249F834000E189FC /* CTRGouraudNoZ2.cpp */; };
@@ -1363,8 +1361,6 @@
 		5E7908931C10EEC000DFE7FE /* COpenGLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COpenGLCommon.h; sourceTree = "<group>"; };
 		5E7908981C10FE4A00DFE7FE /* CB3DMeshWriter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CB3DMeshWriter.cpp; sourceTree = "<group>"; };
 		5E7908991C10FE4A00DFE7FE /* CB3DMeshWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CB3DMeshWriter.h; sourceTree = "<group>"; };
-		5E8570BA1B7F9AC400B267D2 /* CIrrDeviceConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CIrrDeviceConsole.cpp; sourceTree = "<group>"; };
-		5E8570BB1B7F9AC400B267D2 /* CIrrDeviceConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIrrDeviceConsole.h; sourceTree = "<group>"; };
 		5E9573D11C18E70000C27989 /* EVertexAttributes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EVertexAttributes.h; path = ../../include/EVertexAttributes.h; sourceTree = "<group>"; };
 		5E9573D31C18E9B300C27989 /* CEAGLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEAGLManager.h; sourceTree = "<group>"; };
 		5E9573D61C18E9E600C27989 /* CEAGLManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CEAGLManager.mm; sourceTree = "<group>"; };
@@ -1839,8 +1835,6 @@
 		5E34C8061B7F51F100F212E8 /* device */ = {
 			isa = PBXGroup;
 			children = (
-				5E8570BA1B7F9AC400B267D2 /* CIrrDeviceConsole.cpp */,
-				5E8570BB1B7F9AC400B267D2 /* CIrrDeviceConsole.h */,
 				5E5733E61C18E254003F664E /* CIrrDeviceiOS.h */,
 				5E5733E71C18E254003F664E /* CIrrDeviceiOS.mm */,
 				5E34C8131B7F535C00F212E8 /* CIrrDeviceOSX.h */,
@@ -2639,7 +2633,6 @@
 				5E34CA961B7F6EC000F212E8 /* jdmerge.c in Sources */,
 				5E34CA971B7F6EC000F212E8 /* jdpostct.c in Sources */,
 				5E34CA981B7F6EC000F212E8 /* jdsample.c in Sources */,
-				5E8570BC1B7F9AC400B267D2 /* CIrrDeviceConsole.cpp in Sources */,
 				5E34CA991B7F6EC000F212E8 /* jdtrans.c in Sources */,
 				5E34CA9A1B7F6EC000F212E8 /* jerror.c in Sources */,
 				5E34CA9C1B7F6EC000F212E8 /* jfdctflt.c in Sources */,
@@ -2948,7 +2941,6 @@
 				5E5733101C18E212003F664E /* jdmerge.c in Sources */,
 				5E5733111C18E212003F664E /* jdpostct.c in Sources */,
 				5E5733121C18E212003F664E /* jdsample.c in Sources */,
-				5E5733131C18E212003F664E /* CIrrDeviceConsole.cpp in Sources */,
 				5E5733141C18E212003F664E /* jdtrans.c in Sources */,
 				5E5733151C18E212003F664E /* jerror.c in Sources */,
 				5E5733161C18E212003F664E /* jfdctflt.c in Sources */,

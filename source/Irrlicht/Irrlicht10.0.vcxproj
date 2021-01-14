@@ -1210,7 +1210,6 @@
     <ClInclude Include="aesGladman\sha2.h" />
     <ClInclude Include="bzip2\bzlib.h" />
     <ClInclude Include="bzip2\bzlib_private.h" />
-    <ClInclude Include="CIrrDeviceConsole.h" />
     <ClInclude Include="CIrrDeviceFB.h" />
     <ClInclude Include="CIrrDeviceLinux.h" />
     <ClInclude Include="CIrrDeviceSDL.h" />
@@ -1534,7 +1533,6 @@
     <ClCompile Include="bzip2\decompress.c" />
     <ClCompile Include="bzip2\huffman.c" />
     <ClCompile Include="bzip2\randtable.c" />
-    <ClCompile Include="CIrrDeviceConsole.cpp" />
     <ClCompile Include="CIrrDeviceFB.cpp" />
     <ClCompile Include="CIrrDeviceLinux.cpp" />
     <ClCompile Include="CIrrDeviceSDL.cpp" />

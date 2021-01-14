@@ -34,10 +34,6 @@ static const char* const copyright = "Irrlicht Engine (c) 2002-2017 Nikolaus Geb
 #include "CIrrDeviceSDL.h"
 #endif
 
-#ifdef _IRR_COMPILE_WITH_CONSOLE_DEVICE_
-#include "CIrrDeviceConsole.h"
-#endif
-
 #ifdef _IRR_COMPILE_WITH_IOS_DEVICE_
 #include "CIrrDeviceiOS.h"
 #endif
@@ -106,11 +102,6 @@ namespace irr
 #ifdef _IRR_COMPILE_WITH_FB_DEVICE_
 		if (params.DeviceType == EIDT_FRAMEBUFFER || (!dev && params.DeviceType == EIDT_BEST))
 			dev = new CIrrDeviceFB(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_CONSOLE_DEVICE_
-		if (params.DeviceType == EIDT_CONSOLE || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceConsole(params);
 #endif
 
 		if (dev && !dev->getVideoDriver() && params.DriverType != video::EDT_NULL)
