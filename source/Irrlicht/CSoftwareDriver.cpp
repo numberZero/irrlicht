@@ -230,7 +230,7 @@ void CSoftwareDriver::setMaterial(const SMaterial& material)
 bool CSoftwareDriver::beginScene(u16 clearFlag, SColor clearColor, f32 clearDepth, u8 clearStencil, const SExposedVideoData& videoData, core::rect<s32>* sourceRect)
 {
 	CNullDriver::beginScene(clearFlag, clearColor, clearDepth, clearStencil, videoData, sourceRect);
-	WindowId=videoData.D3D9.HWnd;
+	WindowId=videoData.OpenGLWin32.HWnd; // HACK
 	SceneSourceRect = sourceRect;
 
 	clearBuffers(clearFlag, clearColor, clearDepth, clearStencil);

@@ -50,12 +50,6 @@ LOCAL_SRC_FILES := \
 					CColorConverter.cpp \
 					CCSMLoader.cpp \
 					CCubeSceneNode.cpp \
-					CD3D9Driver.cpp \
-					CD3D9HLSLMaterialRenderer.cpp \
-					CD3D9NormalMapRenderer.cpp \
-					CD3D9ParallaxMapRenderer.cpp \
-					CD3D9ShaderMaterialRenderer.cpp \
-					CD3D9Texture.cpp \
 					CDefaultGUIElementFactory.cpp \
 					CDefaultSceneNodeAnimatorFactory.cpp \
 					CDefaultSceneNodeFactory.cpp \

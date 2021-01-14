@@ -84,8 +84,6 @@ The Irrlicht Engine SDK version 1.9
   * Windows:
 	* Needed: PlatformSDK (which usually comes with all IDEs, download
 			it separately for MSVC Express 2005)
-	* Optional: DirectX SDK, for D3D9 support
-	* Optional: DirectX SDK prior to May 2006, for D3D8 support
 
   * Linux:
 	* Needed: XServer with include files

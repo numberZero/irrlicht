@@ -259,15 +259,13 @@ void CIrrDeviceFB::createDriver()
 		#endif
 		break;
 
-	case video::DEPRECATED_EDT_DIRECT3D8_NO_LONGER_EXISTS:
-	case video::EDT_OPENGL:
-	case video::EDT_DIRECT3D9:
-		os::Printer::log("This driver is not available in FB. Try Software renderer.",
-			ELL_WARNING);
+	case video::EDT_NULL:
+		VideoDriver = video::createNullDriver(FileSystem, CreationParams.WindowSize);
 		break;
 
 	default:
-		VideoDriver = video::createNullDriver(FileSystem, CreationParams.WindowSize);
+		os::Printer::log("This driver is not available in FB. Try Software renderer.",
+			ELL_WARNING);
 		break;
 	}
 }

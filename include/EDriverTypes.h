@@ -18,14 +18,14 @@ namespace video
 		//! Null driver, useful for applications to run the engine without visualization.
 		/** The null device is able to load textures, but does not
 		render and display any graphics. */
-		EDT_NULL,
+		EDT_NULL = 0,
 
 		//! The Irrlicht Engine Software renderer.
 		/** Runs on all platforms, with every hardware. It should only
 		be used for 2d graphics, but it can also perform some primitive
 		3d functions. These 3d drawing functions are quite fast, but
 		very inaccurate, and don't even support clipping in 3D mode. */
-		EDT_SOFTWARE,
+		EDT_SOFTWARE = 1,
 
 		//! The Burning's Software Renderer, an alternative software renderer
 		/** Basically it can be described as the Irrlicht Software
@@ -37,30 +37,22 @@ namespace video
 		than the EDT_SOFTWARE driver. This renderer has been written
 		entirely by Thomas Alten, thanks a lot for this huge
 		contribution. */
-		EDT_BURNINGSVIDEO,
-
-		//! Direct3D8 device is longer supported in Irrlicht. You have to go back to Irrlicht 1.8 if you still need that.
-		DEPRECATED_EDT_DIRECT3D8_NO_LONGER_EXISTS, // keep enum to avoid breaking enumeration order (might be used in ini-files, serialization, etc)
-
-		//! Direct3D 9 device, only available on Win32 platforms.
-		/** Performs hardware accelerated rendering of 3D and 2D
-		primitives. */
-		EDT_DIRECT3D9,
+		EDT_BURNINGSVIDEO = 2,
 
 		//! OpenGL device, available on most platforms.
 		/** Performs hardware accelerated rendering of 3D and 2D
 		primitives. */
-		EDT_OPENGL,
+		EDT_OPENGL = 5,
 
         //! OpenGL-ES 1.x driver, for embedded and mobile systems
-		EDT_OGLES1,
+		EDT_OGLES1 = 6,
 
 		//! OpenGL-ES 2.x driver, for embedded and mobile systems
 		/** Supports shaders etc. */
-		EDT_OGLES2,
+		EDT_OGLES2 = 7,
 
 		//! WebGL1 friendly subset of OpenGL-ES 2.x driver for Emscripten
-		EDT_WEBGL1,
+		EDT_WEBGL1 = 8,
 
 		//! No driver, just for counting the elements
 		EDT_COUNT

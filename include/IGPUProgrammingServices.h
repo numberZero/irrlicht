@@ -33,7 +33,7 @@ public:
 	virtual ~IGPUProgrammingServices() {}
 
 	//! Adds a new high-level shading material renderer to the VideoDriver.
-	/** Currently only HLSL/D3D9 and GLSL/OpenGL are supported.
+	/** Only GLSL/OpenGL is supported.
 	\param vertexShaderProgram String containing the source of the vertex
 	shader program. This can be 0 if no vertex program shall be used.
 	\param vertexShaderEntryPointName Name of the entry function of the

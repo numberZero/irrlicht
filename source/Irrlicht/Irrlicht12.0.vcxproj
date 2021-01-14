@@ -1005,7 +1005,6 @@
     <ClInclude Include="..\..\include\IGUITreeView.h" />
     <ClInclude Include="..\..\include\IGUIWindow.h" />
     <ClInclude Include="CB3DMeshWriter.h" />
-    <ClInclude Include="CD3D9RenderTarget.h" />
     <ClInclude Include="CDefaultSceneNodeAnimatorFactory.h" />
     <ClInclude Include="CDefaultSceneNodeFactory.h" />
     <ClInclude Include="CEGLManager.h" />
@@ -1155,13 +1154,6 @@
     <ClInclude Include="CImageLoaderRGB.h" />
     <ClInclude Include="CImageLoaderTGA.h" />
     <ClInclude Include="CImageLoaderWAL.h" />
-    <ClInclude Include="CD3D9Driver.h" />
-    <ClInclude Include="CD3D9HLSLMaterialRenderer.h" />
-    <ClInclude Include="CD3D9MaterialRenderer.h" />
-    <ClInclude Include="CD3D9NormalMapRenderer.h" />
-    <ClInclude Include="CD3D9ParallaxMapRenderer.h" />
-    <ClInclude Include="CD3D9ShaderMaterialRenderer.h" />
-    <ClInclude Include="CD3D9Texture.h" />
     <ClInclude Include="CDepthBuffer.h" />
     <ClInclude Include="CSoftware2MaterialRenderer.h" />
     <ClInclude Include="CSoftwareDriver2.h" />
@@ -1271,7 +1263,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CB3DMeshWriter.cpp" />
-    <ClCompile Include="CD3D9RenderTarget.cpp" />
     <ClCompile Include="CDefaultSceneNodeAnimatorFactory.cpp" />
     <ClCompile Include="CDefaultSceneNodeFactory.cpp" />
     <ClCompile Include="CEGLManager.cpp" />
@@ -1414,12 +1405,6 @@
     <ClCompile Include="CImageLoaderRGB.cpp" />
     <ClCompile Include="CImageLoaderTGA.cpp" />
     <ClCompile Include="CImageLoaderWAL.cpp" />
-    <ClCompile Include="CD3D9Driver.cpp" />
-    <ClCompile Include="CD3D9HLSLMaterialRenderer.cpp" />
-    <ClCompile Include="CD3D9NormalMapRenderer.cpp" />
-    <ClCompile Include="CD3D9ParallaxMapRenderer.cpp" />
-    <ClCompile Include="CD3D9ShaderMaterialRenderer.cpp" />
-    <ClCompile Include="CD3D9Texture.cpp" />
     <ClCompile Include="CBurningShader_Raster_Reference.cpp" />
     <ClCompile Include="CDepthBuffer.cpp" />
     <ClCompile Include="CSoftwareDriver2.cpp" />

@@ -661,7 +661,7 @@ bool CBurningVideoDriver::beginScene(u16 clearFlag, SColor clearColor, f32 clear
 #endif
 
 	Interlaced.nr = (Interlaced.nr + 1) & interlace_control_mask;
-	WindowId = videoData.D3D9.HWnd;
+	WindowId = videoData.OpenGLWin32.HWnd; // HACK
 	SceneSourceRect = sourceRect;
 
 	clearBuffers(clearFlag, clearColor, clearDepth, clearStencil);

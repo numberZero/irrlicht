@@ -37,11 +37,6 @@ namespace irr
 {
 	namespace video
 	{
-		#ifdef _IRR_COMPILE_WITH_DIRECT3D_9_
-		IVideoDriver* createDirectX9Driver(const irr::SIrrlichtCreationParameters& params,
-			io::IFileSystem* io, HWND window);
-		#endif
-
 		#ifdef _IRR_COMPILE_WITH_OPENGL_
 		IVideoDriver* createOpenGLDriver(const SIrrlichtCreationParameters& params,
 				io::IFileSystem* io, CIrrDeviceSDL* device);
@@ -443,19 +438,6 @@ void CIrrDeviceSDL::createDriver()
 {
 	switch(CreationParams.DriverType)
 	{
-	case video::DEPRECATED_EDT_DIRECT3D8_NO_LONGER_EXISTS:
-		os::Printer::log("DIRECT3D8 Driver is no longer supported in Irrlicht. Try another one.", ELL_ERROR);
-		break;
-
-	case video::EDT_DIRECT3D9:
-		#ifdef _IRR_COMPILE_WITH_DIRECT3D_9_
-		os::Printer::log("SDL device does not support DIRECT3D9 driver. Try another one.", ELL_ERROR);
-		#else
-		os::Printer::log("DIRECT3D9 Driver was not compiled into this dll. Try another one.", ELL_ERROR);
-		#endif // _IRR_COMPILE_WITH_DIRECT3D_9_
-
-		break;
-
 	case video::EDT_SOFTWARE:
 		#ifdef _IRR_COMPILE_WITH_SOFTWARE_
 		VideoDriver = video::createSoftwareDriver(CreationParams.WindowSize, CreationParams.Fullscreen, FileSystem, this);

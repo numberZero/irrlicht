@@ -919,11 +919,6 @@ void CIrrDeviceMacOSX::createDriver()
 #endif
 			break;
 
-		case video::DEPRECATED_EDT_DIRECT3D8_NO_LONGER_EXISTS:
-		case video::EDT_DIRECT3D9:
-			os::Printer::log("This driver is not available in OSX. Try OpenGL or Software renderer.", ELL_ERROR);
-			break;
-
 		case video::EDT_NULL:
 			VideoDriver = video::createNullDriver(FileSystem, CreationParams.WindowSize);
 			break;

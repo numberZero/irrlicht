@@ -41,7 +41,6 @@ IRROBJ = CBillboardSceneNode.o CCameraSceneNode.o CDummyTransformationSceneNode.
 IRRPARTICLEOBJ = CParticleAnimatedMeshSceneNodeEmitter.o CParticleBoxEmitter.o CParticleCylinderEmitter.o CParticleMeshEmitter.o CParticlePointEmitter.o CParticleRingEmitter.o CParticleSphereEmitter.o CParticleAttractionAffector.o CParticleFadeOutAffector.o CParticleGravityAffector.o CParticleRotationAffector.o CParticleSystemSceneNode.o CParticleScaleAffector.o
 IRRANIMOBJ = CSceneNodeAnimatorCameraFPS.o CSceneNodeAnimatorCameraMaya.o CSceneNodeAnimatorCollisionResponse.o CSceneNodeAnimatorDelete.o CSceneNodeAnimatorFlyCircle.o CSceneNodeAnimatorFlyStraight.o CSceneNodeAnimatorFollowSpline.o CSceneNodeAnimatorRotation.o CSceneNodeAnimatorTexture.o
 IRRDRVROBJ = CNullDriver.o COpenGLCacheHandler.o COpenGLDriver.o COpenGLNormalMapRenderer.o COpenGLParallaxMapRenderer.o COpenGLShaderMaterialRenderer.o COpenGLSLMaterialRenderer.o COpenGLExtensionHandler.o \
-	CD3D9Driver.o CD3D9HLSLMaterialRenderer.o CD3D9NormalMapRenderer.o CD3D9ParallaxMapRenderer.o CD3D9ShaderMaterialRenderer.o CD3D9Texture.o \
 	COGLESDriver.o COGLESExtensionHandler.o COGLES2Driver.o COGLES2ExtensionHandler.o COGLES2FixedPipelineRenderer.o COGLES2MaterialRenderer.o COGLES2NormalMapRenderer.o COGLES2ParallaxMapRenderer.o COGLES2Renderer2D.o CWebGL1Driver.o \
 	CGLXManager.o CWGLManager.o CEGLManager.o
 IRRIMAGEOBJ = CColorConverter.o CImage.o CImageLoaderBMP.o CImageLoaderDDS.o CImageLoaderJPG.o CImageLoaderPCX.o CImageLoaderPNG.o CImageLoaderPSD.o CImageLoaderPVR.o CImageLoaderTGA.o CImageLoaderPPM.o CImageLoaderWAL.o CImageLoaderRGB.o \
@@ -128,11 +127,10 @@ sharedlib_osx: LDFLAGS += -L/usr/X11R6/lib$(LIBSELECT) -lGL -lXxf86vm
 #Windows specific options
 IRRLICHT_DLL := ../../bin/Win32-gcc/Irrlicht.dll
 sharedlib_win32 staticlib_win32: SYSTEM = Win32-gcc
-sharedlib_win32: LDFLAGS += -lgdi32 -lopengl32 -ld3dx9d -lwinmm -Wl,--add-stdcall-alias
+sharedlib_win32: LDFLAGS += -lgdi32 -lopengl32 -lwinmm -Wl,--add-stdcall-alias
 #sharedlib_win32: LDFLAGS += -lSDL
-#choose either -DIRR_COMPILE_WITH_DX9_DEV_PACK or -DNO_IRR_COMPILE_WITH_DIRECT3D_9_ depending if you need dx9
 #sharedlib_win32 staticlib_win32: CPPFLAGS += -DIRR_COMPILE_WITH_DX9_DEV_PACK
-sharedlib_win32 staticlib_win32: CPPFLAGS += -DNO_IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_ -DNO_IRR_COMPILE_WITH_DIRECT3D_9_
+sharedlib_win32 staticlib_win32: CPPFLAGS += -DNO_IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_
 staticlib_win32: CPPFLAGS += -D_IRR_STATIC_LIB_
 
 #emscripten specific options
