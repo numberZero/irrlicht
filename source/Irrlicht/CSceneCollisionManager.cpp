@@ -166,7 +166,7 @@ void CSceneCollisionManager::getPickedNodeBB(ISceneNode* root,
 					f32 bestDistToBoxBorder = FLT_MAX;
 					f32 bestToIntersectionSq = FLT_MAX;
 
-                    for(s32 face = 0; face < 6; ++face)
+					for(s32 face = 0; face < 6; ++face)
 					{
 						facePlane.setPlane(edges[faceEdges[face][0]],
 											edges[faceEdges[face][1]],
@@ -188,15 +188,15 @@ void CSceneCollisionManager::getPickedNodeBB(ISceneNode* root,
 								// on the box, so need to go back to object space again.
 								worldToObject.transformVect(intersection);
 
-                                // find the closest point on the box borders. Have to do this as exact checks will fail due to floating point problems.
+								// find the closest point on the box borders. Have to do this as exact checks will fail due to floating point problems.
 								f32 distToBorder = core::max_ ( core::min_ (core::abs_(objectBox.MinEdge.X-intersection.X), core::abs_(objectBox.MaxEdge.X-intersection.X)),
-                                                                core::min_ (core::abs_(objectBox.MinEdge.Y-intersection.Y), core::abs_(objectBox.MaxEdge.Y-intersection.Y)),
-                                                                core::min_ (core::abs_(objectBox.MinEdge.Z-intersection.Z), core::abs_(objectBox.MaxEdge.Z-intersection.Z)) );
-                                if ( distToBorder < bestDistToBoxBorder )
-                                {
-                                    bestDistToBoxBorder = distToBorder;
-                                    bestToIntersectionSq = toIntersectionSq;
-                                }
+																core::min_ (core::abs_(objectBox.MinEdge.Y-intersection.Y), core::abs_(objectBox.MaxEdge.Y-intersection.Y)),
+																core::min_ (core::abs_(objectBox.MinEdge.Z-intersection.Z), core::abs_(objectBox.MaxEdge.Z-intersection.Z)) );
+								if ( distToBorder < bestDistToBoxBorder )
+								{
+									bestDistToBoxBorder = distToBorder;
+									bestToIntersectionSq = toIntersectionSq;
+								}
 							}
 						}
 
@@ -208,11 +208,11 @@ void CSceneCollisionManager::getPickedNodeBB(ISceneNode* root,
 
 					if ( bestDistToBoxBorder < FLT_MAX )
 					{
-                        outbestdistance = bestToIntersectionSq;
+						outbestdistance = bestToIntersectionSq;
 						outbestnode = current;
 
-                        // If we got a hit, we can now truncate the ray to stop us hitting further nodes.
-                        ray.end = ray.start + (rayVector * sqrtf(outbestdistance));
+						// If we got a hit, we can now truncate the ray to stop us hitting further nodes.
+						ray.end = ray.start + (rayVector * sqrtf(outbestdistance));
 					}
 				}
 			}

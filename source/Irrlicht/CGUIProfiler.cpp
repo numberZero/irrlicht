@@ -29,7 +29,7 @@ CGUIProfiler::CGUIProfiler(IGUIEnvironment* environment, IGUIElement* parent, s3
 	core::recti r(0, 0, rectangle.getWidth(), rectangle.getHeight());
 
 	// Really just too lazy to code a complete new element for this.
-    // If anyone can do this nicer he's welcome.
+	// If anyone can do this nicer he's welcome.
 	DisplayTable = Environment->addTable(r, this, -1, DrawBackground);
 	DisplayTable->setAlignment(EGUIA_UPPERLEFT, EGUIA_LOWERRIGHT, EGUIA_UPPERLEFT, EGUIA_LOWERRIGHT);
 	DisplayTable->setSubElement(true);
@@ -259,7 +259,7 @@ void CGUIProfiler::firstPage(bool includeOverview)
 	UnfreezeOnce = true;
 	if ( includeOverview )
 		CurrentGroupIdx = 0;
-    else
+	else
 		CurrentGroupIdx = 1; // can be invalid
 	CurrentGroupPage = 0;
 }

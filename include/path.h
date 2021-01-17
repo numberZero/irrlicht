@@ -18,7 +18,7 @@ typedef core::string<fschar_t> path;
 
 //! Used in places where we identify objects by a filename, but don't actually work with the real filename
 /** Irrlicht is internally not case-sensitive when it comes to names.
-    Also this class is a first step towards support for correctly serializing renamed objects.
+	Also this class is a first step towards support for correctly serializing renamed objects.
 */
 struct SNamedPath
 {

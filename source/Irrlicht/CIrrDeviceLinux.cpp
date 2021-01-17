@@ -67,11 +67,11 @@ namespace irr
 #endif
 
 #ifdef _IRR_COMPILE_WITH_OGLES1_
-        IVideoDriver* createOGLES1Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
+		IVideoDriver* createOGLES1Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
 #endif
 
 #ifdef _IRR_COMPILE_WITH_OGLES2_
-        IVideoDriver* createOGLES2Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
+		IVideoDriver* createOGLES2Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
 #endif
 
 #ifdef _IRR_COMPILE_WITH_WEBGL1_
@@ -671,15 +671,15 @@ bool CIrrDeviceLinux::createInputContext()
 	XIMStyle bestStyle = 0;
 	// TODO: If we want to support languages like chinese or japanese as well we probably have to work with callbacks here.
 	XIMStyle supportedStyle = XIMPreeditNone | XIMStatusNone;
-    for(int i=0; i < im_supported_styles->count_styles; ++i)
+	for(int i=0; i < im_supported_styles->count_styles; ++i)
 	{
-        XIMStyle style = im_supported_styles->supported_styles[i];
-        if ((style & supportedStyle) == style) /* if we can handle it */
+		XIMStyle style = im_supported_styles->supported_styles[i];
+		if ((style & supportedStyle) == style) /* if we can handle it */
 		{
-            bestStyle = style;
+			bestStyle = style;
 			break;
 		}
-    }
+	}
 	XFree(im_supported_styles);
 
 	if ( !bestStyle )

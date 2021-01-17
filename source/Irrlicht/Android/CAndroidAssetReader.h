@@ -59,13 +59,13 @@ namespace io
 		bool isOpen() const { return Asset!=NULL; }
 
 	private:
-        //! Android's asset manager
+		//! Android's asset manager
 		AAssetManager *AssetManager;
 
 		// An asset, i.e. file
 		AAsset *Asset;
 		path Filename;
-    };
+	};
 
 } // end namespace io
 } // end namespace irr

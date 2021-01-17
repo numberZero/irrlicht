@@ -31,56 +31,56 @@ CGUIModalScreen::CGUIModalScreen(IGUIEnvironment* environment, IGUIElement* pare
 
 bool CGUIModalScreen::canTakeFocus(IGUIElement* target) const
 {
-    return (target && ((const IGUIElement*)target == this // this element can take it
-                        || isMyChild(target)    // own children also
-                        || (target->getType() == EGUIET_MODAL_SCREEN )	// other modals also fine (is now on top or explicitely requested)
-                        || (target->getParent() && target->getParent()->getType() == EGUIET_MODAL_SCREEN )))   // children of other modals will do
-            ;
+	return (target && ((const IGUIElement*)target == this // this element can take it
+						|| isMyChild(target)    // own children also
+						|| (target->getType() == EGUIET_MODAL_SCREEN )	// other modals also fine (is now on top or explicitely requested)
+						|| (target->getParent() && target->getParent()->getType() == EGUIET_MODAL_SCREEN )))   // children of other modals will do
+			;
 }
 
 bool CGUIModalScreen::isVisible() const
 {
-    // any parent invisible?
-    IGUIElement * parentElement = getParent();
-    while ( parentElement )
-    {
-        if ( !parentElement->isVisible() )
-            return false;
-        parentElement = parentElement->getParent();
-    }
+	// any parent invisible?
+	IGUIElement * parentElement = getParent();
+	while ( parentElement )
+	{
+		if ( !parentElement->isVisible() )
+			return false;
+		parentElement = parentElement->getParent();
+	}
 
-    // if we have no children then the modal is probably abused as a way to block input
-    if ( Children.empty() )
-    {
-        return IGUIElement::isVisible();
-    }
+	// if we have no children then the modal is probably abused as a way to block input
+	if ( Children.empty() )
+	{
+		return IGUIElement::isVisible();
+	}
 
-    // any child visible?
-    bool visible = false;
-    core::list<IGUIElement*>::ConstIterator it = Children.begin();
-    for (; it != Children.end(); ++it)
-    {
-        if ( (*it)->isVisible() )
-        {
-            visible = true;
-            break;
-        }
-    }
-    return visible;
+	// any child visible?
+	bool visible = false;
+	core::list<IGUIElement*>::ConstIterator it = Children.begin();
+	for (; it != Children.end(); ++it)
+	{
+		if ( (*it)->isVisible() )
+		{
+			visible = true;
+			break;
+		}
+	}
+	return visible;
 }
 
 bool CGUIModalScreen::isPointInside(const core::position2d<s32>& point) const
 {
-    return true;
+	return true;
 }
 
 //! called if an event happened.
 bool CGUIModalScreen::OnEvent(const SEvent& event)
 {
-    if (!isEnabled() || !isVisible() )
-        return IGUIElement::OnEvent(event);
+	if (!isEnabled() || !isVisible() )
+		return IGUIElement::OnEvent(event);
 
-    switch(event.EventType)
+	switch(event.EventType)
 	{
 	case EET_GUI_EVENT:
 		switch(event.GUIEvent.EventType)
@@ -104,8 +104,8 @@ bool CGUIModalScreen::OnEvent(const SEvent& event)
 			return false;
 		case EGET_ELEMENT_FOCUS_LOST:
 			if ( !canTakeFocus(event.GUIEvent.Element))
-            {
-            	if ( isMyChild(event.GUIEvent.Caller) )
+			{
+				if ( isMyChild(event.GUIEvent.Caller) )
 				{
 					if ( !Children.empty() )
 						Environment->setFocus(*(Children.begin()));
@@ -133,7 +133,7 @@ bool CGUIModalScreen::OnEvent(const SEvent& event)
 		if (event.MouseInput.Event == EMIE_LMOUSE_PRESSED_DOWN)
 		{
 			MouseDownTime = os::Timer::getTime();
-        }
+		}
 	default:
 		break;
 	}

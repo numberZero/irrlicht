@@ -30,15 +30,15 @@ namespace video
 {
 
 COGLES1Driver::COGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager) :
-    CNullDriver(io, params.WindowSize), COGLES1ExtensionHandler(), CacheHandler(0), CurrentRenderMode(ERM_NONE),
-    ResetRenderStates(true), Transformation3DChanged(true), AntiAlias(params.AntiAlias),
-    ColorFormat(ECF_R8G8B8), Params(params), ContextManager(contextManager)
+	CNullDriver(io, params.WindowSize), COGLES1ExtensionHandler(), CacheHandler(0), CurrentRenderMode(ERM_NONE),
+	ResetRenderStates(true), Transformation3DChanged(true), AntiAlias(params.AntiAlias),
+	ColorFormat(ECF_R8G8B8), Params(params), ContextManager(contextManager)
 {
 #ifdef _DEBUG
 	setDebugName("COGLESDriver");
 #endif
 
-    core::dimension2d<u32> windowSize(0, 0);
+	core::dimension2d<u32> windowSize(0, 0);
 
 	if (!ContextManager)
 		return;
@@ -51,7 +51,7 @@ COGLES1Driver::COGLES1Driver(const SIrrlichtCreationParameters& params, io::IFil
 
 	windowSize = params.WindowSize;
 
-    genericDriverInit(windowSize, params.Stencilbuffer);
+	genericDriverInit(windowSize, params.Stencilbuffer);
 }
 
 COGLES1Driver::~COGLES1Driver()
@@ -1799,29 +1799,29 @@ void COGLES1Driver::setBasicRenderStates(const SMaterial& material, const SMater
 		}
 	}
 
-    // Blend Factor
+	// Blend Factor
 	if (IR(material.BlendFactor) & 0xFFFFFFFF	// TODO: why the & 0xFFFFFFFF?
 			&& material.MaterialType != EMT_ONETEXTURE_BLEND
 		)
 	{
-        E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
-        E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
-        E_BLEND_FACTOR srcAlphaFact = EBF_ZERO;
-        E_BLEND_FACTOR dstAlphaFact = EBF_ZERO;
-        E_MODULATE_FUNC modulo = EMFN_MODULATE_1X;
-        u32 alphaSource = 0;
+		E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
+		E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
+		E_BLEND_FACTOR srcAlphaFact = EBF_ZERO;
+		E_BLEND_FACTOR dstAlphaFact = EBF_ZERO;
+		E_MODULATE_FUNC modulo = EMFN_MODULATE_1X;
+		u32 alphaSource = 0;
 
-        unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulo, alphaSource, material.BlendFactor);
+		unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulo, alphaSource, material.BlendFactor);
 
-        if (queryFeature(EVDF_BLEND_SEPARATE))
-        {
+		if (queryFeature(EVDF_BLEND_SEPARATE))
+		{
 			CacheHandler->setBlendFuncSeparate(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact),
-                getGLBlend(srcAlphaFact), getGLBlend(dstAlphaFact));
-        }
-        else
-        {
+				getGLBlend(srcAlphaFact), getGLBlend(dstAlphaFact));
+		}
+		else
+		{
 			CacheHandler->setBlendFunc(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact));
-        }
+		}
 	}
 
 	// TODO: Polygon Offset. Not sure if it was left out deliberately or if it won't work with this driver.

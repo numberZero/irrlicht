@@ -9,14 +9,14 @@
  form is allowed (with or without changes) provided that:
 
    1. distributions of this source code include the above copyright 
-      notice, this list of conditions and the following disclaimer;
+	  notice, this list of conditions and the following disclaimer;
 
    2. distributions in binary form include the above copyright
-      notice, this list of conditions and the following disclaimer
-      in the documentation and/or other associated materials;
+	  notice, this list of conditions and the following disclaimer
+	  in the documentation and/or other associated materials;
 
    3. the copyright holder's name is not used to endorse products 
-      built using this software without specific written permission. 
+	  built using this software without specific written permission. 
 
  ALTERNATIVELY, provided that this notice is retained in full, this product
  may be distributed under the terms of the GNU General Public License (GPL),
@@ -38,13 +38,13 @@
 #define PWD2KEY_H
 
 void derive_key(
-        const unsigned char pwd[],   /* the PASSWORD, and   */
-        unsigned int pwd_len,        /*    its length       */ 
-        const unsigned char salt[],  /* the SALT and its    */
-        unsigned int salt_len,       /*    length           */
-        unsigned int iter,      /* the number of iterations */
-        unsigned char key[],    /* space for the output key */
-        unsigned int key_len);  /* and its required length  */
+		const unsigned char pwd[],   /* the PASSWORD, and   */
+		unsigned int pwd_len,        /*    its length       */ 
+		const unsigned char salt[],  /* the SALT and its    */
+		unsigned int salt_len,       /*    length           */
+		unsigned int iter,      /* the number of iterations */
+		unsigned char key[],    /* space for the output key */
+		unsigned int key_len);  /* and its required length  */
 
 #endif
 

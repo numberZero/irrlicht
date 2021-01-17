@@ -9,14 +9,14 @@
  form is allowed (with or without changes) provided that:
 
    1. distributions of this source code include the above copyright
-      notice, this list of conditions and the following disclaimer;
+	  notice, this list of conditions and the following disclaimer;
 
    2. distributions in binary form include the above copyright
-      notice, this list of conditions and the following disclaimer
-      in the documentation and/or other associated materials;
+	  notice, this list of conditions and the following disclaimer
+	  in the documentation and/or other associated materials;
 
    3. the copyright holder's name is not used to endorse products
-      built using this software without specific written permission.
+	  built using this software without specific written permission.
 
  ALTERNATIVELY, provided that this notice is retained in full, this product
  may be distributed under the terms of the GNU General Public License (GPL),
@@ -76,8 +76,8 @@
 
 typedef struct
 {   unsigned char   key[HMAC_HASH_INPUT_SIZE];
-    sha_ctx         ctx[1];
-    unsigned long   klen;
+	sha_ctx         ctx[1];
+	unsigned long   klen;
 } hmac_ctx;
 
 void hmac_sha_begin(hmac_ctx cx[1]);
@@ -89,7 +89,7 @@ void hmac_sha_data(const unsigned char data[], unsigned long data_len, hmac_ctx 
 void hmac_sha_end(unsigned char mac[], unsigned long mac_len, hmac_ctx cx[1]);
 
 void hmac_sha(const unsigned char key[], unsigned long key_len,
-          const unsigned char data[], unsigned long data_len,
-          unsigned char mac[], unsigned long mac_len);
+		  const unsigned char data[], unsigned long data_len,
+		  unsigned char mac[], unsigned long mac_len);
 
 #endif

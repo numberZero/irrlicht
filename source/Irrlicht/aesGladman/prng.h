@@ -9,14 +9,14 @@
  form is allowed (with or without changes) provided that:
 
    1. distributions of this source code include the above copyright
-      notice, this list of conditions and the following disclaimer;
+	  notice, this list of conditions and the following disclaimer;
 
    2. distributions in binary form include the above copyright
-      notice, this list of conditions and the following disclaimer
-      in the documentation and/or other associated materials;
+	  notice, this list of conditions and the following disclaimer
+	  in the documentation and/or other associated materials;
 
    3. the copyright holder's name is not used to endorse products
-      built using this software without specific written permission.
+	  built using this software without specific written permission.
 
  ALTERNATIVELY, provided that this notice is retained in full, this product
  may be distributed under the terms of the GNU General Public License (GPL),
@@ -56,9 +56,9 @@ typedef int (*prng_entropy_fn)(unsigned char buf[], unsigned int len);
 
 typedef struct
 {   unsigned char   rbuf[PRNG_POOL_SIZE];   /* the random pool          */
-    unsigned char   obuf[PRNG_POOL_SIZE];   /* pool output buffer       */
-    unsigned int    pos;                    /* output buffer position   */
-    prng_entropy_fn entropy;                /* entropy function pointer */
+	unsigned char   obuf[PRNG_POOL_SIZE];   /* pool output buffer       */
+	unsigned int    pos;                    /* output buffer position   */
+	prng_entropy_fn entropy;                /* entropy function pointer */
 } prng_ctx;
 
 /* initialise the random stream generator   */

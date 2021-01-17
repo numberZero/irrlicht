@@ -513,7 +513,7 @@ void CGUIComboBox::deserializeAttributes(io::IAttributes* in, io::SAttributeRead
 	IGUIComboBox::deserializeAttributes(in,options);
 
 	setTextAlignment( (EGUI_ALIGNMENT) in->getAttributeAsEnumeration("HTextAlign", GUIAlignmentNames),
-                      (EGUI_ALIGNMENT) in->getAttributeAsEnumeration("VTextAlign", GUIAlignmentNames));
+					  (EGUI_ALIGNMENT) in->getAttributeAsEnumeration("VTextAlign", GUIAlignmentNames));
 	setMaxSelectionRows( (u32)(in->getAttributeAsInt("MaxSelectionRows")) );
 
 	// clear the list

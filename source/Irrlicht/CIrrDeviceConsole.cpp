@@ -17,26 +17,26 @@ irr::CIrrDeviceConsole *DeviceToClose;
 // Callback for Windows
 BOOL WINAPI ConsoleHandler(DWORD CEvent)
 {
-    switch(CEvent)
-    {
-    case CTRL_C_EVENT:
+	switch(CEvent)
+	{
+	case CTRL_C_EVENT:
 		irr::os::Printer::log("Closing console device", "CTRL+C");
 		break;
 	case CTRL_BREAK_EVENT:
 		irr::os::Printer::log("Closing console device", "CTRL+Break");
 		break;
-    case CTRL_CLOSE_EVENT:
+	case CTRL_CLOSE_EVENT:
 		irr::os::Printer::log("Closing console device", "User closed console");
 		break;
-    case CTRL_LOGOFF_EVENT:
+	case CTRL_LOGOFF_EVENT:
 		irr::os::Printer::log("Closing console device", "User is logging off");
 		break;
-    case CTRL_SHUTDOWN_EVENT:
+	case CTRL_SHUTDOWN_EVENT:
 		irr::os::Printer::log("Closing console device", "Computer shutting down");
 		break;
-    }
+	}
 	DeviceToClose->closeDevice();
-    return TRUE;
+	return TRUE;
 }
 #elif defined(_IRR_POSIX_API_)
 // sigterm handler
@@ -271,7 +271,7 @@ bool CIrrDeviceConsole::run()
 		case WINDOW_BUFFER_SIZE_EVENT:
 			VideoDriver->OnResize(
 				core::dimension2d<u32>(in.Event.WindowBufferSizeEvent.dwSize.X,
-				                       in.Event.WindowBufferSizeEvent.dwSize.Y));
+									   in.Event.WindowBufferSizeEvent.dwSize.Y));
 			break;
 		case FOCUS_EVENT:
 			IsWindowFocused = (in.Event.FocusEvent.bSetFocus == TRUE);
@@ -432,9 +432,9 @@ void CIrrDeviceConsole::setTextCursorPos(s16 x, s16 y)
 #ifdef _IRR_WINDOWS_NT_CONSOLE_
 	// move WinNT cursor
 	COORD Position;
-    Position.X = x;
-    Position.Y = y;
-    SetConsoleCursorPosition(WindowsSTDOut, Position);
+	Position.X = x;
+	Position.Y = y;
+	SetConsoleCursorPosition(WindowsSTDOut, Position);
 #elif defined(_IRR_VT100_CONSOLE_)
 	// send escape code
 	fprintf(OutFile, "%c[%d;%dH", 27, y, x);

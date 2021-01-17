@@ -73,7 +73,7 @@ public:
 
 	//! Uint interface for the above.
 	/* NOTE: UINT only works with GLSL, not supported for other shaders.
-	         Also GLES drivers in Irrlicht do not support it as this needs at least GLES 3.0.
+			 Also GLES drivers in Irrlicht do not support it as this needs at least GLES 3.0.
 	*/
 	virtual bool setVertexShaderConstant(s32 index, const u32* ints, int count) = 0;
 
@@ -103,7 +103,7 @@ public:
 
 	//! Uint interface for the above.
 	/* NOTE: UINT only works with GLSL, not supported for other shaders.
-	         Also GLES drivers in Irrlicht do not support it as this needs at least GLES 3.0.
+			 Also GLES drivers in Irrlicht do not support it as this needs at least GLES 3.0.
 	*/
 	virtual bool setPixelShaderConstant(s32 index, const u32* ints, int count) = 0;
 

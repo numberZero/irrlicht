@@ -190,7 +190,7 @@ void CTerrainTriangleSelector::getTriangles(core::triangle3df* triangles,
 	for (s32 i=0; i<TrianglePatches.NumPatches; ++i)
 	{
 		if (tIndex + TrianglePatches.TrianglePatchArray[i].NumTriangles <= count
-            && TrianglePatches.TrianglePatchArray[i].Box.intersectsWithLine(line))
+			&& TrianglePatches.TrianglePatchArray[i].Box.intersectsWithLine(line))
 		{
 			for (s32 j=0; j<TrianglePatches.TrianglePatchArray[i].NumTriangles; ++j)
 			{

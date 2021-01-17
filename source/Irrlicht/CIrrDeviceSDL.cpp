@@ -354,9 +354,9 @@ bool CIrrDeviceSDL::createWindow()
 
 	// "#canvas" is for the opengl context
 	emscripten_set_mousedown_callback("#canvas", (void*)this, true, MouseUpDownCallback);
-    emscripten_set_mouseup_callback("#canvas", (void*)this, true, MouseUpDownCallback);
-    emscripten_set_mouseenter_callback("#canvas", (void*)this, false, MouseEnterCallback);
-    emscripten_set_mouseleave_callback("#canvas", (void*)this, false, MouseLeaveCallback);
+	emscripten_set_mouseup_callback("#canvas", (void*)this, true, MouseUpDownCallback);
+	emscripten_set_mouseenter_callback("#canvas", (void*)this, false, MouseEnterCallback);
+	emscripten_set_mouseleave_callback("#canvas", (void*)this, false, MouseLeaveCallback);
 
 	return true;
 #else // !_IRR_EMSCRIPTEN_PLATFORM_
@@ -1054,7 +1054,7 @@ void CIrrDeviceSDL::maximizeWindow()
 //! Get the position of this window on screen
 core::position2di CIrrDeviceSDL::getWindowPosition()
 {
-    return core::position2di(-1, -1);
+	return core::position2di(-1, -1);
 }
 
 

@@ -1287,7 +1287,7 @@ public:
 	/** After generating strings from floats we often end up with strings
 		ending up with lots of zeros which don't add any value. Erase 'em all.
 		Examples: "0.100000" becomes "0.1"
-	              "10.000000" becomes "10"
+				  "10.000000" becomes "10"
 				  "foo 3.140000" becomes "foo 3.14"
 				  "no_num.000" stays "no_num.000"
 				  "1." stays "1."
@@ -1418,7 +1418,7 @@ public:
 		if ((used - 1) > tokenStartIdx)
 			ret.push_back(string<T,TAlloc>(&array[tokenStartIdx], (used - 1) - tokenStartIdx));
 		 else if ( !ignoreEmptyTokens )
-                ret.push_back(string<T,TAlloc>());
+				ret.push_back(string<T,TAlloc>());
 
 		return ret.size()-oldSize;
 	}

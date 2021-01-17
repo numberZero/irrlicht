@@ -146,7 +146,7 @@ namespace scene
 		/** \param mesh Mesh on which the operation is performed.
 		\param m transformation matrix. 
 		\param normalsUpdate When 0 - don't update normals. 
-		                     When 1 - update normals with inverse transposed of the transformation matrix
+							 When 1 - update normals with inverse transposed of the transformation matrix
 		*/
 		void transform(IMesh* mesh, const core::matrix4& m, u32 normalsUpdate = 0) const
 		{
@@ -167,7 +167,7 @@ namespace scene
 		/** \param buffer Meshbuffer on which the operation is performed.
 		\param m transformation matrix. 
 		\param normalsUpdate When 0 - don't update normals. 
-		                     When 1 - update normals with inverse transposed of the transformation matrix
+							 When 1 - update normals with inverse transposed of the transformation matrix
 		*/
 		void transform(IMeshBuffer* buffer, const core::matrix4& m, u32 normalsUpdate = 0) const
 		{

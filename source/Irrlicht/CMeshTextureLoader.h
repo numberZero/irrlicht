@@ -23,7 +23,7 @@ public:
 	CMeshTextureLoader(irr::io::IFileSystem* fs, irr::video::IVideoDriver* driver);
 
 	//! Set a custom texture path.
-    /**	This is the first path the texture-loader should search.  */
+	/**	This is the first path the texture-loader should search.  */
 	virtual void setTexturePath(const irr::io::path& path)  _IRR_OVERRIDE_;
 
 	//! Get the current custom texture path.

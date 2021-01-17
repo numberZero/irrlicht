@@ -65,22 +65,22 @@ public:
 //			material.MaterialTypeParam != lastMaterial.MaterialTypeParam ||
 //			resetAllRenderstates)
 		{
-            E_BLEND_FACTOR srcRGBFact,dstRGBFact,srcAlphaFact,dstAlphaFact;
+			E_BLEND_FACTOR srcRGBFact,dstRGBFact,srcAlphaFact,dstAlphaFact;
 			E_MODULATE_FUNC modulate;
 			u32 alphaSource;
 			unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulate, alphaSource, material.MaterialTypeParam);
 
-            Driver->getCacheHandler()->setBlend(true);
+			Driver->getCacheHandler()->setBlend(true);
 
-            if (Driver->queryFeature(EVDF_BLEND_SEPARATE))
-            {
-                Driver->getCacheHandler()->setBlendFuncSeparate(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact),
-                    Driver->getGLBlend(srcAlphaFact), Driver->getGLBlend(dstAlphaFact));
-            }
-            else
-            {
-                Driver->getCacheHandler()->setBlendFunc(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact));
-            }
+			if (Driver->queryFeature(EVDF_BLEND_SEPARATE))
+			{
+				Driver->getCacheHandler()->setBlendFuncSeparate(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact),
+					Driver->getGLBlend(srcAlphaFact), Driver->getGLBlend(dstAlphaFact));
+			}
+			else
+			{
+				Driver->getCacheHandler()->setBlendFunc(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact));
+			}
 
 			Driver->getCacheHandler()->setActiveTexture(GL_TEXTURE0_ARB);
 
@@ -99,7 +99,7 @@ public:
 #endif
 
 			if (textureBlendFunc_hasAlpha(srcRGBFact) || textureBlendFunc_hasAlpha(dstRGBFact) ||
-                textureBlendFunc_hasAlpha(srcAlphaFact) || textureBlendFunc_hasAlpha(dstAlphaFact))
+				textureBlendFunc_hasAlpha(srcAlphaFact) || textureBlendFunc_hasAlpha(dstAlphaFact))
 			{
 				if (alphaSource==EAS_VERTEX_COLOR)
 				{
@@ -295,7 +295,7 @@ public:
 		Driver->setBasicRenderStates(material, lastMaterial, resetAllRenderstates);
 
 		Driver->getCacheHandler()->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        Driver->getCacheHandler()->setBlend(true);
+		Driver->getCacheHandler()->setBlend(true);
 
 		if (material.MaterialType != lastMaterial.MaterialType || resetAllRenderstates)
 		{
@@ -365,10 +365,10 @@ public:
 		Driver->disableTextures(1);
 		Driver->setBasicRenderStates(material, lastMaterial, resetAllRenderstates);
 
-        Driver->getCacheHandler()->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        Driver->getCacheHandler()->setBlend(true);
-        Driver->getCacheHandler()->setAlphaTest(true);
-        Driver->getCacheHandler()->setAlphaFunc(GL_GREATER, material.MaterialTypeParam);
+		Driver->getCacheHandler()->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Driver->getCacheHandler()->setBlend(true);
+		Driver->getCacheHandler()->setAlphaTest(true);
+		Driver->getCacheHandler()->setAlphaFunc(GL_GREATER, material.MaterialTypeParam);
 
 		if (material.MaterialType != lastMaterial.MaterialType || resetAllRenderstates || material.MaterialTypeParam != lastMaterial.MaterialTypeParam )
 		{
@@ -772,7 +772,7 @@ public:
 		Driver->setBasicRenderStates(material, lastMaterial, resetAllRenderstates);
 
 		Driver->getCacheHandler()->setBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        Driver->getCacheHandler()->setBlend(true);
+		Driver->getCacheHandler()->setBlend(true);
 
 		if (material.MaterialType != lastMaterial.MaterialType || resetAllRenderstates)
 		{

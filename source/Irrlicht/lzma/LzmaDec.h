@@ -73,8 +73,8 @@ typedef struct
 void LzmaDec_Init(CLzmaDec *p);
 
 /* There are two types of LZMA streams:
-     0) Stream with end mark. That end mark adds about 6 bytes to compressed size.
-     1) Stream without end mark. You must know exact uncompressed size to decompress such stream. */
+	 0) Stream with end mark. That end mark adds about 6 bytes to compressed size.
+	 1) Stream without end mark. You must know exact uncompressed size to decompress such stream. */
 
 typedef enum
 {
@@ -92,10 +92,10 @@ typedef enum
    You can check status result also.
 
    You can use multiple checks to test data integrity after full decompression:
-     1) Check Result and "status" variable.
-     2) Check that output(destLen) = uncompressedSize, if you know real uncompressedSize.
-     3) Check that output(srcLen) = compressedSize, if you know real compressedSize.
-        You must use correct finish mode in that case. */
+	 1) Check Result and "status" variable.
+	 2) Check that output(destLen) = uncompressedSize, if you know real uncompressedSize.
+	 3) Check that output(srcLen) = compressedSize, if you know real compressedSize.
+		You must use correct finish mode in that case. */
 
 typedef enum
 {
@@ -112,16 +112,16 @@ typedef enum
 /* ---------- Interfaces ---------- */
 
 /* There are 3 levels of interfaces:
-     1) Dictionary Interface
-     2) Buffer Interface
-     3) One Call Interface
+	 1) Dictionary Interface
+	 2) Buffer Interface
+	 3) One Call Interface
    You can select any of these interfaces, but don't mix functions from different
    groups for same object. */
 
 
 /* There are two variants to allocate state for Dictionary Interface:
-     1) LzmaDec_Allocate / LzmaDec_Free
-     2) LzmaDec_AllocateProbs / LzmaDec_FreeProbs
+	 1) LzmaDec_Allocate / LzmaDec_Free
+	 2) LzmaDec_AllocateProbs / LzmaDec_FreeProbs
    You can use variant 2, if you set dictionary buffer manually.
    For Buffer Interface you must always use variant 1.
 
@@ -144,18 +144,18 @@ void LzmaDec_Free(CLzmaDec *state, ISzAlloc *alloc);
    You must work with CLzmaDec variables directly in this interface.
 
    STEPS:
-     LzmaDec_Constr()
-     LzmaDec_Allocate()
-     for (each new stream)
-     {
-       LzmaDec_Init()
-       while (it needs more decompression)
-       {
-         LzmaDec_DecodeToDic()
-         use data from CLzmaDec::dic and update CLzmaDec::dicPos
-       }
-     }
-     LzmaDec_Free()
+	 LzmaDec_Constr()
+	 LzmaDec_Allocate()
+	 for (each new stream)
+	 {
+	   LzmaDec_Init()
+	   while (it needs more decompression)
+	   {
+		 LzmaDec_DecodeToDic()
+		 use data from CLzmaDec::dic and update CLzmaDec::dicPos
+	   }
+	 }
+	 LzmaDec_Free()
 */
 
 /* LzmaDec_DecodeToDic
@@ -170,16 +170,16 @@ finishMode:
 
 Returns:
   SZ_OK
-    status:
-      LZMA_STATUS_FINISHED_WITH_MARK
-      LZMA_STATUS_NOT_FINISHED
-      LZMA_STATUS_NEEDS_MORE_INPUT
-      LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK
+	status:
+	  LZMA_STATUS_FINISHED_WITH_MARK
+	  LZMA_STATUS_NOT_FINISHED
+	  LZMA_STATUS_NEEDS_MORE_INPUT
+	  LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK
   SZ_ERROR_DATA - Data error
 */
 
 SRes LzmaDec_DecodeToDic(CLzmaDec *p, SizeT dicLimit,
-    const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status);
+	const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status);
 
 
 /* ---------- Buffer Interface ---------- */
@@ -196,7 +196,7 @@ finishMode:
 */
 
 SRes LzmaDec_DecodeToBuf(CLzmaDec *p, Byte *dest, SizeT *destLen,
-    const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status);
+	const Byte *src, SizeT *srcLen, ELzmaFinishMode finishMode, ELzmaStatus *status);
 
 
 /* ---------- One Call Interface ---------- */
@@ -210,10 +210,10 @@ finishMode:
 
 Returns:
   SZ_OK
-    status:
-      LZMA_STATUS_FINISHED_WITH_MARK
-      LZMA_STATUS_NOT_FINISHED
-      LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK
+	status:
+	  LZMA_STATUS_FINISHED_WITH_MARK
+	  LZMA_STATUS_NOT_FINISHED
+	  LZMA_STATUS_MAYBE_FINISHED_WITHOUT_MARK
   SZ_ERROR_DATA - Data error
   SZ_ERROR_MEM  - Memory allocation error
   SZ_ERROR_UNSUPPORTED - Unsupported properties
@@ -221,8 +221,8 @@ Returns:
 */
 
 SRes LzmaDecode(Byte *dest, SizeT *destLen, const Byte *src, SizeT *srcLen,
-    const Byte *propData, unsigned propSize, ELzmaFinishMode finishMode,
-    ELzmaStatus *status, ISzAlloc *alloc);
+	const Byte *propData, unsigned propSize, ELzmaFinishMode finishMode,
+	ELzmaStatus *status, ISzAlloc *alloc);
 
 #ifdef __cplusplus
 }

@@ -648,14 +648,14 @@ void CGUITreeView::updateScrollBarSize(s32 size)
 		if ( ScrollBarV )
 		{
 			core::recti r(RelativeRect.getWidth() - ScrollBarSize, 0,
-			              RelativeRect.getWidth(), RelativeRect.getHeight() - ScrollBarSize);
+						  RelativeRect.getWidth(), RelativeRect.getHeight() - ScrollBarSize);
 			ScrollBarV->setRelativePosition(r);
 		}
 
 		if ( ScrollBarH ) 
 		{
 			core::recti r(0, RelativeRect.getHeight() - ScrollBarSize,
-			              RelativeRect.getWidth() - ScrollBarSize, RelativeRect.getHeight());
+						  RelativeRect.getWidth() - ScrollBarSize, RelativeRect.getHeight());
 			ScrollBarH->setRelativePosition(r);
 		}
 	}

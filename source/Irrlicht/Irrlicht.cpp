@@ -87,7 +87,7 @@ namespace irr
 		if (params.DeviceType == EIDT_X11 || (!dev && params.DeviceType == EIDT_BEST))
 			dev = new CIrrDeviceLinux(params);
 #endif
-        
+		
 #ifdef _IRR_COMPILE_WITH_IOS_DEVICE_
 		if (params.DeviceType == EIDT_IOS || (!dev && params.DeviceType == EIDT_BEST))
 			dev = new CIrrDeviceiOS(params);
@@ -142,12 +142,12 @@ namespace video
 #if defined(_IRR_WINDOWS_API_) && !defined(_IRR_STATIC_LIB_)
 
 BOOL APIENTRY DllMain( HANDLE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved )
+					   DWORD  ul_reason_for_call,
+					   LPVOID lpReserved )
 {
 	// _crtBreakAlloc = 139;
 
-    switch (ul_reason_for_call)
+	switch (ul_reason_for_call)
 	{
 		case DLL_PROCESS_ATTACH:
 			#if defined(_DEBUG) && !defined(__GNUWIN32__) && !defined(__BORLANDC__) && !defined (_WIN32_WCE) && !defined (_IRR_XBOX_PLATFORM_)
@@ -158,8 +158,8 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		case DLL_THREAD_DETACH:
 		case DLL_PROCESS_DETACH:
 			break;
-    }
-    return TRUE;
+	}
+	return TRUE;
 }
 
 #endif // defined(_IRR_WINDOWS_)

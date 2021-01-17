@@ -10,8 +10,8 @@
 namespace irr
 {
 #ifdef _IRR_COMPILE_WITH_PROFILING_
-    enum EPROFILE_ID
-    {
+	enum EPROFILE_ID
+	{
 		// We use negative ID's to avoid clashing with user application id's.
 		EPID_FIRST = -INT_MAX,	// not used
 
@@ -47,7 +47,7 @@ namespace irr
 		EPID_ES2_SET_RENDERSTATE_BASIC,
 		EPID_ES2_SET_RENDERSTATE_TEXTURE,
 		EPID_ES2_DRAW_SHADOW
-    };
+	};
 #endif
 } // end namespace irr
 

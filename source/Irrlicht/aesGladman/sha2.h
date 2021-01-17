@@ -9,14 +9,14 @@
  form is allowed (with or without changes) provided that:
 
    1. distributions of this source code include the above copyright
-      notice, this list of conditions and the following disclaimer;
+	  notice, this list of conditions and the following disclaimer;
 
    2. distributions in binary form include the above copyright
-      notice, this list of conditions and the following disclaimer
-      in the documentation and/or other associated materials;
+	  notice, this list of conditions and the following disclaimer
+	  in the documentation and/or other associated materials;
 
    3. the copyright holder's name is not used to endorse products
-      built using this software without specific written permission.
+	  built using this software without specific written permission.
 
  ALTERNATIVELY, provided that this notice is retained in full, this product
  may be distributed under the terms of the GNU General Public License (GPL),
@@ -76,7 +76,7 @@
 #else
 #include <stdint.h>
 #endif
-    typedef uint64_t sha2_64t;
+	typedef uint64_t sha2_64t;
 #if __WORDSIZE==64
 #define s_u64 ul
 #else
@@ -101,16 +101,16 @@
 
 typedef struct
 {   sha2_32t count[2];
-    sha2_32t hash[8];
-    sha2_32t wbuf[16];
+	sha2_32t hash[8];
+	sha2_32t wbuf[16];
 } sha256_ctx;
 
 /* type to hold the SHA384/512 context          */
 
 typedef struct
 {   sha2_64t count[2];
-    sha2_64t hash[8];
-    sha2_64t wbuf[16];
+	sha2_64t hash[8];
+	sha2_64t wbuf[16];
 } sha512_ctx;
 
 typedef sha512_ctx  sha384_ctx;
@@ -119,10 +119,10 @@ typedef sha512_ctx  sha384_ctx;
 
 typedef struct
 {   union
-    {   sha256_ctx  ctx256[1];
-        sha512_ctx  ctx512[1];
-    } uu[1];
-    sha2_32t    sha2_len;
+	{   sha256_ctx  ctx256[1];
+		sha512_ctx  ctx512[1];
+	} uu[1];
+	sha2_32t    sha2_len;
 } sha2_ctx;
 
 #ifndef SHA2_DLL                  /* implement normal or DLL functions   */

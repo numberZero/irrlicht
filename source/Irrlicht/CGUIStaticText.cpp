@@ -629,7 +629,7 @@ void CGUIStaticText::deserializeAttributes(io::IAttributes* in, io::SAttributeRe
 	BGColor = in->getAttributeAsColor("BGColor", BGColor);
 
 	setTextAlignment( (EGUI_ALIGNMENT) in->getAttributeAsEnumeration("HTextAlign", GUIAlignmentNames, (s32)HAlign),
-                      (EGUI_ALIGNMENT) in->getAttributeAsEnumeration("VTextAlign", GUIAlignmentNames, (s32)VAlign));
+					  (EGUI_ALIGNMENT) in->getAttributeAsEnumeration("VTextAlign", GUIAlignmentNames, (s32)VAlign));
 
 	// OverrideFont = in->getAttributeAsFont("OverrideFont");
 }

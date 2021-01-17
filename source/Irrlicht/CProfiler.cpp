@@ -28,44 +28,44 @@ CProfiler::~CProfiler()
 
 void CProfiler::printAll(core::stringw &ostream, bool includeOverview, bool suppressUncalled) const
 {
-    ostream += makeTitleString();
-    ostream += L"\n";
+	ostream += makeTitleString();
+	ostream += L"\n";
 	for ( u32 i=includeOverview ?0:1; i<ProfileGroups.size(); ++i )
-    {
-        printGroup( ostream, i, suppressUncalled );
-    }
+	{
+		printGroup( ostream, i, suppressUncalled );
+	}
 }
 
 void CProfiler::printGroup(core::stringw &ostream, u32 idxGroup, bool suppressUncalled) const
 {
-    ostream += getAsString(ProfileGroups[idxGroup]);
-    ostream += L"\n";
+	ostream += getAsString(ProfileGroups[idxGroup]);
+	ostream += L"\n";
 
 	// print overview for groups
-    if ( idxGroup == 0 )
-    {
+	if ( idxGroup == 0 )
+	{
 		for ( u32 i=0; i<ProfileGroups.size(); ++i )
-        {
+		{
 			if ( !suppressUncalled || ProfileGroups[i].getCallsCounter() > 0)
-            {
-                ostream += getAsString(ProfileGroups[i]);
-                ostream += L"\n";
-            }
-        }
-    }
+			{
+				ostream += getAsString(ProfileGroups[i]);
+				ostream += L"\n";
+			}
+		}
+	}
 	// print all data in a group
-    else
-    {
+	else
+	{
 		for ( u32 i=0; i<ProfileDatas.size(); ++i )
-        {
+		{
 			if ( (!suppressUncalled || ProfileDatas[i].getCallsCounter() > 0)
 				&& ProfileDatas[i].getGroupIndex() == idxGroup )
-            {
-                ostream += getAsString(ProfileDatas[i]);
-                ostream += L"\n";
-            }
-        }
-    }
+			{
+				ostream += getAsString(ProfileDatas[i]);
+				ostream += L"\n";
+			}
+		}
+	}
 }
 
 //! Convert the whole data into a string

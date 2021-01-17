@@ -26,9 +26,9 @@ namespace io
 	Android asset file system written August 2012 by J.Henrichs (later reworked by others).
 */
 	class CAndroidAssetFileArchive : public virtual IFileArchive,
-                                          virtual CFileList
+										  virtual CFileList
 	{
-    public:
+	public:
 
 		//! constructor
 		CAndroidAssetFileArchive(AAssetManager *assetManager, bool ignoreCase, bool ignorePaths);
@@ -60,7 +60,7 @@ namespace io
 		//! Android's asset manager
 		AAssetManager *AssetManager;
 
-    };   // CAndroidAssetFileArchive
+	};   // CAndroidAssetFileArchive
 
 } // end namespace io
 } // end namespace irr

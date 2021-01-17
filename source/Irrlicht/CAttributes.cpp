@@ -1368,7 +1368,7 @@ void* CAttributes::getAttributeAsUserPointer(s32 index) const
 	void* value = 0;
 
 	if (index >= 0 && index < (s32)Attributes.size())
-        value = Attributes[index]->getUserPointer();
+		value = Attributes[index]->getUserPointer();
 
 	return value;
 }
@@ -1385,7 +1385,7 @@ void CAttributes::setAttribute(s32 index, void* userPointer)
 //! \param readCurrentElementOnly: If set to true, reading only works if current element has the name 'attributes'.
 //! IF set to false, the first appearing list attributes are read.
 bool CAttributes::read(io::IXMLReader* reader, bool readCurrentElementOnly,
-					    const wchar_t* nonDefaultElementName)
+						const wchar_t* nonDefaultElementName)
 {
 #ifdef _IRR_COMPILE_WITH_XML_
 	if (!reader)

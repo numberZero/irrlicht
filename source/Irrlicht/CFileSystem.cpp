@@ -26,7 +26,7 @@
 #include "irrList.h"
 
 #if defined (__STRICT_ANSI__)
-    #error Compiling with __STRICT_ANSI__ not supported. g++ does set this when compiling with -std=c++11 or -std=c++0x. Use instead -std=gnu++11 or -std=gnu++0x. Or use -U__STRICT_ANSI__ to disable strict ansi.
+	#error Compiling with __STRICT_ANSI__ not supported. g++ does set this when compiling with -std=c++11 or -std=c++0x. Use instead -std=gnu++11 or -std=gnu++0x. Or use -U__STRICT_ANSI__ to disable strict ansi.
 #endif
 
 #if defined (_IRR_WINDOWS_API_)
@@ -45,7 +45,7 @@
 		#include <sys/stat.h>
 		#include <unistd.h>
 #elif defined(_IRR_EMSCRIPTEN_PLATFORM_)
-    #include <unistd.h>
+	#include <unistd.h>
 #endif
 
 namespace irr

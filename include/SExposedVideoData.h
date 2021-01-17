@@ -45,14 +45,14 @@ struct SExposedVideoData
 		unsigned long GLXWindow;
 	};
 
-    struct SOpenGLOSX
-    {
-        //! The NSOpenGLContext object.
-        void* Context;
+	struct SOpenGLOSX
+	{
+		//! The NSOpenGLContext object.
+		void* Context;
 
-        //! The NSWindow object.
-        void* Window;
-    };
+		//! The NSWindow object.
+		void* Window;
+	};
 	
 	struct SOpenGLFB
 	{
@@ -72,7 +72,7 @@ struct SExposedVideoData
 		void* ViewController;
 		
 		//! The UIWindow object.
-        void* Window;
+		void* Window;
 	};
 
 	struct SOGLESAndroid

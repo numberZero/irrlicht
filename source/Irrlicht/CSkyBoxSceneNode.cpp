@@ -48,17 +48,17 @@ CSkyBoxSceneNode::CSkyBoxSceneNode(video::ITexture* top, video::ITexture* bottom
 	/* Hey, I am no artist, but look at that
 	   cool ASCII art I made! ;)
 
-       -111         111
-          /6--------/5        y
-         /  |      / |        ^  z
-        /   |   11-1 |        | /
+	   -111         111
+		  /6--------/5        y
+		 /  |      / |        ^  z
+		/   |   11-1 |        | /
   -11-1 3---------2  |        |/
-        |   7- - -| -4 1-11    *---->x
-        | -1-11   |  /       3-------|2
-        |/        | /         |    //|
-        0---------1/          |  //  |
-     -1-1-1     1-1-1         |//    |
-	                     0--------1
+		|   7- - -| -4 1-11    *---->x
+		| -1-11   |  /       3-------|2
+		|/        | /         |    //|
+		0---------1/          |  //  |
+	 -1-1-1     1-1-1         |//    |
+						 0--------1
 	*/
 
 	video::ITexture* tex = front;

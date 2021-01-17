@@ -187,13 +187,13 @@ void CSceneNodeAnimatorCameraMaya::animateNode(ISceneNode *node, u32 timeMs)
 		else
 		{
 			translate +=  tvectX * (TranslateStart.X - MousePos.X)*TranslateSpeed +
-			              tvectY * (TranslateStart.Y - MousePos.Y)*TranslateSpeed;
+						  tvectY * (TranslateStart.Y - MousePos.Y)*TranslateSpeed;
 		}
 	}
 	else if (Translating)
 	{
 		translate += tvectX * (TranslateStart.X - MousePos.X)*TranslateSpeed +
-		             tvectY * (TranslateStart.Y - MousePos.Y)*TranslateSpeed;
+					 tvectY * (TranslateStart.Y - MousePos.Y)*TranslateSpeed;
 		OldTarget = translate;
 		Translating = false;
 	}

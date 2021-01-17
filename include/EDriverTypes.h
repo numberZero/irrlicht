@@ -25,7 +25,7 @@ namespace video
 		primitives. */
 		EDT_OPENGL = 5,
 
-        //! OpenGL-ES 1.x driver, for embedded and mobile systems
+		//! OpenGL-ES 1.x driver, for embedded and mobile systems
 		EDT_OGLES1 = 6,
 
 		//! OpenGL-ES 2.x driver, for embedded and mobile systems

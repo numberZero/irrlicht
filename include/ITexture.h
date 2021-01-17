@@ -67,7 +67,7 @@ enum E_TEXTURE_CREATION_FLAG
 
 	/** Discard any alpha layer and use non-alpha color format. 
 	Warning: This may lead to getting 24-bit texture formats which 
-	         are often badly supported by drivers. So it's generally
+			 are often badly supported by drivers. So it's generally
 			 not recommended to enable this flag.	*/
 	ETCF_NO_ALPHA_CHANNEL = 0x00000020,
 

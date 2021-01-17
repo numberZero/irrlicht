@@ -317,7 +317,7 @@ bool COGLES2MaterialRenderer::linkProgram()
 			GLint size;
 			glGetActiveUniform(Program, i, maxlen, 0, &size, &ui.type, reinterpret_cast<GLchar*>(buf));
 
-            core::stringc name = "";
+			core::stringc name = "";
 
 			// array support, workaround for some bugged drivers.
 			for (s32 i = 0; i < maxlen; ++i)
@@ -325,7 +325,7 @@ bool COGLES2MaterialRenderer::linkProgram()
 				if (buf[i] == '[' || buf[i] == '\0')
 					break;
 
-                name += buf[i];
+				name += buf[i];
 			}
 
 			ui.name = name;

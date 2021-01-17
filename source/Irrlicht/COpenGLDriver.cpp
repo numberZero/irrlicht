@@ -753,7 +753,7 @@ void COpenGLDriver::updateOcclusionQuery(scene::ISceneNode* node, bool block)
 			return;
 		GLint available = block?GL_TRUE:GL_FALSE;
 		if (!block)
-        {
+		{
 			extGlGetQueryObjectiv(OcclusionQueries[index].UID,
 #ifdef GL_ARB_occlusion_query
 						GL_QUERY_RESULT_AVAILABLE_ARB,
@@ -2489,126 +2489,126 @@ void COpenGLDriver::setBasicRenderStates(const SMaterial& material, const SMater
 	CacheHandler->setColorMask(material.ColorMask);
 
 	// Blend Equation
-    if (material.BlendOperation == EBO_NONE)
-        CacheHandler->setBlend(false);
-    else
-    {
-        CacheHandler->setBlend(true);
+	if (material.BlendOperation == EBO_NONE)
+		CacheHandler->setBlend(false);
+	else
+	{
+		CacheHandler->setBlend(true);
 
 #if defined(GL_EXT_blend_subtract) || defined(GL_EXT_blend_minmax) || defined(GL_EXT_blend_logic_op) || defined(GL_VERSION_1_4)
-        if (queryFeature(EVDF_BLEND_OPERATIONS))
-        {
-            switch (material.BlendOperation)
-            {
-            case EBO_SUBTRACT:
+		if (queryFeature(EVDF_BLEND_OPERATIONS))
+		{
+			switch (material.BlendOperation)
+			{
+			case EBO_SUBTRACT:
 #if defined(GL_VERSION_1_4)
-                CacheHandler->setBlendEquation(GL_FUNC_SUBTRACT);
+				CacheHandler->setBlendEquation(GL_FUNC_SUBTRACT);
 #elif defined(GL_EXT_blend_subtract)
-                CacheHandler->setBlendEquation(GL_FUNC_SUBTRACT_EXT);
+				CacheHandler->setBlendEquation(GL_FUNC_SUBTRACT_EXT);
 #endif
-                break;
-            case EBO_REVSUBTRACT:
+				break;
+			case EBO_REVSUBTRACT:
 #if defined(GL_VERSION_1_4)
-                CacheHandler->setBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+				CacheHandler->setBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 #elif defined(GL_EXT_blend_subtract)
-                CacheHandler->setBlendEquation(GL_FUNC_REVERSE_SUBTRACT_EXT);
+				CacheHandler->setBlendEquation(GL_FUNC_REVERSE_SUBTRACT_EXT);
 #endif
-                break;
-            case EBO_MIN:
+				break;
+			case EBO_MIN:
 #if defined(GL_VERSION_1_4)
-                CacheHandler->setBlendEquation(GL_MIN);
+				CacheHandler->setBlendEquation(GL_MIN);
 #elif defined(GL_EXT_blend_minmax)
-                CacheHandler->setBlendEquation(GL_MIN_EXT);
+				CacheHandler->setBlendEquation(GL_MIN_EXT);
 #endif
-                break;
-            case EBO_MAX:
+				break;
+			case EBO_MAX:
 #if defined(GL_VERSION_1_4)
-                CacheHandler->setBlendEquation(GL_MAX);
+				CacheHandler->setBlendEquation(GL_MAX);
 #elif defined(GL_EXT_blend_minmax)
-                CacheHandler->setBlendEquation(GL_MAX_EXT);
+				CacheHandler->setBlendEquation(GL_MAX_EXT);
 #endif
-                break;
-            case EBO_MIN_FACTOR:
+				break;
+			case EBO_MIN_FACTOR:
 #if defined(GL_AMD_blend_minmax_factor)
-                if (FeatureAvailable[IRR_AMD_blend_minmax_factor])
-                    CacheHandler->setBlendEquation(GL_FACTOR_MIN_AMD);
+				if (FeatureAvailable[IRR_AMD_blend_minmax_factor])
+					CacheHandler->setBlendEquation(GL_FACTOR_MIN_AMD);
 #endif
 				// fallback in case of missing extension
 #if defined(GL_VERSION_1_4)
 #if defined(GL_AMD_blend_minmax_factor)
-                else
+				else
 #endif
-                    CacheHandler->setBlendEquation(GL_MIN);
+					CacheHandler->setBlendEquation(GL_MIN);
 #endif
-                break;
-            case EBO_MAX_FACTOR:
+				break;
+			case EBO_MAX_FACTOR:
 #if defined(GL_AMD_blend_minmax_factor)
-                if (FeatureAvailable[IRR_AMD_blend_minmax_factor])
-                    CacheHandler->setBlendEquation(GL_FACTOR_MAX_AMD);
+				if (FeatureAvailable[IRR_AMD_blend_minmax_factor])
+					CacheHandler->setBlendEquation(GL_FACTOR_MAX_AMD);
 #endif
 				// fallback in case of missing extension
 #if defined(GL_VERSION_1_4)
 #if defined(GL_AMD_blend_minmax_factor)
-                else
+				else
 #endif
-                    CacheHandler->setBlendEquation(GL_MAX);
+					CacheHandler->setBlendEquation(GL_MAX);
 #endif
-                break;
-            case EBO_MIN_ALPHA:
+				break;
+			case EBO_MIN_ALPHA:
 #if defined(GL_SGIX_blend_alpha_minmax)
-                if (FeatureAvailable[IRR_SGIX_blend_alpha_minmax])
-                    CacheHandler->setBlendEquation(GL_ALPHA_MIN_SGIX);
-                // fallback in case of missing extension
-                else
-                    if (FeatureAvailable[IRR_EXT_blend_minmax])
-                        CacheHandler->setBlendEquation(GL_MIN_EXT);
+				if (FeatureAvailable[IRR_SGIX_blend_alpha_minmax])
+					CacheHandler->setBlendEquation(GL_ALPHA_MIN_SGIX);
+				// fallback in case of missing extension
+				else
+					if (FeatureAvailable[IRR_EXT_blend_minmax])
+						CacheHandler->setBlendEquation(GL_MIN_EXT);
 #endif
-                break;
-            case EBO_MAX_ALPHA:
+				break;
+			case EBO_MAX_ALPHA:
 #if defined(GL_SGIX_blend_alpha_minmax)
-                if (FeatureAvailable[IRR_SGIX_blend_alpha_minmax])
-                    CacheHandler->setBlendEquation(GL_ALPHA_MAX_SGIX);
-                // fallback in case of missing extension
-                else
-                    if (FeatureAvailable[IRR_EXT_blend_minmax])
-                        CacheHandler->setBlendEquation(GL_MAX_EXT);
+				if (FeatureAvailable[IRR_SGIX_blend_alpha_minmax])
+					CacheHandler->setBlendEquation(GL_ALPHA_MAX_SGIX);
+				// fallback in case of missing extension
+				else
+					if (FeatureAvailable[IRR_EXT_blend_minmax])
+						CacheHandler->setBlendEquation(GL_MAX_EXT);
 #endif
-                break;
-            default:
+				break;
+			default:
 #if defined(GL_VERSION_1_4)
-                CacheHandler->setBlendEquation(GL_FUNC_ADD);
+				CacheHandler->setBlendEquation(GL_FUNC_ADD);
 #elif defined(GL_EXT_blend_subtract) || defined(GL_EXT_blend_minmax) || defined(GL_EXT_blend_logic_op)
-                CacheHandler->setBlendEquation(GL_FUNC_ADD_EXT);
+				CacheHandler->setBlendEquation(GL_FUNC_ADD_EXT);
 #endif
-                break;
-            }
+				break;
+			}
 		}
 #endif
 	}
 
-    // Blend Factor
+	// Blend Factor
 	if (IR(material.BlendFactor) & 0xFFFFFFFF	// TODO: why the & 0xFFFFFFFF?
 		&& material.MaterialType != EMT_ONETEXTURE_BLEND
 		)
 	{
-        E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
-        E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
-        E_BLEND_FACTOR srcAlphaFact = EBF_ZERO;
-        E_BLEND_FACTOR dstAlphaFact = EBF_ZERO;
-        E_MODULATE_FUNC modulo = EMFN_MODULATE_1X;
-        u32 alphaSource = 0;
+		E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
+		E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
+		E_BLEND_FACTOR srcAlphaFact = EBF_ZERO;
+		E_BLEND_FACTOR dstAlphaFact = EBF_ZERO;
+		E_MODULATE_FUNC modulo = EMFN_MODULATE_1X;
+		u32 alphaSource = 0;
 
-        unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulo, alphaSource, material.BlendFactor);
+		unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulo, alphaSource, material.BlendFactor);
 
-        if (queryFeature(EVDF_BLEND_SEPARATE))
-        {
-            CacheHandler->setBlendFuncSeparate(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact),
-                getGLBlend(srcAlphaFact), getGLBlend(dstAlphaFact));
-        }
-        else
-        {
-            CacheHandler->setBlendFunc(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact));
-        }
+		if (queryFeature(EVDF_BLEND_SEPARATE))
+		{
+			CacheHandler->setBlendFuncSeparate(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact),
+				getGLBlend(srcAlphaFact), getGLBlend(dstAlphaFact));
+		}
+		else
+		{
+			CacheHandler->setBlendFunc(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact));
+		}
 	}
 
 	// Polygon Offset

@@ -21,7 +21,7 @@ struct SProfileData
 {
 	friend class IProfiler;
 
-    SProfileData()
+	SProfileData()
 	{
 		GroupIndex = 0;
 		reset();
@@ -80,15 +80,15 @@ private:
 	}
 
 	s32 Id;
-    u32 GroupIndex;
+	u32 GroupIndex;
 	core::stringw Name;
 
 	s32 StartStopCounter; // 0 means stopped > 0 means it runs.
-    u32 CountCalls;
-    u32 LongestTime;
-    u32 TimeSum;
+	u32 CountCalls;
+	u32 LongestTime;
+	u32 TimeSum;
 
-    u32 LastTimeStarted;
+	u32 LastTimeStarted;
 };
 
 //! Code-profiler. Please check the example in the Irrlicht examples folder about how to use it.
@@ -102,7 +102,7 @@ class IProfiler
 {
 public:
 	//! Constructor. You could use this to create a new profiler, but usually getProfiler() is used to access the global instance.
-    IProfiler()	: Timer(0), NextAutoId(INT_MAX)
+	IProfiler()	: Timer(0), NextAutoId(INT_MAX)
 	{}
 
 	virtual ~IProfiler()
@@ -114,20 +114,20 @@ public:
 	have been added automatically by the other add function.
 	\param name: Name for displaying profile data.
 	\param groupName: Each id belongs into a group - this helps on displaying profile data. */
-    inline void add(s32 id, const core::stringw &name, const core::stringw &groupName);
+	inline void add(s32 id, const core::stringw &name, const core::stringw &groupName);
 
 	//! Add an automatically generated for the given name and group which can be used for profiling with start/stop.
 	/** After calling this once you can start/stop profiling with the returned id.
 	\param name: Name for displaying profile data.
 	\param groupName: Each id belongs into a group - this helps on displaying profile data.
 	\return Automatic id's start at INT_MAX and count down for each new id. If the name already has an id then that id will be returned. */
-    inline s32 add(const core::stringw &name, const core::stringw &groupName);
+	inline s32 add(const core::stringw &name, const core::stringw &groupName);
 
 	//! Return the number of profile data blocks. There is one for each id.
-    u32 getProfileDataCount() const
-    {
+	u32 getProfileDataCount() const
+	{
 		return ProfileDatas.size();
-    }
+	}
 
 	//! Search for the index of the profile data by name
 	/** \param result Receives the resulting data index when one was found.
@@ -137,32 +137,32 @@ public:
 
 	//! Get the profile data
 	/** \param index A value between 0 and getProfileDataCount()-1.	Indices can change when new id's are added.*/
-    const SProfileData& getProfileDataByIndex(u32 index) const
-    {
+	const SProfileData& getProfileDataByIndex(u32 index) const
+	{
 		return ProfileDatas[index];
-    }
+	}
 
 	//! Get the profile data
 	/** \param id Same value as used in ::add
 	\return Profile data for the given id or 0 when it does not exist.	*/
-    inline const SProfileData* getProfileDataById(u32 id);
+	inline const SProfileData* getProfileDataById(u32 id);
 
 	//! Get the number of profile groups. Will be at least 1.
 	/** NOTE: The first groups is always L"overview" which is an overview for all existing groups */
-    inline u32 getGroupCount() const
-    {
+	inline u32 getGroupCount() const
+	{
 		return ProfileGroups.size();
-    }
+	}
 
-    //! Get profile data for a group.
-    /** NOTE: The first groups is always L"overview" which is an overview for all existing groups */
-    inline const SProfileData& getGroupData(u32 index) const
-    {
+	//! Get profile data for a group.
+	/** NOTE: The first groups is always L"overview" which is an overview for all existing groups */
+	inline const SProfileData& getGroupData(u32 index) const
+	{
 		return ProfileGroups[index];
-    }
+	}
 
-    //! Find the group index by the group-name
-    /** \param result Receives the resulting group index when one was found.
+	//! Find the group index by the group-name
+	/** \param result Receives the resulting group index when one was found.
 	\param name String with name to search for
 	\return true when found, false when not found */
 	inline bool findGroupIndex(u32 & result, const core::stringw &name) const;
@@ -179,44 +179,44 @@ public:
 		You should have the same amount of start and stop calls. If stop is called more often than start
 		then the additional stop calls will be ignored (counter never goes below 0)
 	*/
-    inline void stop(s32 id);
+	inline void stop(s32 id);
 
 	//! Reset profile data for the given id
-    inline void resetDataById(s32 id);
+	inline void resetDataById(s32 id);
 
 	//! Reset profile data for the given index
-    inline void resetDataByIndex(u32 index);
+	inline void resetDataByIndex(u32 index);
 
-    //! Reset profile data for a whole group
-    inline void resetGroup(u32 index);
+	//! Reset profile data for a whole group
+	inline void resetGroup(u32 index);
 
-    //! Reset all profile data
-    /** NOTE: This is not deleting id's or groups, just resetting all timers to 0. */
-    inline void resetAll();
+	//! Reset all profile data
+	/** NOTE: This is not deleting id's or groups, just resetting all timers to 0. */
+	inline void resetAll();
 
 	//! Write all profile-data into a string
 	/** \param result Receives the result string.
 	\param includeOverview When true a group-overview is attached first
 	\param suppressUncalled When true elements which got never called are not printed */
-    virtual void printAll(core::stringw &result, bool includeOverview=false,bool suppressUncalled=true) const = 0;
+	virtual void printAll(core::stringw &result, bool includeOverview=false,bool suppressUncalled=true) const = 0;
 
 	//! Write the profile data of one group into a string
 	/** \param result Receives the result string.
 	\param groupIndex_	*/
-    virtual void printGroup(core::stringw &result, u32 groupIndex, bool suppressUncalled) const = 0;
+	virtual void printGroup(core::stringw &result, u32 groupIndex, bool suppressUncalled) const = 0;
 
 protected:
 
-    inline u32 addGroup(const core::stringw &name);
+	inline u32 addGroup(const core::stringw &name);
 
 	// I would prefer using os::Timer, but os.h is not in the public interface so far.
 	// Timer must be initialized by the implementation.
-    ITimer * Timer;
+	ITimer * Timer;
 	core::array<SProfileData> ProfileDatas;
-    core::array<SProfileData> ProfileGroups;
+	core::array<SProfileData> ProfileGroups;
 
 private:
-    s32 NextAutoId;	// for giving out id's automatically
+	s32 NextAutoId;	// for giving out id's automatically
 };
 
 //! Access the Irrlicht profiler object.
@@ -376,11 +376,11 @@ void IProfiler::add(s32 id, const core::stringw &name, const core::stringw &grou
 
 u32 IProfiler::addGroup(const core::stringw &name)
 {
-    SProfileData group;
+	SProfileData group;
 	group.Id = -1;	// Id for groups doesn't matter so far
 	group.Name = name;
-    ProfileGroups.push_back(group);
-    return ProfileGroups.size()-1;
+	ProfileGroups.push_back(group);
+	return ProfileGroups.size()-1;
 }
 
 bool IProfiler::findDataIndex(u32 & result, const core::stringw &name) const
@@ -400,7 +400,7 @@ bool IProfiler::findDataIndex(u32 & result, const core::stringw &name) const
 const SProfileData* IProfiler::getProfileDataById(u32 id)
 {
 	SProfileData data(id);
-    s32 idx = ProfileDatas.binary_search(data);
+	s32 idx = ProfileDatas.binary_search(data);
 	if ( idx >= 0 )
 		return &ProfileDatas[idx];
 	return NULL;
@@ -423,10 +423,10 @@ bool IProfiler::findGroupIndex(u32 & result, const core::stringw &name) const
 void IProfiler::resetDataById(s32 id)
 {
 	s32 idx = ProfileDatas.binary_search(SProfileData(id));
-    if ( idx >= 0 )
-    {
+	if ( idx >= 0 )
+	{
 		resetDataByIndex((u32)idx);
-    }
+	}
 }
 
 void IProfiler::resetDataByIndex(u32 index)
@@ -444,25 +444,25 @@ void IProfiler::resetDataByIndex(u32 index)
 void IProfiler::resetGroup(u32 index)
 {
 	for ( u32 i=0; i<ProfileDatas.size(); ++i )
-    {
+	{
 		if ( ProfileDatas[i].GroupIndex == index )
 			ProfileDatas[i].reset();
-    }
-    if ( index < ProfileGroups.size() )
+	}
+	if ( index < ProfileGroups.size() )
 		ProfileGroups[index].reset();
 }
 
 void IProfiler::resetAll()
 {
 	for ( u32 i=0; i<ProfileDatas.size(); ++i )
-    {
+	{
 		ProfileDatas[i].reset();
-    }
+	}
 
 	for ( u32 i=0; i<ProfileGroups.size(); ++i )
-    {
+	{
 		ProfileGroups[i].reset();
-    }
+	}
 }
 
 //! For internal engine use:

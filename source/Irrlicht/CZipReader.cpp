@@ -64,7 +64,7 @@ CArchiveLoaderZIP::CArchiveLoaderZIP(io::IFileSystem* fs)
 bool CArchiveLoaderZIP::isALoadableFileFormat(const io::path& filename) const
 {
 	return core::hasFileExtension(filename, "zip", "pk3") ||
-	       core::hasFileExtension(filename, "gz", "tgz");
+		   core::hasFileExtension(filename, "gz", "tgz");
 }
 
 //! Check to see if the loader can create archives of this type.

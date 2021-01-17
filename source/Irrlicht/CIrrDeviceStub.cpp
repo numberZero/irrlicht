@@ -363,73 +363,73 @@ bool CIrrDeviceStub::activateJoysticks(core::array<SJoystickInfo> & joystickInfo
 //! No-op in this implementation
 bool CIrrDeviceStub::activateAccelerometer(float updateInterval)
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::deactivateAccelerometer()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::isAccelerometerActive()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::isAccelerometerAvailable()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::activateGyroscope(float updateInterval)
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::deactivateGyroscope()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::isGyroscopeActive()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::isGyroscopeAvailable()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::activateDeviceMotion(float updateInterval)
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::deactivateDeviceMotion()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::isDeviceMotionActive()
 {
-    return false;
+	return false;
 }
 
 //! No-op in this implementation
 bool CIrrDeviceStub::isDeviceMotionAvailable()
 {
-    return false;
+	return false;
 }
 
 /*!

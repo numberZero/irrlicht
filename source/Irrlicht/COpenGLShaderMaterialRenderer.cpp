@@ -226,14 +226,14 @@ void COpenGLShaderMaterialRenderer::OnSetMaterial(const video::SMaterial& materi
 		unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulate, alphaSource, material.MaterialTypeParam);
 
 		if (Driver->queryFeature(EVDF_BLEND_SEPARATE))
-        {
+		{
 			cacheHandler->setBlendFuncSeparate(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact),
-                Driver->getGLBlend(srcAlphaFact), Driver->getGLBlend(dstAlphaFact));
-        }
-        else
-        {
+				Driver->getGLBlend(srcAlphaFact), Driver->getGLBlend(dstAlphaFact));
+		}
+		else
+		{
 			cacheHandler->setBlendFunc(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact));
-        }
+		}
 
 		cacheHandler->setBlend(true);
 	}

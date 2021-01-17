@@ -42,11 +42,11 @@ namespace gui
 		//! Insert an existing tab
 		/** Note that it will also add the tab as a child of this TabControl.
 		\param idx Index at which tab will be inserted. Later tabs will be moved. 
-		           Previous active tab will stay active unless this is the first 
+				   Previous active tab will stay active unless this is the first 
 				   element to be inserted in which case it becomes active.
 		\param tab New tab to insert.
 		\param serializationMode Internally used for serialization. You should not need this.
-		       When true it reserves space for the index, doesn't move but replaces tabs 
+			   When true it reserves space for the index, doesn't move but replaces tabs 
 			   and it doesn't change the active tab.
 		\return Index of added tab (should be same as the one passed) or -1 for failure*/
 		virtual s32 insertTab(s32 idx, IGUITab* tab, bool serializationMode=false) = 0;
@@ -68,7 +68,7 @@ namespace gui
 
 		//! For given element find if it's a tab and return it's zero-based index (or -1 for not found)
 		/** \param tab Tab for which we are looking (usually you will look for an IGUITab* type as only  
-		              those can be tabs, but we allow looking for any kind of IGUIElement* as there are some 
+					  those can be tabs, but we allow looking for any kind of IGUIElement* as there are some 
 					  use-cases for that even if it just returns 0. For example this way you can check for
 					  all children of this gui-element if they are tabs or some non-tab children.*/
 		virtual s32 getTabIndex(const IGUIElement *tab) const = 0;

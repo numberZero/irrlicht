@@ -20,7 +20,7 @@ namespace video
 {
 
 CEGLManager::CEGLManager() : IContextManager(), EglWindow(0), EglDisplay(EGL_NO_DISPLAY),
-    EglSurface(EGL_NO_SURFACE), EglContext(EGL_NO_CONTEXT), EglConfig(0), MajorVersion(0), MinorVersion(0)
+	EglSurface(EGL_NO_SURFACE), EglContext(EGL_NO_CONTEXT), EglConfig(0), MajorVersion(0), MinorVersion(0)
 {
 	#ifdef _DEBUG
 	setDebugName("CEGLManager");
@@ -29,9 +29,9 @@ CEGLManager::CEGLManager() : IContextManager(), EglWindow(0), EglDisplay(EGL_NO_
 
 CEGLManager::~CEGLManager()
 {
-    destroyContext();
-    destroySurface();
-    terminate();
+	destroyContext();
+	destroySurface();
+	terminate();
 }
 
 bool CEGLManager::initialize(const SIrrlichtCreationParameters& params, const SExposedVideoData& data)
@@ -41,7 +41,7 @@ bool CEGLManager::initialize(const SIrrlichtCreationParameters& params, const SE
 	Data=data;
 
 	if (EglWindow != 0 && EglDisplay != EGL_NO_DISPLAY)
-        return true;
+		return true;
 
 	// Window is depend on platform.
 #if defined(_IRR_COMPILE_WITH_WINDOWS_DEVICE_)
@@ -64,31 +64,31 @@ bool CEGLManager::initialize(const SIrrlichtCreationParameters& params, const SE
 
 	// We must check if EGL display is valid.
 	if (EglDisplay == EGL_NO_DISPLAY)
-    {
+	{
 		os::Printer::log("Could not get EGL display.");
 		terminate();
-        return false;
-    }
+		return false;
+	}
 
 	// Initialize EGL here.
 	if (!eglInitialize(EglDisplay, &MajorVersion, &MinorVersion))
-    {
+	{
 		os::Printer::log("Could not initialize EGL display.");
 
-        EglDisplay = EGL_NO_DISPLAY;
+		EglDisplay = EGL_NO_DISPLAY;
 		terminate();
-        return false;
-    }
+		return false;
+	}
 	else
 		os::Printer::log("EGL version", core::stringc(MajorVersion+(MinorVersion*0.1f)).c_str());
 
-    return true;
+	return true;
 }
 
 void CEGLManager::terminate()
 {
-    if (EglWindow == 0 && EglDisplay == EGL_NO_DISPLAY)
-        return;
+	if (EglWindow == 0 && EglDisplay == EGL_NO_DISPLAY)
+		return;
 
 	if (EglDisplay != EGL_NO_DISPLAY)
 	{
@@ -101,23 +101,23 @@ void CEGLManager::terminate()
 
 #if defined(_IRR_COMPILE_WITH_WINDOWS_DEVICE_)
 	if (Data.OpenGLWin32.HDc)
-    {
+	{
 		ReleaseDC((HWND)EglWindow, (HDC)Data.OpenGLWin32.HDc);
-        Data.OpenGLWin32.HDc = 0;
-    }
+		Data.OpenGLWin32.HDc = 0;
+	}
 #endif
 
-    MajorVersion = 0;
-    MinorVersion = 0;
+	MajorVersion = 0;
+	MinorVersion = 0;
 }
 
 bool CEGLManager::generateSurface()
 {
-    if (EglDisplay == EGL_NO_DISPLAY)
-        return false;
+	if (EglDisplay == EGL_NO_DISPLAY)
+		return false;
 
-    if (EglSurface != EGL_NO_SURFACE)
-        return true;
+	if (EglSurface != EGL_NO_SURFACE)
+		return true;
 
 	// We should assign new WindowID on platforms, where WindowID may change at runtime,
 	// at this time only Android support this feature.
@@ -143,10 +143,10 @@ bool CEGLManager::generateSurface()
 
 
 #if defined(_IRR_COMPILE_WITH_ANDROID_DEVICE_)
-    EGLint Format = 0;
-    eglGetConfigAttrib(EglDisplay, EglConfig, EGL_NATIVE_VISUAL_ID, &Format);
+	EGLint Format = 0;
+	eglGetConfigAttrib(EglDisplay, EglConfig, EGL_NATIVE_VISUAL_ID, &Format);
 
-    ANativeWindow_setBuffersGeometry(EglWindow, 0, 0, Format);
+	ANativeWindow_setBuffersGeometry(EglWindow, 0, 0, Format);
 #endif
 
 	// Now we are able to create EGL surface.
@@ -163,10 +163,10 @@ bool CEGLManager::generateSurface()
 		eglBindAPI(EGL_OPENGL_ES_API);
 #endif
 
-    if (Params.Vsync)
+	if (Params.Vsync)
 		eglSwapInterval(EglDisplay, 1);
 
-    return true;
+	return true;
 }
 
 EGLConfig CEGLManager::chooseConfig(EConfigStyle confStyle)
@@ -507,23 +507,23 @@ irr::s32 CEGLManager::rateConfig(EGLConfig config, EGLint eglOpenGLBIT, bool log
 
 void CEGLManager::destroySurface()
 {
-    if (EglSurface == EGL_NO_SURFACE)
-        return;
+	if (EglSurface == EGL_NO_SURFACE)
+		return;
 
 	// We should unbind current EGL context before destroy EGL surface.
 	eglMakeCurrent(EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 
-    eglDestroySurface(EglDisplay, EglSurface);
-    EglSurface = EGL_NO_SURFACE;
+	eglDestroySurface(EglDisplay, EglSurface);
+	EglSurface = EGL_NO_SURFACE;
 }
 
 bool CEGLManager::generateContext()
 {
-    if (EglDisplay == EGL_NO_DISPLAY || EglSurface == EGL_NO_SURFACE)
-        return false;
+	if (EglDisplay == EGL_NO_DISPLAY || EglSurface == EGL_NO_SURFACE)
+		return false;
 
-    if (EglContext != EGL_NO_CONTEXT)
-        return true;
+	if (EglContext != EGL_NO_CONTEXT)
+		return true;
 
 	EGLint OpenGLESVersion = 0;
 
@@ -540,7 +540,7 @@ bool CEGLManager::generateContext()
 		break;
 	}
 
-    EGLint ContextAttrib[] =
+	EGLint ContextAttrib[] =
 	{
 #ifdef EGL_VERSION_1_3
 		EGL_CONTEXT_CLIENT_VERSION, OpenGLESVersion,
@@ -558,19 +558,19 @@ bool CEGLManager::generateContext()
 
 	os::Printer::log("EGL context created with OpenGLESVersion: ", core::stringc((int)OpenGLESVersion), ELL_DEBUG);
 
-    return true;
+	return true;
 }
 
 void CEGLManager::destroyContext()
 {
-    if (EglContext == EGL_NO_CONTEXT)
-        return;
+	if (EglContext == EGL_NO_CONTEXT)
+		return;
 
 	// We must unbind current EGL context before destroy it.
 	eglMakeCurrent(EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 	eglDestroyContext(EglDisplay, EglContext);
 
-    EglContext = EGL_NO_CONTEXT;
+	EglContext = EGL_NO_CONTEXT;
 }
 
 bool CEGLManager::activateContext(const SExposedVideoData& videoData, bool restorePrimaryOnZero)
@@ -592,7 +592,7 @@ const SExposedVideoData& CEGLManager::getContext() const
 
 bool CEGLManager::swapBuffers()
 {
-    return (eglSwapBuffers(EglDisplay, EglSurface)==EGL_TRUE);
+	return (eglSwapBuffers(EglDisplay, EglSurface)==EGL_TRUE);
 }
 
 bool CEGLManager::testEGLError()
@@ -603,51 +603,51 @@ bool CEGLManager::testEGLError()
 	switch (status)
 	{
 		case EGL_SUCCESS:
-            return false;
+			return false;
 		case EGL_NOT_INITIALIZED :
 			os::Printer::log("Not Initialized", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_ACCESS:
 			os::Printer::log("Bad Access", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_ALLOC:
 			os::Printer::log("Bad Alloc", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_ATTRIBUTE:
 			os::Printer::log("Bad Attribute", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_CONTEXT:
 			os::Printer::log("Bad Context", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_CONFIG:
 			os::Printer::log("Bad Config", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_CURRENT_SURFACE:
 			os::Printer::log("Bad Current Surface", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_DISPLAY:
 			os::Printer::log("Bad Display", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_SURFACE:
 			os::Printer::log("Bad Surface", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_MATCH:
 			os::Printer::log("Bad Match", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_PARAMETER:
 			os::Printer::log("Bad Parameter", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_NATIVE_PIXMAP:
 			os::Printer::log("Bad Native Pixmap", ELL_ERROR);
-            break;
+			break;
 		case EGL_BAD_NATIVE_WINDOW:
 			os::Printer::log("Bad Native Window", ELL_ERROR);
-            break;
+			break;
 		case EGL_CONTEXT_LOST:
 			os::Printer::log("Context Lost", ELL_ERROR);
-            break;
-        default:
-            break;
+			break;
+		default:
+			break;
 	};
 
 	return true;

@@ -18,10 +18,10 @@ public:
 	virtual ~CProfiler();
 
 	//! Write all profile-data into a string
-    virtual void printAll(core::stringw &result, bool includeOverview,bool suppressUncalled) const  _IRR_OVERRIDE_;
+	virtual void printAll(core::stringw &result, bool includeOverview,bool suppressUncalled) const  _IRR_OVERRIDE_;
 
 	//! Write the profile data of one group into a string
-    virtual void printGroup(core::stringw &result, u32 groupIndex, bool suppressUncalled) const  _IRR_OVERRIDE_;
+	virtual void printGroup(core::stringw &result, u32 groupIndex, bool suppressUncalled) const  _IRR_OVERRIDE_;
 
 protected:
 	core::stringw makeTitleString() const;

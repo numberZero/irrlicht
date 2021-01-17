@@ -77,17 +77,17 @@ public:
 			u32 alphaSource;
 			unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulate, alphaSource, material.MaterialTypeParam);
 
-            Driver->getCacheHandler()->setBlend(true);
+			Driver->getCacheHandler()->setBlend(true);
 
-            if (Driver->queryFeature(EVDF_BLEND_SEPARATE))
-            {
-                Driver->getCacheHandler()->setBlendFuncSeparate(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact),
-                    Driver->getGLBlend(srcAlphaFact), Driver->getGLBlend(dstAlphaFact));
-            }
-            else
-            {
-                Driver->getCacheHandler()->setBlendFunc(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact));
-            }
+			if (Driver->queryFeature(EVDF_BLEND_SEPARATE))
+			{
+				Driver->getCacheHandler()->setBlendFuncSeparate(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact),
+					Driver->getGLBlend(srcAlphaFact), Driver->getGLBlend(dstAlphaFact));
+			}
+			else
+			{
+				Driver->getCacheHandler()->setBlendFunc(Driver->getGLBlend(srcRGBFact), Driver->getGLBlend(dstRGBFact));
+			}
 
 			glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
 			glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
@@ -100,7 +100,7 @@ public:
 			glAlphaFunc(GL_GREATER, 0.f);
 
 			if (textureBlendFunc_hasAlpha(srcRGBFact) || textureBlendFunc_hasAlpha(dstRGBFact) ||
-                textureBlendFunc_hasAlpha(srcAlphaFact) || textureBlendFunc_hasAlpha(dstAlphaFact))
+				textureBlendFunc_hasAlpha(srcAlphaFact) || textureBlendFunc_hasAlpha(dstAlphaFact))
 			{
 				glTexEnvf(GL_TEXTURE_ENV, GL_COMBINE_ALPHA, GL_REPLACE);
 				glTexEnvf(GL_TEXTURE_ENV, GL_SRC0_ALPHA, GL_TEXTURE);

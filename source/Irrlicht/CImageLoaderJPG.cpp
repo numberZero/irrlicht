@@ -48,15 +48,15 @@ bool CImageLoaderJPG::isALoadableFileExtension(const io::path& filename) const
 
 #ifdef _IRR_COMPILE_WITH_LIBJPEG_
 
-    // struct for handling jpeg errors
-    struct irr_jpeg_error_mgr
-    {
-        // public jpeg error fields
-        struct jpeg_error_mgr pub;
+	// struct for handling jpeg errors
+	struct irr_jpeg_error_mgr
+	{
+		// public jpeg error fields
+		struct jpeg_error_mgr pub;
 
-        // for longjmp, to return to caller on a fatal error
-        jmp_buf setjmp_buffer;
-    };
+		// for longjmp, to return to caller on a fatal error
+		jmp_buf setjmp_buffer;
+	};
 
 void CImageLoaderJPG::init_source (j_decompress_ptr cinfo)
 {

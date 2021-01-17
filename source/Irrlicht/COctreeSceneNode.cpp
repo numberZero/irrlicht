@@ -377,7 +377,7 @@ bool COctreeSceneNode::createTree(IMesh* mesh)
 
 	MeshName = SceneManager->getMeshCache()->getMeshName(mesh);
 
-    mesh->grab();
+	mesh->grab();
 	deleteTree();
 
 	Mesh = mesh;

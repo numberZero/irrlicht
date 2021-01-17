@@ -20,18 +20,18 @@ namespace video
 
 struct SPVRHeader
 {
-    u32 Version;
-    u32 Flags;
-    u64 PixelFormat;
-    u32 ColourSpace;
-    u32 ChannelType;
-    u32 Height;
-    u32 Width;
-    u32 Depth;
-    u32 NumSurfaces;
-    u32 NumFaces;
-    u32 MipMapCount;
-    u32 MetDataSize;
+	u32 Version;
+	u32 Flags;
+	u64 PixelFormat;
+	u32 ColourSpace;
+	u32 ChannelType;
+	u32 Height;
+	u32 Width;
+	u32 Depth;
+	u32 NumSurfaces;
+	u32 NumFaces;
+	u32 MipMapCount;
+	u32 MetDataSize;
 } PACK_STRUCT;
 
 #include "irrunpack.h"

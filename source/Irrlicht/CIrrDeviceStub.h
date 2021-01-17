@@ -123,41 +123,41 @@ namespace irr
 		//! Activate any joysticks, and generate events for them.
 		virtual bool activateJoysticks(core::array<SJoystickInfo> & joystickInfo) _IRR_OVERRIDE_;
 
-        //! Activate accelerometer.
-        virtual bool activateAccelerometer(float updateInterval = 0.016666f) _IRR_OVERRIDE_;
-        
-        //! Deactivate accelerometer.
-        virtual bool deactivateAccelerometer() _IRR_OVERRIDE_;
-        
-        //! Is accelerometer active.
-        virtual bool isAccelerometerActive() _IRR_OVERRIDE_;
-        
-        //! Is accelerometer available.
-        virtual bool isAccelerometerAvailable() _IRR_OVERRIDE_;
-        
-        //! Activate gyroscope.
-        virtual bool activateGyroscope(float updateInterval = 0.016666f) _IRR_OVERRIDE_;
-        
-        //! Deactivate gyroscope.
-        virtual bool deactivateGyroscope() _IRR_OVERRIDE_;
-        
-        //! Is gyroscope active.
-        virtual bool isGyroscopeActive() _IRR_OVERRIDE_;
-        
-        //! Is gyroscope available.
-        virtual bool isGyroscopeAvailable() _IRR_OVERRIDE_;
-        
-        //! Activate device motion.
-        virtual bool activateDeviceMotion(float updateInterval = 0.016666f) _IRR_OVERRIDE_;
-        
-        //! Deactivate device motion.
-        virtual bool deactivateDeviceMotion() _IRR_OVERRIDE_;
-        
-        //! Is device motion active.
-        virtual bool isDeviceMotionActive() _IRR_OVERRIDE_;
-        
-        //! Is device motion available.
-        virtual bool isDeviceMotionAvailable() _IRR_OVERRIDE_;
+		//! Activate accelerometer.
+		virtual bool activateAccelerometer(float updateInterval = 0.016666f) _IRR_OVERRIDE_;
+		
+		//! Deactivate accelerometer.
+		virtual bool deactivateAccelerometer() _IRR_OVERRIDE_;
+		
+		//! Is accelerometer active.
+		virtual bool isAccelerometerActive() _IRR_OVERRIDE_;
+		
+		//! Is accelerometer available.
+		virtual bool isAccelerometerAvailable() _IRR_OVERRIDE_;
+		
+		//! Activate gyroscope.
+		virtual bool activateGyroscope(float updateInterval = 0.016666f) _IRR_OVERRIDE_;
+		
+		//! Deactivate gyroscope.
+		virtual bool deactivateGyroscope() _IRR_OVERRIDE_;
+		
+		//! Is gyroscope active.
+		virtual bool isGyroscopeActive() _IRR_OVERRIDE_;
+		
+		//! Is gyroscope available.
+		virtual bool isGyroscopeAvailable() _IRR_OVERRIDE_;
+		
+		//! Activate device motion.
+		virtual bool activateDeviceMotion(float updateInterval = 0.016666f) _IRR_OVERRIDE_;
+		
+		//! Deactivate device motion.
+		virtual bool deactivateDeviceMotion() _IRR_OVERRIDE_;
+		
+		//! Is device motion active.
+		virtual bool isDeviceMotionActive() _IRR_OVERRIDE_;
+		
+		//! Is device motion available.
+		virtual bool isDeviceMotionAvailable() _IRR_OVERRIDE_;
 
 		//! Set the current Gamma Value for the Display
 		virtual bool setGammaRamp( f32 red, f32 green, f32 blue, f32 brightness, f32 contrast ) _IRR_OVERRIDE_;

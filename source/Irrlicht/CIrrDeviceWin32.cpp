@@ -7,7 +7,7 @@
 #ifdef _IRR_COMPILE_WITH_WINDOWS_DEVICE_
 
 #if defined (__STRICT_ANSI__)
-    #error Compiling with __STRICT_ANSI__ not supported. g++ does set this when compiling with -std=c++11 or -std=c++0x. Use instead -std=gnu++11 or -std=gnu++0x. Or use -U__STRICT_ANSI__ to disable strict ansi.
+	#error Compiling with __STRICT_ANSI__ not supported. g++ does set this when compiling with -std=c++11 or -std=c++0x. Use instead -std=gnu++11 or -std=gnu++0x. Or use -U__STRICT_ANSI__ to disable strict ansi.
 #endif
 
 #include "CIrrDeviceWin32.h"
@@ -56,53 +56,53 @@ namespace irr
 #endif
 
 #ifdef _IRR_COMPILE_WITH_OGLES1_
-        IVideoDriver* createOGLES1Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
+		IVideoDriver* createOGLES1Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
 #endif
 
 #ifdef _IRR_COMPILE_WITH_OGLES2_
-        IVideoDriver* createOGLES2Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
+		IVideoDriver* createOGLES2Driver(const irr::SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
 #endif
 	}
 } // end namespace irr
 
 namespace irr
 {
-    struct SJoystickWin32Control
-    {
-        CIrrDeviceWin32* Device;
+	struct SJoystickWin32Control
+	{
+		CIrrDeviceWin32* Device;
 
-    #if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_) && defined(_IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_)
-        IDirectInput8* DirectInputDevice;
-    #endif
-    #if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
-        struct JoystickInfo
-        {
-            u32 Index;
-    #ifdef _IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_
-            core::stringc Name;
-            GUID guid;
-            LPDIRECTINPUTDEVICE8 lpdijoy;
-            DIDEVCAPS devcaps;
-            u8 axisValid[8];
-    #else
-            JOYCAPS Caps;
-    #endif
-        };
-        core::array<JoystickInfo> ActiveJoysticks;
-    #endif
+	#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_) && defined(_IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_)
+		IDirectInput8* DirectInputDevice;
+	#endif
+	#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
+		struct JoystickInfo
+		{
+			u32 Index;
+	#ifdef _IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_
+			core::stringc Name;
+			GUID guid;
+			LPDIRECTINPUTDEVICE8 lpdijoy;
+			DIDEVCAPS devcaps;
+			u8 axisValid[8];
+	#else
+			JOYCAPS Caps;
+	#endif
+		};
+		core::array<JoystickInfo> ActiveJoysticks;
+	#endif
 
-        SJoystickWin32Control(CIrrDeviceWin32* dev);
-        ~SJoystickWin32Control();
+		SJoystickWin32Control(CIrrDeviceWin32* dev);
+		~SJoystickWin32Control();
 
-    #if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_) && defined(_IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_)
-        static BOOL CALLBACK EnumJoysticks(LPCDIDEVICEINSTANCE lpddi, LPVOID cp);
-        void directInputAddJoystick(LPCDIDEVICEINSTANCE lpddi);
-    #endif
+	#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_) && defined(_IRR_COMPILE_WITH_DIRECTINPUT_JOYSTICK_)
+		static BOOL CALLBACK EnumJoysticks(LPCDIDEVICEINSTANCE lpddi, LPVOID cp);
+		void directInputAddJoystick(LPCDIDEVICEINSTANCE lpddi);
+	#endif
 
-        void pollJoysticks();
-        bool activateJoysticks(core::array<SJoystickInfo> & joystickInfo);
-        irr::core::stringc findJoystickName(int index, const JOYCAPS &caps) const;
-    };
+		void pollJoysticks();
+		bool activateJoysticks(core::array<SJoystickInfo> & joystickInfo);
+		irr::core::stringc findJoystickName(int index, const JOYCAPS &caps) const;
+	};
 
 
 	SJoystickWin32Control::SJoystickWin32Control(CIrrDeviceWin32* dev) : Device(dev)
@@ -392,58 +392,58 @@ irr::core::stringc SJoystickWin32Control::findJoystickName(int index, const JOYC
 {
 #if defined _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
 
-    // As a default use the name given in the joystick structure.
-    // It is always the same name, independent of joystick.
-    irr::core::stringc result(caps.szPname);
+	// As a default use the name given in the joystick structure.
+	// It is always the same name, independent of joystick.
+	irr::core::stringc result(caps.szPname);
 
-    core::stringc key = core::stringc(REGSTR_PATH_JOYCONFIG)+ "\\" + caps.szRegKey + "\\" + REGSTR_KEY_JOYCURR;
-    HKEY hTopKey = HKEY_LOCAL_MACHINE;
-    HKEY hKey;
-    long regresult = RegOpenKeyExA(hTopKey, key.c_str(), 0, KEY_READ, &hKey);
-    if (regresult != ERROR_SUCCESS)
-    {
-        hTopKey = HKEY_CURRENT_USER;
-        regresult = RegOpenKeyExA(hTopKey, key.c_str(), 0, KEY_READ, &hKey);
-    }
-    if (regresult != ERROR_SUCCESS)
-        return result;
+	core::stringc key = core::stringc(REGSTR_PATH_JOYCONFIG)+ "\\" + caps.szRegKey + "\\" + REGSTR_KEY_JOYCURR;
+	HKEY hTopKey = HKEY_LOCAL_MACHINE;
+	HKEY hKey;
+	long regresult = RegOpenKeyExA(hTopKey, key.c_str(), 0, KEY_READ, &hKey);
+	if (regresult != ERROR_SUCCESS)
+	{
+		hTopKey = HKEY_CURRENT_USER;
+		regresult = RegOpenKeyExA(hTopKey, key.c_str(), 0, KEY_READ, &hKey);
+	}
+	if (regresult != ERROR_SUCCESS)
+		return result;
 
-    /* find the registry key name for the joystick's properties */
-    char regname[256];
-    DWORD regsize = sizeof(regname);
-    core::stringc regvalue = core::stringc("Joystick")+core::stringc(index+1) + REGSTR_VAL_JOYOEMNAME;
-    regresult = RegQueryValueExA(hKey, regvalue.c_str(), 0, 0, (LPBYTE)regname, &regsize);
-    RegCloseKey(hKey);
-    if (regresult != ERROR_SUCCESS)
-        return result;
+	/* find the registry key name for the joystick's properties */
+	char regname[256];
+	DWORD regsize = sizeof(regname);
+	core::stringc regvalue = core::stringc("Joystick")+core::stringc(index+1) + REGSTR_VAL_JOYOEMNAME;
+	regresult = RegQueryValueExA(hKey, regvalue.c_str(), 0, 0, (LPBYTE)regname, &regsize);
+	RegCloseKey(hKey);
+	if (regresult != ERROR_SUCCESS)
+		return result;
 
-    /* open that registry key */
-    core::stringc regkey = core::stringc(REGSTR_PATH_JOYOEM) + "\\" + regname;
-    regresult = RegOpenKeyExA(hTopKey, regkey.c_str(), 0, KEY_READ, &hKey);
-    if (regresult != ERROR_SUCCESS)
-        return result;
+	/* open that registry key */
+	core::stringc regkey = core::stringc(REGSTR_PATH_JOYOEM) + "\\" + regname;
+	regresult = RegOpenKeyExA(hTopKey, regkey.c_str(), 0, KEY_READ, &hKey);
+	if (regresult != ERROR_SUCCESS)
+		return result;
 
-    /* find the size for the OEM name text */
-    regsize = sizeof(regvalue);
-    regresult = RegQueryValueEx(hKey, REGSTR_VAL_JOYOEMNAME, 0, 0,
-                                 NULL, &regsize);
-    if (regresult == ERROR_SUCCESS)
-    {
-        char *name;
-        /* allocate enough memory for the OEM name text ... */
-        name = new char[regsize];
-        if (name)
-        {
-            /* ... and read it from the registry */
-            regresult = RegQueryValueEx(hKey, REGSTR_VAL_JOYOEMNAME, 0, 0,
-                                         (LPBYTE)name, &regsize );
-            result = name;
-        }
-        delete[] name;
-    }
-    RegCloseKey(hKey);
+	/* find the size for the OEM name text */
+	regsize = sizeof(regvalue);
+	regresult = RegQueryValueEx(hKey, REGSTR_VAL_JOYOEMNAME, 0, 0,
+								 NULL, &regsize);
+	if (regresult == ERROR_SUCCESS)
+	{
+		char *name;
+		/* allocate enough memory for the OEM name text ... */
+		name = new char[regsize];
+		if (name)
+		{
+			/* ... and read it from the registry */
+			regresult = RegQueryValueEx(hKey, REGSTR_VAL_JOYOEMNAME, 0, 0,
+										 (LPBYTE)name, &regsize );
+			result = name;
+		}
+		delete[] name;
+	}
+	RegCloseKey(hKey);
 
-    return result;
+	return result;
 #endif
 	return "";
 }
@@ -1053,11 +1053,11 @@ CIrrDeviceWin32::CIrrDeviceWin32(const SIrrlichtCreationParameters& params)
 		const s32 realHeight = clientSize.bottom - clientSize.top;
 
 		s32 windowLeft = (CreationParams.WindowPosition.X == -1 ?
-		                     (GetSystemMetrics(SM_CXSCREEN) - realWidth) / 2 :
-		                     CreationParams.WindowPosition.X);
+							 (GetSystemMetrics(SM_CXSCREEN) - realWidth) / 2 :
+							 CreationParams.WindowPosition.X);
 		s32 windowTop = (CreationParams.WindowPosition.Y == -1 ?
-		                     (GetSystemMetrics(SM_CYSCREEN) - realHeight) / 2 :
-		                     CreationParams.WindowPosition.Y);
+							 (GetSystemMetrics(SM_CYSCREEN) - realHeight) / 2 :
+							 CreationParams.WindowPosition.Y);
 
 		if ( windowLeft < 0 )
 			windowLeft = 0;
@@ -1828,7 +1828,7 @@ core::position2di CIrrDeviceWin32::getWindowPosition()
 	if (GetWindowPlacement(HWnd, &wndpl))
 	{
 		return core::position2di((int)wndpl.rcNormalPosition.left,
-		                         (int)wndpl.rcNormalPosition.top);
+								 (int)wndpl.rcNormalPosition.top);
 	}
 	else
 	{
@@ -1897,14 +1897,14 @@ void CIrrDeviceWin32::handleSystemMessages()
 		if (ExternalWindow && msg.hwnd == HWnd)
 		{
 			if (msg.hwnd == HWnd)
-            {
+			{
 				WndProc(HWnd, msg.message, msg.wParam, msg.lParam);
-            }
-            else
-            {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
+			}
+			else
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
 		}
 		else
 		{
@@ -1982,7 +1982,7 @@ bool CIrrDeviceWin32::isWindowsVistaOrGreater()
 
 	return VerifyVersionInfo(&osvi, VER_MAJORVERSION, VerSetConditionMask(0, VER_MAJORVERSION, VER_GREATER_EQUAL)) ? true : false;
 #else
-    return false;
+	return false;
 #endif
 }
 

@@ -38,21 +38,21 @@ If the image is run length encoded, this is the structure:
 
 The Header consists of the following:
 
-        Size  | Type   | Name      | Description
+		Size  | Type   | Name      | Description
 
-      2 bytes | short  | MAGIC     | IRIS image file magic number
-      1 byte  | char   | STORAGE   | Storage format
-      1 byte  | char   | BPC       | Number of bytes per pixel channel
-      2 bytes | ushort | DIMENSION | Number of dimensions
-      2 bytes | ushort | XSIZE     | X size in pixels
-      2 bytes | ushort | YSIZE     | Y size in pixels
-      2 bytes | ushort | ZSIZE     | Number of channels
-      4 bytes | long   | PIXMIN    | Minimum pixel value
-      4 bytes | long   | PIXMAX    | Maximum pixel value
-      4 bytes | char   | DUMMY     | Ignored
-     80 bytes | char   | IMAGENAME | Image name
-      4 bytes | long   | COLORMAP  | Colormap ID
-    404 bytes | char   | DUMMY     | Ignored
+	  2 bytes | short  | MAGIC     | IRIS image file magic number
+	  1 byte  | char   | STORAGE   | Storage format
+	  1 byte  | char   | BPC       | Number of bytes per pixel channel
+	  2 bytes | ushort | DIMENSION | Number of dimensions
+	  2 bytes | ushort | XSIZE     | X size in pixels
+	  2 bytes | ushort | YSIZE     | Y size in pixels
+	  2 bytes | ushort | ZSIZE     | Number of channels
+	  4 bytes | long   | PIXMIN    | Minimum pixel value
+	  4 bytes | long   | PIXMAX    | Maximum pixel value
+	  4 bytes | char   | DUMMY     | Ignored
+	 80 bytes | char   | IMAGENAME | Image name
+	  4 bytes | long   | COLORMAP  | Colormap ID
+	404 bytes | char   | DUMMY     | Ignored
 
 Here is a description of each field in the image file Header:
 
@@ -152,7 +152,7 @@ CImageLoaderRGB::CImageLoaderRGB()
 bool CImageLoaderRGB::isALoadableFileExtension(const io::path& filename) const
 {
 	return core::hasFileExtension( filename, "rgb", "rgba", "sgi" ) ||
-	       core::hasFileExtension( filename, "int", "inta", "bw" );
+		   core::hasFileExtension( filename, "int", "inta", "bw" );
 }
 
 
@@ -310,7 +310,7 @@ If the image is stored using run length encoding, offset tables follow the Heade
 describe what the file offsets are to the RLE for each scanline. This information only
 applies if the value for STORAGE above is 1.
 
-         Size  | Type   | Name      | Description
+		 Size  | Type   | Name      | Description
 
   tablen longs | long   | STARTTAB  | Start table
   tablen longs | long   | LENGTHTAB | Length table
@@ -322,21 +322,21 @@ two arrays may be read in and indexed as follows:
 
 To read in the tables:
 
-    unsigned long *starttab, *lengthtab;
+	unsigned long *starttab, *lengthtab;
 
-    tablen = YSIZE*ZSIZE*sizeof(long);
-    starttab = (unsigned long *)mymalloc(tablen);
-    lengthtab = (unsigned long *)mymalloc(tablen);
-    fseek(rgb->inf,512,SEEK_SET);
-    readlongtab(rgb->inf,starttab);
-    readlongtab(rgb->inf,lengthtab);
+	tablen = YSIZE*ZSIZE*sizeof(long);
+	starttab = (unsigned long *)mymalloc(tablen);
+	lengthtab = (unsigned long *)mymalloc(tablen);
+	fseek(rgb->inf,512,SEEK_SET);
+	readlongtab(rgb->inf,starttab);
+	readlongtab(rgb->inf,lengthtab);
 
 To find the file offset and RLE data length for a scanline:
 
 rowno is an integer in the range 0 to YSIZE-1 channo is an integer in the range 0 to ZSIZE-1
 
-    rleoffset = starttab[rowno+channo*YSIZE]
-    rlelength = lengthtab[rowno+channo*YSIZE]
+	rleoffset = starttab[rowno+channo*YSIZE]
+	rlelength = lengthtab[rowno+channo*YSIZE]
 
 It is possible for two identical rows (scanlines) to share compressed data. A completely
 white image could be written as a single compressed row and having all table entries point
@@ -458,7 +458,7 @@ void CImageLoaderRGB::processFile(io::IReadFile* file, rgbStruct& rgb) const
 					ptr = ( u8 *)(tempShort);
 				}
 			} // end if(rgb.Header.BPC == 1)
-       	} // end for
+	   	} // end for
 	} // end for
 }
 

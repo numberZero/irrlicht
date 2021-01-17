@@ -23,7 +23,7 @@ class IMeshBuffer;
 
 //! Additional information about the triangle arrays returned by ITriangleSelector::getTriangles
 /** ITriangleSelector are free to fill out this information fully, partly or ignore it.
-    Usually they will try to fill it when they can and set values to 0 otherwise.
+	Usually they will try to fill it when they can and set values to 0 otherwise.
 */
 struct SCollisionTriangleRange
 {

@@ -211,9 +211,9 @@ IImage* CImageLoaderWAL2::loadImage(irr::io::IReadFile* file) const
 	case ECF_A8R8G8B8:
 		CColorConverter::convert8BitTo32Bit(rawtex, (u8*)image->getData(), header.width, header.height, (u8*) pal + 768, 0, false);
 		break;
-    default:
-        // Assuming there are no other color formats (I found no information about this format)
-        break;
+	default:
+		// Assuming there are no other color formats (I found no information about this format)
+		break;
 	}
 
 	delete [] rawtex;

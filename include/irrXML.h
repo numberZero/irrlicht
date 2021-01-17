@@ -29,7 +29,7 @@
   \section features Features
 
   irrXML provides forward-only, read-only
-     access to a stream of non validated XML data. It was fully implemented by
+	 access to a stream of non validated XML data. It was fully implemented by
 	Nikolaus Gebhardt. Its current features are:
 
 	- It it fast as lighting and has very low memory usage. It was
@@ -52,11 +52,11 @@
 
 	- The input xml file is not validated and assumed to be correct.
 
-    \section irrxmlexample Example
+	\section irrxmlexample Example
 
-    The following code demonstrates the basic usage of irrXML. A simple xml
+	The following code demonstrates the basic usage of irrXML. A simple xml
 	file like this is parsed:
-    \code
+	\code
 	<?xml version="1.0"?>
 	<config>
 		<!-- This is a config file for the mesh viewer -->

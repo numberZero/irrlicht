@@ -27,24 +27,24 @@ public:
 	CB3DMeshWriter();
 
 	//! Returns the type of the mesh writer
-    virtual EMESH_WRITER_TYPE getType() const _IRR_OVERRIDE_;
+	virtual EMESH_WRITER_TYPE getType() const _IRR_OVERRIDE_;
 
 	//! writes a mesh
-    virtual bool writeMesh(io::IWriteFile* file, scene::IMesh* mesh, s32 flags=EMWF_NONE) _IRR_OVERRIDE_;
+	virtual bool writeMesh(io::IWriteFile* file, scene::IMesh* mesh, s32 flags=EMWF_NONE) _IRR_OVERRIDE_;
 
 private:
-    void writeJointChunk(io::IWriteFile* file, ISkinnedMesh* mesh , ISkinnedMesh::SJoint* joint, f32 animationSpeedMultiplier);
-    u32 getJointChunkSize(const ISkinnedMesh* mesh, ISkinnedMesh::SJoint* joint);
-    core::array<ISkinnedMesh::SJoint*> getRootJoints(const ISkinnedMesh* mesh);
+	void writeJointChunk(io::IWriteFile* file, ISkinnedMesh* mesh , ISkinnedMesh::SJoint* joint, f32 animationSpeedMultiplier);
+	u32 getJointChunkSize(const ISkinnedMesh* mesh, ISkinnedMesh::SJoint* joint);
+	core::array<ISkinnedMesh::SJoint*> getRootJoints(const ISkinnedMesh* mesh);
 
-    u32 getUVlayerCount(IMesh *mesh);
-    ISkinnedMesh* getSkinned (IMesh *mesh);
+	u32 getUVlayerCount(IMesh *mesh);
+	ISkinnedMesh* getSkinned (IMesh *mesh);
 
-    inline void writeVector2(io::IWriteFile* file, const core::vector2df& vec);
-    inline void writeVector3(io::IWriteFile* file, const core::vector3df& vec);
-    inline void writeQuaternion(io::IWriteFile* file, const core::quaternion& quat);
-    inline void writeColor(io::IWriteFile* file, const video::SColorf& color);
-    void writeSizeFrom(io::IWriteFile* file, const u32 from, const u32 adressToWrite);
+	inline void writeVector2(io::IWriteFile* file, const core::vector2df& vec);
+	inline void writeVector3(io::IWriteFile* file, const core::vector3df& vec);
+	inline void writeQuaternion(io::IWriteFile* file, const core::quaternion& quat);
+	inline void writeColor(io::IWriteFile* file, const video::SColorf& color);
+	void writeSizeFrom(io::IWriteFile* file, const u32 from, const u32 adressToWrite);
 };
 
 } // end namespace

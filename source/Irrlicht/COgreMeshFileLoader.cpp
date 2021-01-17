@@ -169,7 +169,7 @@ IAnimatedMesh* COgreMeshFileLoader::createMesh(io::IReadFile* file)
 			am->recalculateBoundingBox();
 			Mesh->drop();
 			Mesh = 0;
-        	return am;
+			return am;
 		}
 	}
 

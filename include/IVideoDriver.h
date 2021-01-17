@@ -1352,7 +1352,7 @@ namespace video
 		 \param idx1 First material index to swap. It must already exist or nothing happens.
 		 \param idx2 Second material index to swap. It must already exist or nothing happens.
 		 \param swapNames When true the renderer names also swap
-		                  When false the names will stay at the original index */
+						  When false the names will stay at the original index */
 		virtual void swapMaterialRenderers(u32 idx1, u32 idx2, bool swapNames=true) = 0;
 
 		//! Creates material attributes list from a material

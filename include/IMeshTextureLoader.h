@@ -35,7 +35,7 @@ public:
 	virtual ~IMeshTextureLoader() {}
 
 	//! Set a custom texture path.
-    /**	This is the first path the texture-loader should search.  */
+	/**	This is the first path the texture-loader should search.  */
 	virtual void setTexturePath(const irr::io::path& path) = 0;
 
 	//! Get the current custom texture path.

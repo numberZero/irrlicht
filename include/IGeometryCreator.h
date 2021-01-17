@@ -154,7 +154,7 @@ public:
 	\param closeTop If true, close the ends of the cylinder, otherwise leave them open.
 	\param oblique X-offset (shear) of top compared to bottom. 
 	\param normalType When 0 side normals are radial from origin. Note that origin is at the bottom.
-	                  When 1 side normals are flat along top/bottom polygons.
+					  When 1 side normals are flat along top/bottom polygons.
 			NOTE: To get normals which are perpendicular to the side of an oblique 
 			cylinder, don't use the oblique parameter. Instead set normalType to 1 
 			and create a cylinder with oblique set to 0. Then use 

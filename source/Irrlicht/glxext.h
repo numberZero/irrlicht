@@ -340,14 +340,14 @@ void glXFreeContextEXT (Display *dpy, GLXContext context);
 #ifndef GLX_EXT_stereo_tree
 #define GLX_EXT_stereo_tree 1
 typedef struct {
-    int type;
-    unsigned long serial;
-    Bool send_event;
-    Display *display;
-    int extension;
-    int evtype;
-    GLXDrawable window;
-    Bool stereo_tree;
+	int type;
+	unsigned long serial;
+	Bool send_event;
+	Display *display;
+	int extension;
+	int evtype;
+	GLXDrawable window;
+	Bool stereo_tree;
 } GLXStereoNotifyEventEXT;
 #define GLX_STEREO_TREE_EXT               0x20F5
 #define GLX_STEREO_NOTIFY_MASK_EXT        0x00000001
@@ -766,23 +766,23 @@ GLXFBConfigSGIX glXGetFBConfigFromVisualSGIX (Display *dpy, XVisualInfo *vis);
 #ifndef GLX_SGIX_hyperpipe
 #define GLX_SGIX_hyperpipe 1
 typedef struct {
-    char    pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
-    int     networkId;
+	char    pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
+	int     networkId;
 } GLXHyperpipeNetworkSGIX;
 typedef struct {
-    char    pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
-    int     channel;
-    unsigned int participationType;
-    int     timeSlice;
+	char    pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
+	int     channel;
+	unsigned int participationType;
+	int     timeSlice;
 } GLXHyperpipeConfigSGIX;
 typedef struct {
-    char pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
-    int srcXOrigin, srcYOrigin, srcWidth, srcHeight;
-    int destXOrigin, destYOrigin, destWidth, destHeight;
+	char pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
+	int srcXOrigin, srcYOrigin, srcWidth, srcHeight;
+	int destXOrigin, destYOrigin, destWidth, destHeight;
 } GLXPipeRect;
 typedef struct {
-    char pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
-    int XOrigin, YOrigin, maxHeight, maxWidth;
+	char pipeName[80]; /* Should be [GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX] */
+	int XOrigin, YOrigin, maxHeight, maxWidth;
 } GLXPipeRectLimits;
 #define GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX 80
 #define GLX_BAD_HYPERPIPE_CONFIG_SGIX     91

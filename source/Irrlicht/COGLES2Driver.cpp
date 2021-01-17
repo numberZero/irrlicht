@@ -1829,14 +1829,14 @@ COGLES2Driver::~COGLES2Driver()
 			&& material.MaterialType != EMT_ONETEXTURE_BLEND
 		)
 		{
-		    E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
-		    E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
-		    E_BLEND_FACTOR srcAlphaFact = EBF_ZERO;
-		    E_BLEND_FACTOR dstAlphaFact = EBF_ZERO;
-		    E_MODULATE_FUNC modulo = EMFN_MODULATE_1X;
-		    u32 alphaSource = 0;
+			E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
+			E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
+			E_BLEND_FACTOR srcAlphaFact = EBF_ZERO;
+			E_BLEND_FACTOR dstAlphaFact = EBF_ZERO;
+			E_MODULATE_FUNC modulo = EMFN_MODULATE_1X;
+			u32 alphaSource = 0;
 
-		    unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulo, alphaSource, material.BlendFactor);
+			unpack_textureBlendFuncSeparate(srcRGBFact, dstRGBFact, srcAlphaFact, dstAlphaFact, modulo, alphaSource, material.BlendFactor);
 
 			CacheHandler->setBlendFuncSeparate(getGLBlend(srcRGBFact), getGLBlend(dstRGBFact),
 				getGLBlend(srcAlphaFact), getGLBlend(dstAlphaFact));

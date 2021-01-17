@@ -42,22 +42,22 @@ E_FILE_ARCHIVE_TYPE CAndroidAssetFileArchive::getType() const
 
 const IFileList* CAndroidAssetFileArchive::getFileList() const
 {
-    // The assert_manager can not read directory names, so
-    // getFileList returns only files in folders which have been added.
-    return this;
+	// The assert_manager can not read directory names, so
+	// getFileList returns only files in folders which have been added.
+	return this;
 }
 
 
 //! opens a file by file name
 IReadFile* CAndroidAssetFileArchive::createAndOpenFile(const io::path& filename)
 {
-    CAndroidAssetReader *reader = new CAndroidAssetReader(AssetManager, filename);
+	CAndroidAssetReader *reader = new CAndroidAssetReader(AssetManager, filename);
 
-    if(reader->isOpen())
+	if(reader->isOpen())
 		return reader;
 
 	reader->drop();
-    return NULL;
+	return NULL;
 }
 
 //! opens a file by index
@@ -67,7 +67,7 @@ IReadFile* CAndroidAssetFileArchive::createAndOpenFile(u32 index)
 	if ( filename.empty() )
 		return 0;
 	
-    return createAndOpenFile(filename);
+	return createAndOpenFile(filename);
 }
 
 void CAndroidAssetFileArchive::addDirectoryToFileList(const io::path &dirname_)
@@ -93,7 +93,7 @@ void CAndroidAssetFileArchive::addDirectoryToFileList(const io::path &dirname_)
 	while(const char *filename = AAssetDir_getNextFileName(dir))
 	{
 		core::stringc full_filename= dirname=="" ? filename
-                                             : dirname+"/"+filename;
+											 : dirname+"/"+filename;
 
 		// We can't get the size without opening the file - so for performance
 		// reasons we set the file size to 0.

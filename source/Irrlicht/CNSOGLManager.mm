@@ -29,7 +29,7 @@ bool CNSOGLManager::initialize(const SIrrlichtCreationParameters& params, const 
 {
 	Params = params;
 
-    return true;
+	return true;
 }
 
 void CNSOGLManager::terminate()
@@ -40,133 +40,133 @@ bool CNSOGLManager::generateSurface()
 {    
 	if (Params.DriverType == video::EDT_OPENGL)
 	{
-        int alphaSize = Params.WithAlphaChannel ? 4 : 0;
-        int depthSize = Params.ZBufferBits;
-        
-        if (Params.WithAlphaChannel && Params.Bits == 32)
-            alphaSize = 8;
-        
-        NSOpenGLPixelFormatAttribute Attribs[] =
-        {
-            NSOpenGLPFANoRecovery,
-            NSOpenGLPFAAccelerated,
-            NSOpenGLPFADoubleBuffer,
-            NSOpenGLPFADepthSize, static_cast<NSOpenGLPixelFormatAttribute>(depthSize),
-            NSOpenGLPFAColorSize, Params.Bits,
-            NSOpenGLPFAAlphaSize, static_cast<NSOpenGLPixelFormatAttribute>(alphaSize),
-            NSOpenGLPFASampleBuffers, 1,
-            NSOpenGLPFASamples, Params.AntiAlias,
-            NSOpenGLPFAStencilSize, static_cast<NSOpenGLPixelFormatAttribute>(Params.Stencilbuffer ? 1 : 0),
-            //NSOpenGLPFAFullScreen,
-            0
-        };
+		int alphaSize = Params.WithAlphaChannel ? 4 : 0;
+		int depthSize = Params.ZBufferBits;
+		
+		if (Params.WithAlphaChannel && Params.Bits == 32)
+			alphaSize = 8;
+		
+		NSOpenGLPixelFormatAttribute Attribs[] =
+		{
+			NSOpenGLPFANoRecovery,
+			NSOpenGLPFAAccelerated,
+			NSOpenGLPFADoubleBuffer,
+			NSOpenGLPFADepthSize, static_cast<NSOpenGLPixelFormatAttribute>(depthSize),
+			NSOpenGLPFAColorSize, Params.Bits,
+			NSOpenGLPFAAlphaSize, static_cast<NSOpenGLPixelFormatAttribute>(alphaSize),
+			NSOpenGLPFASampleBuffers, 1,
+			NSOpenGLPFASamples, Params.AntiAlias,
+			NSOpenGLPFAStencilSize, static_cast<NSOpenGLPixelFormatAttribute>(Params.Stencilbuffer ? 1 : 0),
+			//NSOpenGLPFAFullScreen,
+			0
+		};
 
-        u32 Steps = 6;
-        
-        // Choose the best pixel format.
-        do
-        {
-            switch (Steps)
-            {
-            case 6: // decrease step.
-                --Steps;
-                break;
-            case 5: // samples
-                if (Attribs[12] > 2)
-                    --Attribs[12];
-                else
-                {
-                    Attribs[10] = 0;
-                    Attribs[12] = 0;
-                    --Steps;
-                }
-                break;
-            case 4: // alpha
-                if (Attribs[8])
-                {
-                    Attribs[8] = 0;
-                        
-                    if (Params.AntiAlias)
-                    {
-                        Attribs[10] = 1;
-                        Attribs[12] = Params.AntiAlias;
-                        Steps = 5;
-                    }
-                }
-                else
-                    --Steps;
-                break;
-            case 3: // stencil
-                if (Attribs[14])
-                {
-                    Attribs[14] = 0;
-                        
-                    if (Params.AntiAlias)
-                    {
-                        Attribs[10] = 1;
-                        Attribs[12] = Params.AntiAlias;
-                        Steps = 5;
-                    }
-                }
-                else
-                    --Steps;
-                break;
-            case 2: // depth size
-                if (Attribs[4] > 16)
-                {
-                    Attribs[4] = Attribs[4] - 8;
-                }
-                else
-                    --Steps;
-                break;
-            case 1: // buffer size
-                if (Attribs[6] > 16)
-                {
-                    Attribs[6] = Attribs[6] - 8;
-                }
-                else
-                    --Steps;
-                break;
-            default:
-                os::Printer::log("Could not get pixel format.");
-                return false;
-            }
-            
-            PixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:Attribs];
-        }
-        while (PixelFormat == nil);
-        
-        if (Params.AntiAlias && !Attribs[10])
-            os::Printer::log("No multisampling.");
-        
-        if (Params.WithAlphaChannel && !Attribs[8])
-            os::Printer::log("No alpha.");
-        
-        if (Params.Stencilbuffer && !Attribs[14])
-            os::Printer::log("No stencil buffer.");
-        
-        if (Params.ZBufferBits > Attribs[4])
-            os::Printer::log("No full depth buffer.");
-        
-        if (Params.Bits > Attribs[6])
-            os::Printer::log("No full color buffer.");
+		u32 Steps = 6;
+		
+		// Choose the best pixel format.
+		do
+		{
+			switch (Steps)
+			{
+			case 6: // decrease step.
+				--Steps;
+				break;
+			case 5: // samples
+				if (Attribs[12] > 2)
+					--Attribs[12];
+				else
+				{
+					Attribs[10] = 0;
+					Attribs[12] = 0;
+					--Steps;
+				}
+				break;
+			case 4: // alpha
+				if (Attribs[8])
+				{
+					Attribs[8] = 0;
+						
+					if (Params.AntiAlias)
+					{
+						Attribs[10] = 1;
+						Attribs[12] = Params.AntiAlias;
+						Steps = 5;
+					}
+				}
+				else
+					--Steps;
+				break;
+			case 3: // stencil
+				if (Attribs[14])
+				{
+					Attribs[14] = 0;
+						
+					if (Params.AntiAlias)
+					{
+						Attribs[10] = 1;
+						Attribs[12] = Params.AntiAlias;
+						Steps = 5;
+					}
+				}
+				else
+					--Steps;
+				break;
+			case 2: // depth size
+				if (Attribs[4] > 16)
+				{
+					Attribs[4] = Attribs[4] - 8;
+				}
+				else
+					--Steps;
+				break;
+			case 1: // buffer size
+				if (Attribs[6] > 16)
+				{
+					Attribs[6] = Attribs[6] - 8;
+				}
+				else
+					--Steps;
+				break;
+			default:
+				os::Printer::log("Could not get pixel format.");
+				return false;
+			}
+			
+			PixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:Attribs];
+		}
+		while (PixelFormat == nil);
+		
+		if (Params.AntiAlias && !Attribs[10])
+			os::Printer::log("No multisampling.");
+		
+		if (Params.WithAlphaChannel && !Attribs[8])
+			os::Printer::log("No alpha.");
+		
+		if (Params.Stencilbuffer && !Attribs[14])
+			os::Printer::log("No stencil buffer.");
+		
+		if (Params.ZBufferBits > Attribs[4])
+			os::Printer::log("No full depth buffer.");
+		
+		if (Params.Bits > Attribs[6])
+			os::Printer::log("No full color buffer.");
 	}
 
-    return true;
+	return true;
 }
 
 void CNSOGLManager::destroySurface()
 {
-    [PixelFormat release];
-    PixelFormat = nil;
+	[PixelFormat release];
+	PixelFormat = nil;
 }
 
 bool CNSOGLManager::generateContext()
 {
-    NSOpenGLContext* Context = [[NSOpenGLContext alloc] initWithFormat:PixelFormat shareContext:nil];
-    
-    GLint Vsync = Params.Vsync ? 1 : 0;
-    [Context setValues:&Vsync forParameter:NSOpenGLCPSwapInterval];
+	NSOpenGLContext* Context = [[NSOpenGLContext alloc] initWithFormat:PixelFormat shareContext:nil];
+	
+	GLint Vsync = Params.Vsync ? 1 : 0;
+	[Context setValues:&Vsync forParameter:NSOpenGLCPSwapInterval];
 
 	if (Context == nil)
 	{
@@ -176,7 +176,7 @@ bool CNSOGLManager::generateContext()
 
 	// set exposed data
 	CurrentContext.OpenGLOSX.Context = Context;
-    
+	
 	if (!PrimaryContext.OpenGLOSX.Context)
 		PrimaryContext.OpenGLOSX.Context = CurrentContext.OpenGLOSX.Context;
 
@@ -191,26 +191,26 @@ const SExposedVideoData& CNSOGLManager::getContext() const
 bool CNSOGLManager::activateContext(const SExposedVideoData& videoData, bool restorePrimaryOnZero)
 {
 	//TODO: handle restorePrimaryOnZero
-    if (videoData.OpenGLOSX.Context)
-    {
-        if ((NSOpenGLContext*)videoData.OpenGLOSX.Context != [NSOpenGLContext currentContext])
-        {
-            [(NSOpenGLContext*)videoData.OpenGLOSX.Context makeCurrentContext];
-            
-            CurrentContext = videoData;
-        }
-    }
-    // set back to main context
-    else
-    {
-        if ((NSOpenGLContext*)PrimaryContext.OpenGLOSX.Context != [NSOpenGLContext currentContext])
-        {
-            [(NSOpenGLContext*)PrimaryContext.OpenGLOSX.Context makeCurrentContext];
-            
-            CurrentContext = PrimaryContext;
-        }
-    }
-    
+	if (videoData.OpenGLOSX.Context)
+	{
+		if ((NSOpenGLContext*)videoData.OpenGLOSX.Context != [NSOpenGLContext currentContext])
+		{
+			[(NSOpenGLContext*)videoData.OpenGLOSX.Context makeCurrentContext];
+			
+			CurrentContext = videoData;
+		}
+	}
+	// set back to main context
+	else
+	{
+		if ((NSOpenGLContext*)PrimaryContext.OpenGLOSX.Context != [NSOpenGLContext currentContext])
+		{
+			[(NSOpenGLContext*)PrimaryContext.OpenGLOSX.Context makeCurrentContext];
+			
+			CurrentContext = PrimaryContext;
+		}
+	}
+	
 	return true;
 }
 
@@ -218,21 +218,21 @@ void CNSOGLManager::destroyContext()
 {
 	if (CurrentContext.OpenGLOSX.Context)
 	{
-        if (PrimaryContext.OpenGLOSX.Context == CurrentContext.OpenGLOSX.Context)
-            PrimaryContext.OpenGLOSX.Context = nil;
+		if (PrimaryContext.OpenGLOSX.Context == CurrentContext.OpenGLOSX.Context)
+			PrimaryContext.OpenGLOSX.Context = nil;
 
 		[(NSOpenGLContext*)CurrentContext.OpenGLOSX.Context makeCurrentContext];
-        [(NSOpenGLContext *)CurrentContext.OpenGLOSX.Context clearDrawable];
-        [(NSOpenGLContext *)CurrentContext.OpenGLOSX.Context release];
+		[(NSOpenGLContext *)CurrentContext.OpenGLOSX.Context clearDrawable];
+		[(NSOpenGLContext *)CurrentContext.OpenGLOSX.Context release];
 		[NSOpenGLContext clearCurrentContext];
-        
+		
 		CurrentContext.OpenGLOSX.Context = nil;
 	}
 }
 
 bool CNSOGLManager::swapBuffers()
 {
-    [(NSOpenGLContext*)CurrentContext.OpenGLOSX.Context flushBuffer];
+	[(NSOpenGLContext*)CurrentContext.OpenGLOSX.Context flushBuffer];
 
 	return true;
 }

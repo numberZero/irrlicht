@@ -9,14 +9,14 @@
  form is allowed (with or without changes) provided that:
 
    1. distributions of this source code include the above copyright 
-      notice, this list of conditions and the following disclaimer;
+	  notice, this list of conditions and the following disclaimer;
 
    2. distributions in binary form include the above copyright
-      notice, this list of conditions and the following disclaimer
-      in the documentation and/or other associated materials;
+	  notice, this list of conditions and the following disclaimer
+	  in the documentation and/or other associated materials;
 
    3. the copyright holder's name is not used to endorse products 
-      built using this software without specific written permission. 
+	  built using this software without specific written permission. 
 
  ALTERNATIVELY, provided that this notice is retained in full, this product
  may be distributed under the terms of the GNU General Public License (GPL),
@@ -53,8 +53,8 @@
 
 typedef struct
 {   sha1_32t count[2];
-    sha1_32t hash[5];
-    sha1_32t wbuf[16];
+	sha1_32t hash[5];
+	sha1_32t wbuf[16];
 } sha1_ctx;
 
 void sha1_compile(sha1_ctx ctx[1]);

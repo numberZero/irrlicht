@@ -155,14 +155,14 @@ class aabbox3d
 			/*
 			Edges are stored in this way:
 			Hey, am I an ascii artist, or what? :) niko.
-                   /3--------/7
-                  / |       / |
-                 /  |      /  |
-                1---------5   |
-                |  /2- - -|- -6
-                | /       |  /
-                |/        | /
-                0---------4/
+				   /3--------/7
+				  / |       / |
+				 /  |      /  |
+				1---------5   |
+				|  /2- - -|- -6
+				| /       |  /
+				|/        | /
+				0---------4/
 			*/
 
 			edges[0].set(middle.X + diag.X, middle.Y + diag.Y, middle.Z + diag.Z);

@@ -82,20 +82,20 @@ void COSOperator::copyToClipboard(const c8* text) const
 	CloseClipboard();
 
 #elif defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
-    NSString *str = nil;
-    NSPasteboard *board = nil;
+	NSString *str = nil;
+	NSPasteboard *board = nil;
 
-    if ((text != NULL) && (strlen(text) > 0))
-    {
-        str = [NSString stringWithCString:text encoding:NSWindowsCP1252StringEncoding];
-        board = [NSPasteboard generalPasteboard];
-        [board declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:NSApp];
-        [board setString:str forType:NSStringPboardType];
-    }
+	if ((text != NULL) && (strlen(text) > 0))
+	{
+		str = [NSString stringWithCString:text encoding:NSWindowsCP1252StringEncoding];
+		board = [NSPasteboard generalPasteboard];
+		[board declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:NSApp];
+		[board setString:str forType:NSStringPboardType];
+	}
 
 #elif defined(_IRR_COMPILE_WITH_X11_DEVICE_)
-    if ( IrrDeviceLinux )
-        IrrDeviceLinux->copyToClipboard(text);
+	if ( IrrDeviceLinux )
+		IrrDeviceLinux->copyToClipboard(text);
 #else
 
 #endif
@@ -121,22 +121,22 @@ const c8* COSOperator::getTextFromClipboard() const
 	return buffer;
 
 #elif defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
-    NSString* str = nil;
-    NSPasteboard* board = nil;
-    char* result = 0;
+	NSString* str = nil;
+	NSPasteboard* board = nil;
+	char* result = 0;
 
-    board = [NSPasteboard generalPasteboard];
-    str = [board stringForType:NSStringPboardType];
+	board = [NSPasteboard generalPasteboard];
+	str = [board stringForType:NSStringPboardType];
 
-    if (str != nil)
-        result = (char*)[str cStringUsingEncoding:NSWindowsCP1252StringEncoding];
+	if (str != nil)
+		result = (char*)[str cStringUsingEncoding:NSWindowsCP1252StringEncoding];
 
-    return (result);
+	return (result);
 
 #elif defined(_IRR_COMPILE_WITH_X11_DEVICE_)
-    if ( IrrDeviceLinux )
-        return IrrDeviceLinux->getTextFromClipboard();
-    return 0;
+	if ( IrrDeviceLinux )
+		return IrrDeviceLinux->getTextFromClipboard();
+	return 0;
 
 #else
 
@@ -211,7 +211,7 @@ bool COSOperator::getSystemMemory(u32* Total, u32* Avail) const
 {
 #if defined(_IRR_WINDOWS_API_) && !defined (_IRR_XBOX_PLATFORM_)
 
-    #if (_WIN32_WINNT >= 0x0500)
+	#if (_WIN32_WINNT >= 0x0500)
 	MEMORYSTATUSEX MemoryStatusEx;
  	MemoryStatusEx.dwLength = sizeof(MEMORYSTATUSEX);
 
@@ -234,14 +234,14 @@ bool COSOperator::getSystemMemory(u32* Total, u32* Avail) const
 		*Total = (u32)(MemoryStatus.dwTotalPhys>>10);
  	if (Avail)
 		*Avail = (u32)(MemoryStatus.dwAvailPhys>>10);
-    return true;
+	return true;
 	#endif
 
 #elif defined(_IRR_POSIX_API_) && !defined(__FreeBSD__)
 #if defined(_SC_PHYS_PAGES) && defined(_SC_AVPHYS_PAGES)
-        long ps = sysconf(_SC_PAGESIZE);
-        long pp = sysconf(_SC_PHYS_PAGES);
-        long ap = sysconf(_SC_AVPHYS_PAGES);
+		long ps = sysconf(_SC_PAGESIZE);
+		long pp = sysconf(_SC_PHYS_PAGES);
+		long ap = sysconf(_SC_AVPHYS_PAGES);
 
 	if ((ps==-1)||(pp==-1)||(ap==-1))
 		return false;

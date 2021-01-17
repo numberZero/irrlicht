@@ -62,17 +62,17 @@ struct MS3DTriangle
 // Material information
 struct MS3DMaterial
 {
-    char Name[32];
-    float Ambient[4];
-    float Diffuse[4];
-    float Specular[4];
-    float Emissive[4];
-    float Shininess;	// 0.0f - 128.0f
-    float Transparency;	// 0.0f - 1.0f
-    u8 Mode;	// 0, 1, 2 is unused now
-    char Texture[128];
-    char Alphamap[128];
-    u8 pad1[3];
+	char Name[32];
+	float Ambient[4];
+	float Diffuse[4];
+	float Specular[4];
+	float Emissive[4];
+	float Shininess;	// 0.0f - 128.0f
+	float Transparency;	// 0.0f - 1.0f
+	u8 Mode;	// 0, 1, 2 is unused now
+	char Texture[128];
+	char Alphamap[128];
+	u8 pad1[3];
 } PACK_STRUCT;
 
 #define MS3DMATERIAL_NUM_PAD_BYTES 3
@@ -114,19 +114,19 @@ struct MS3DVertexWeights
 // Get float encoded in little endian in  way not causing troubles when floats have to be memory aligned.
 static inline float get_unaligned_le_float(const u8 *ptr)
 {
-    union {
-        u8 u[4];
-        float f;
-    } tmp;
+	union {
+		u8 u[4];
+		float f;
+	} tmp;
 #ifdef __BIG_ENDIAN__
-    tmp.u[0] = ptr[3];
-    tmp.u[1] = ptr[2];
-    tmp.u[2] = ptr[1];
-    tmp.u[3] = ptr[0];
+	tmp.u[0] = ptr[3];
+	tmp.u[1] = ptr[2];
+	tmp.u[2] = ptr[1];
+	tmp.u[3] = ptr[0];
 #else
-    tmp.f = *(float*)ptr;
+	tmp.f = *(float*)ptr;
 #endif
-    return tmp.f;
+	return tmp.f;
 }
 
 

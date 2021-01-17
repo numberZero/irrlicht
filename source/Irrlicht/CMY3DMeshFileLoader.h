@@ -46,22 +46,22 @@ namespace scene
 
 struct SMyColor
 {   SMyColor () {;}
-    SMyColor (s32 __R, s32 __G, s32 __B, s32 __A)
-        : R(__R), G(__G), B(__B), A(__A) {}
-    s32 R, G, B, A;
+	SMyColor (s32 __R, s32 __G, s32 __B, s32 __A)
+		: R(__R), G(__G), B(__B), A(__A) {}
+	s32 R, G, B, A;
 } PACK_STRUCT;
 
 // material header
 struct SMyMaterialHeader
 {   c8  Name[256];           // material name
-    u32 Index;
-    SMyColor AmbientColor;
-    SMyColor DiffuseColor;
-    SMyColor EmissiveColor;
-    SMyColor SpecularColor;
-    f32 Shininess;
-    f32 Transparency;
-    u32 TextureCount;        // texture count
+	u32 Index;
+	SMyColor AmbientColor;
+	SMyColor DiffuseColor;
+	SMyColor EmissiveColor;
+	SMyColor SpecularColor;
+	f32 Shininess;
+	f32 Transparency;
+	u32 TextureCount;        // texture count
 } PACK_STRUCT;
 
 // Default alignment

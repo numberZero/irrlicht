@@ -65,7 +65,7 @@ namespace video
 
 		bool Configured;
 
-        void* DataStorage;
+		void* DataStorage;
 
 		struct SFrameBuffer
 		{

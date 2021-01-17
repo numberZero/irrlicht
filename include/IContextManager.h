@@ -16,23 +16,23 @@ namespace video
 	class IContextManager : public virtual IReferenceCounted
 	{
 	public:
-        //! Initialize manager with device creation parameters and device window (passed as exposed video data)
-        virtual bool initialize(const SIrrlichtCreationParameters& params, const SExposedVideoData& data) =0;
+		//! Initialize manager with device creation parameters and device window (passed as exposed video data)
+		virtual bool initialize(const SIrrlichtCreationParameters& params, const SExposedVideoData& data) =0;
 
-        //! Terminate manager, any cleanup that is left over. Manager needs a new initialize to be usable again
-        virtual void terminate() =0;
+		//! Terminate manager, any cleanup that is left over. Manager needs a new initialize to be usable again
+		virtual void terminate() =0;
 
-        //! Create surface based on current window set
-        virtual bool generateSurface() =0;
+		//! Create surface based on current window set
+		virtual bool generateSurface() =0;
 
-        //! Destroy current surface
-        virtual void destroySurface() =0;
+		//! Destroy current surface
+		virtual void destroySurface() =0;
 
-        //! Create context based on current surface
-        virtual bool generateContext() =0;
+		//! Create context based on current surface
+		virtual bool generateContext() =0;
 
-        //! Destroy current context
-        virtual void destroyContext() =0;
+		//! Destroy current context
+		virtual void destroyContext() =0;
 
 		//! Get current context
 		virtual const SExposedVideoData& getContext() const =0;
@@ -48,8 +48,8 @@ namespace video
 			Note that only 1 thread at a time may access an OpenGL context.	*/
 		virtual bool activateContext(const SExposedVideoData& videoData, bool restorePrimaryOnZero=false) =0;
 
-        //! Swap buffers.
-        virtual bool swapBuffers() =0;
+		//! Swap buffers.
+		virtual bool swapBuffers() =0;
 	};
 
 } // end namespace video

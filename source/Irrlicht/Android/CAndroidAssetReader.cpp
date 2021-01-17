@@ -26,7 +26,7 @@ CAndroidAssetReader::CAndroidAssetReader(AAssetManager *assetManager, const io::
 {
 	Asset = AAssetManager_open(AssetManager, 
 					core::stringc(filename).c_str(),
-				    AASSET_MODE_RANDOM);
+					AASSET_MODE_RANDOM);
 
 }
 
@@ -43,7 +43,7 @@ size_t CAndroidAssetReader::read(void* buffer, size_t sizeToRead)
 		return size_t(readBytes);
 	return 0;	// direct fd access is not possible (for example, if the asset is compressed). 
 }
-      
+	  
 bool CAndroidAssetReader::seek(long finalPos, bool relativeMovement)
 {
 	off_t status =  AAsset_seek(Asset, finalPos, relativeMovement ? SEEK_CUR : SEEK_SET);
@@ -55,12 +55,12 @@ long CAndroidAssetReader::getSize() const
 {
 	return AAsset_getLength(Asset);
 }
-      
+	  
 long CAndroidAssetReader::getPos() const
 {
 	return AAsset_getLength(Asset) - AAsset_getRemainingLength(Asset);
 }
-      
+	  
 const io::path& CAndroidAssetReader::getFileName() const
 {
 	return Filename;

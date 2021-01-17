@@ -137,8 +137,8 @@ typedef struct
 typedef struct
 {
   SRes (*Read)(void *p, void *buf, size_t *size);
-    /* if (input(*size) != 0 && output(*size) == 0) means end_of_stream.
-       (output(*size) < input(*size)) is allowed */
+	/* if (input(*size) != 0 && output(*size) == 0) means end_of_stream.
+	   (output(*size) < input(*size)) is allowed */
 } ISeqInStream;
 
 /* it can return SZ_ERROR_INPUT_EOF */
@@ -149,8 +149,8 @@ SRes SeqInStream_ReadByte(ISeqInStream *stream, Byte *buf);
 typedef struct
 {
   size_t (*Write)(void *p, const void *buf, size_t size);
-    /* Returns: result - the number of actually written bytes.
-       (result < size) means error */
+	/* Returns: result - the number of actually written bytes.
+	   (result < size) means error */
 } ISeqOutStream;
 
 typedef enum
@@ -169,14 +169,14 @@ typedef struct
 typedef struct
 {
   SRes (*Look)(void *p, const void **buf, size_t *size);
-    /* if (input(*size) != 0 && output(*size) == 0) means end_of_stream.
-       (output(*size) > input(*size)) is not allowed
-       (output(*size) < input(*size)) is allowed */
+	/* if (input(*size) != 0 && output(*size) == 0) means end_of_stream.
+	   (output(*size) > input(*size)) is not allowed
+	   (output(*size) < input(*size)) is allowed */
   SRes (*Skip)(void *p, size_t offset);
-    /* offset must be <= output(*size) of Look */
+	/* offset must be <= output(*size) of Look */
 
   SRes (*Read)(void *p, void *buf, size_t *size);
-    /* reads directly (without buffer). It's same as ISeqInStream::Read */
+	/* reads directly (without buffer). It's same as ISeqInStream::Read */
   SRes (*Seek)(void *p, Int64 *pos, ESzSeek origin);
 } ILookInStream;
 
@@ -220,8 +220,8 @@ void SecToRead_CreateVTable(CSecToRead *p);
 typedef struct
 {
   SRes (*Progress)(void *p, UInt64 inSize, UInt64 outSize);
-    /* Returns: result. (result != SZ_OK) means break.
-       Value (UInt64)(Int64)-1 for size means unknown value. */
+	/* Returns: result. (result != SZ_OK) means break.
+	   Value (UInt64)(Int64)-1 for size means unknown value. */
 } ICompressProgress;
 
 typedef struct

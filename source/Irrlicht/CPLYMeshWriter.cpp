@@ -39,7 +39,7 @@ bool CPLYMeshWriter::writeMesh(io::IWriteFile* file, scene::IMesh* mesh, s32 fla
 
 	os::Printer::log("Writing mesh", file->getFileName());
 
-    // write PLY header
+	// write PLY header
 	core::stringc header = "ply\n";
 
 	if (flags & scene::EMWF_WRITE_BINARY)
@@ -121,7 +121,7 @@ bool CPLYMeshWriter::writeMesh(io::IWriteFile* file, scene::IMesh* mesh, s32 fla
 
 		for (u32 j=0; j < mb->getVertexCount(); ++j)
 		{
-        	u8 *buf = vertices + j * vertexSize;
+			u8 *buf = vertices + j * vertexSize;
 			const video::S3DVertex* vertex = ( (video::S3DVertex*)buf );
 			const core::vector3df& pos    = vertex->Pos;
 			const core::vector3df& n      = vertex->Normal;

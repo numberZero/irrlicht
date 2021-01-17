@@ -27,12 +27,12 @@ namespace video
 
 struct SEAGLManagerDataStorage
 {
-    SEAGLManagerDataStorage() : Layer(0), Context(0)
+	SEAGLManagerDataStorage() : Layer(0), Context(0)
 	{
 	}
 
 	CAEAGLLayer* Layer;
-    EAGLContext* Context;
+	EAGLContext* Context;
 };
 
 CEAGLManager::CEAGLManager() : IContextManager(), Configured(false), DataStorage(0)
@@ -46,9 +46,9 @@ CEAGLManager::CEAGLManager() : IContextManager(), Configured(false), DataStorage
 
 CEAGLManager::~CEAGLManager()
 {
-    destroyContext();
-    destroySurface();
-    terminate();
+	destroyContext();
+	destroySurface();
+	terminate();
 
 	delete static_cast<SEAGLManagerDataStorage*>(DataStorage);
 }
@@ -58,7 +58,7 @@ bool CEAGLManager::initialize(const SIrrlichtCreationParameters& params, const S
 	SEAGLManagerDataStorage* dataStorage = static_cast<SEAGLManagerDataStorage*>(DataStorage);
 
 	if (dataStorage->Layer != nil)
-        return true;
+		return true;
 
 	Params = params;
 	Data = data;
@@ -74,7 +74,7 @@ bool CEAGLManager::initialize(const SIrrlichtCreationParameters& params, const S
 	dataStorage->Layer = (CAEAGLLayer*)[view layer];
 	dataStorage->Layer.contentsScale = view.contentScaleFactor;
 
-    return true;
+	return true;
 }
 
 void CEAGLManager::terminate()
@@ -85,8 +85,8 @@ void CEAGLManager::terminate()
 
 	destroySurface();
 
-    if (dataStorage->Layer != nil)
-        dataStorage->Layer = 0;
+	if (dataStorage->Layer != nil)
+		dataStorage->Layer = 0;
 }
 
 bool CEAGLManager::generateSurface()
@@ -94,8 +94,8 @@ bool CEAGLManager::generateSurface()
 	SEAGLManagerDataStorage* dataStorage = static_cast<SEAGLManagerDataStorage*>(DataStorage);
 	CAEAGLLayer* layer = dataStorage->Layer;
 
-    if (layer == nil)
-        return false;
+	if (layer == nil)
+		return false;
 
 	if (Configured)
 		return true;
@@ -112,7 +112,7 @@ bool CEAGLManager::generateSurface()
 
 	Configured = true;
 
-    return true;
+	return true;
 }
 
 void CEAGLManager::destroySurface()
@@ -133,8 +133,8 @@ bool CEAGLManager::generateContext()
 {
 	SEAGLManagerDataStorage* dataStorage = static_cast<SEAGLManagerDataStorage*>(DataStorage);
 
-    if (dataStorage->Context != nil || !Configured)
-        return false;
+	if (dataStorage->Context != nil || !Configured)
+		return false;
 
 	EAGLRenderingAPI OpenGLESVersion = kEAGLRenderingAPIOpenGLES2;
 
@@ -150,14 +150,14 @@ bool CEAGLManager::generateContext()
 		break;
 	}
 
-    if (OpenGLESVersion == kEAGLRenderingAPIOpenGLES2) {
-        dataStorage->Context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+	if (OpenGLESVersion == kEAGLRenderingAPIOpenGLES2) {
+		dataStorage->Context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
 
-        if (dataStorage->Context == nil)
-            dataStorage->Context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    } else {
-        dataStorage->Context = [[EAGLContext alloc] initWithAPI:OpenGLESVersion];
-    }
+		if (dataStorage->Context == nil)
+			dataStorage->Context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+	} else {
+		dataStorage->Context = [[EAGLContext alloc] initWithAPI:OpenGLESVersion];
+	}
 
 	if (dataStorage->Context == nil)
 	{
@@ -169,7 +169,7 @@ bool CEAGLManager::generateContext()
 
 	os::Printer::log("EAGL context created with OpenGLESVersion: ", core::stringc(static_cast<int>(OpenGLESVersion)), ELL_DEBUG);
 
-    return true;
+	return true;
 }
 
 void CEAGLManager::destroyContext()
@@ -198,8 +198,8 @@ void CEAGLManager::destroyContext()
 
 	[EAGLContext setCurrentContext:0];
 
-    if (dataStorage->Context != nil)
-        dataStorage->Context = 0;
+	if (dataStorage->Context != nil)
+		dataStorage->Context = 0;
 
 	Data.OpenGLiOS.Context = 0;
 }
@@ -272,7 +272,7 @@ bool CEAGLManager::swapBuffers()
 		status = true;
 	}
 
-    return status;
+	return status;
 }
 
 }
