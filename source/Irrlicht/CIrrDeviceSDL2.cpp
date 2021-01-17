@@ -306,6 +306,8 @@ bool CIrrDeviceSDL2::run()
 				MouseX = irrevent.MouseInput.X = SDL_event.motion.x;
 				MouseY = irrevent.MouseInput.Y = SDL_event.motion.y;
 				MouseButtonStates = irrevent.MouseInput.ButtonStates = mouse_buttons_sdl_to_irr(SDL_event.motion.state);
+				irrevent.MouseInput.Shift = (KeyMode & KMOD_SHIFT) != 0;
+				irrevent.MouseInput.Control = (KeyMode & KMOD_CTRL) != 0;
 
 				postEventFromUser(irrevent);
 				break;
@@ -316,6 +318,8 @@ bool CIrrDeviceSDL2::run()
 				irrevent.EventType = irr::EET_MOUSE_INPUT_EVENT;
 				irrevent.MouseInput.X = SDL_event.button.x;
 				irrevent.MouseInput.Y = SDL_event.button.y;
+				irrevent.MouseInput.Shift = (KeyMode & KMOD_SHIFT) != 0;
+				irrevent.MouseInput.Control = (KeyMode & KMOD_CTRL) != 0;
 
 				irrevent.MouseInput.Event = irr::EMIE_MOUSE_MOVED;
 
@@ -415,7 +419,7 @@ bool CIrrDeviceSDL2::run()
 					irrevent.KeyInput.Key = key;
 					irrevent.KeyInput.PressedDown = (SDL_event.type == SDL_KEYDOWN);
 					irrevent.KeyInput.Shift = (SDL_event.key.keysym.mod & KMOD_SHIFT) != 0;
-					irrevent.KeyInput.Control = (SDL_event.key.keysym.mod & KMOD_CTRL ) != 0;
+					irrevent.KeyInput.Control = (SDL_event.key.keysym.mod & KMOD_CTRL) != 0;
 					postEventFromUser(irrevent);
 				}
 				break;
@@ -475,7 +479,7 @@ bool CIrrDeviceSDL2::run()
 					irrevent.EventType = irr::EET_KEY_INPUT_EVENT;
 					irrevent.KeyInput.Key = (EKEY_CODE)0;
 					irrevent.KeyInput.Shift = (KeyMode & KMOD_SHIFT) != 0;
-					irrevent.KeyInput.Control = (KeyMode & KMOD_CTRL ) != 0;
+					irrevent.KeyInput.Control = (KeyMode & KMOD_CTRL) != 0;
 					char* str = SDL_event.text.text;
 					char* end = str + strnlen(str, sizeof(SDL_event.text.text));
 					uint32_t cp = 0;
