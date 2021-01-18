@@ -9,21 +9,11 @@
 
 #ifdef _IRR_COMPILE_WITH_OGLES1_
 
-#if defined(_IRR_COMPILE_WITH_IOS_DEVICE_)
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
-#elif defined(_IRR_OGLES1_USE_KHRONOS_API_HEADERS_)
-#include <khronos-api/GLES/gl.h>
-#include <EGL/eglplatform.h>
-typedef char GLchar;
-#else	// or only when defined(_IRR_COMPILE_WITH_ANDROID_DEVICE_) ?
-#include <GLES/gl.h>
-#include <GLES/glext.h>
-#include <EGL/eglplatform.h>
-#if defined(_IRR_OGLES1_USE_EXTPOINTER_)
-#include "gles-ext.h"
+#ifndef _IRR_OGLES1_USE_EXTPOINTER_
+#define GL_GLEXT_PROTOTYPES 1
 #endif
-#endif
+#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_opengles.h>
 
 #ifndef GL_BGRA
 #define GL_BGRA 0x80E1;

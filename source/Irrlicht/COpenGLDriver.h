@@ -9,14 +9,8 @@
 
 #include "SIrrCreationParameters.h"
 
-namespace irr
-{
-	class CIrrDeviceSDL2;
-}
-
 #ifdef _IRR_COMPILE_WITH_OPENGL_
 
-#include <SDL2/SDL_video.h>
 #include "IMaterialRendererServices.h"
 #include "CNullDriver.h"
 
@@ -41,7 +35,7 @@ namespace video
 			EOFPS_DISABLE_TO_ENABLE // switch from programmable to fixed pipeline.
 		};
 
-		COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, CIrrDeviceSDL2* device);
+		COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
 
 		//! destructor
 		virtual ~COpenGLDriver();
@@ -503,11 +497,8 @@ namespace video
 		S3DVertex Quad2DVertices[4];
 		static const u16 Quad2DIndices[4];
 
-		CIrrDeviceSDL2 *SDLDevice;
-		SDL_Window *Window;
-		SDL_GLContext Context;
-
-		E_DEVICE_TYPE DeviceType;
+		SDL_Window *Window = nullptr;
+		SDL_GLContext Context = 0;
 	};
 
 } // end namespace video

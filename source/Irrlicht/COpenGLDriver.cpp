@@ -27,11 +27,11 @@ namespace video
 // Statics variables
 const u16 COpenGLDriver::Quad2DIndices[4] = { 0, 1, 2, 3 };
 
-COpenGLDriver::COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, CIrrDeviceSDL2* device)
+COpenGLDriver::COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 	: CNullDriver(io, params.WindowSize), COpenGLExtensionHandler(), CacheHandler(0),
 	CurrentRenderMode(ERM_NONE), ResetRenderStates(true), Transformation3DChanged(true),
 	AntiAlias(params.AntiAlias), ColorFormat(ECF_R8G8B8), FixedPipelineState(EOFPS_ENABLE),
-	Params(params), SDLDevice(device), DeviceType(EIDT_SDL)
+	Params(params)
 {
 #ifdef _DEBUG
 	setDebugName("COpenGLDriver");
@@ -39,6 +39,8 @@ COpenGLDriver::COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFil
 	ExposedData.context = SDL_GL_GetCurrentContext();
 	ExposedData.window = SDL_GL_GetCurrentWindow();
 	SDL_GL_MakeCurrent(ExposedData.window, ExposedData.context);
+	Window = ExposedData.window;
+	Context = ExposedData.context;
 	genericDriverInit();
 	SDL_GL_SetSwapInterval(Params.Vsync ? 1 : 0);
 }
@@ -4393,10 +4395,10 @@ namespace video
 {
 
 IVideoDriver* createOpenGLDriver(const SIrrlichtCreationParameters& params,
-		io::IFileSystem* io, CIrrDeviceSDL2* device)
+		io::IFileSystem* io)
 {
 #ifdef _IRR_COMPILE_WITH_OPENGL_
-	return new COpenGLDriver(params, io, device);
+	return new COpenGLDriver(params, io);
 #else
 	return 0;
 #endif //  _IRR_COMPILE_WITH_OPENGL_

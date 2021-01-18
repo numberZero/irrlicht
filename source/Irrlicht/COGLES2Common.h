@@ -9,29 +9,11 @@
 
 #ifdef _IRR_COMPILE_WITH_OGLES2_
 
-#if defined(_IRR_COMPILE_WITH_IOS_DEVICE_)
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-#elif defined(_IRR_COMPILE_WITH_ANDROID_DEVICE_)
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-#include <EGL/eglplatform.h>
-#elif defined(_IRR_EMSCRIPTEN_PLATFORM_)
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-#include <EGL/eglplatform.h>
-#else
-#if defined(_IRR_OGLES2_USE_EXTPOINTER_)
-	#define GL_GLEXT_PROTOTYPES 1
-	#define GLX_GLXEXT_PROTOTYPES 1
+#ifndef _IRR_OGLES1_USE_EXTPOINTER_
+#define GL_GLEXT_PROTOTYPES 1
 #endif
-#include <GLES2/gl2.h>
-#include <EGL/eglplatform.h>
-typedef char GLchar;
-#if defined(_IRR_OGLES2_USE_EXTPOINTER_)
-#include "gles2-ext.h"
-#endif
-#endif
+#include <SDL2/SDL_video.h>
+#include <SDL2/SDL_opengles2.h>
 
 #ifndef GL_BGRA
 #define GL_BGRA 0x80E1;

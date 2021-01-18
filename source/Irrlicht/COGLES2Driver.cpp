@@ -34,13 +34,13 @@ namespace irr
 namespace video
 {
 
-COGLES2Driver::COGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager) :
+COGLES2Driver::COGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io) :
 	CNullDriver(io, params.WindowSize), COGLES2ExtensionHandler(), CacheHandler(0),
 	Params(params), ResetRenderStates(true), LockRenderStateMode(false), AntiAlias(params.AntiAlias),
 	MaterialRenderer2DActive(0), MaterialRenderer2DTexture(0), MaterialRenderer2DNoTexture(0),
 	CurrentRenderMode(ERM_NONE), Transformation3DChanged(true),
 	OGLES2ShaderPath(params.OGLES2ShaderPath),
-	ColorFormat(ECF_R8G8B8), ContextManager(contextManager)
+	ColorFormat(ECF_R8G8B8)
 {
 #ifdef _DEBUG
 	setDebugName("COGLES2Driver");
@@ -68,14 +68,12 @@ COGLES2Driver::COGLES2Driver(const SIrrlichtCreationParameters& params, io::IFil
 			getProfiler().add(EPID_ES2_DRAW_SHADOW, L"shadows", L"ES2");
 		}
  	)
-	if (!ContextManager)
-		return;
 
-	ContextManager->grab();
-	ContextManager->generateSurface();
-	ContextManager->generateContext();
-	ExposedData = ContextManager->getContext();
-	ContextManager->activateContext(ExposedData, false);
+	ExposedData.context = SDL_GL_GetCurrentContext();
+	ExposedData.window = SDL_GL_GetCurrentWindow();
+	SDL_GL_MakeCurrent(ExposedData.window, ExposedData.context);
+	Window = ExposedData.window;
+	Context = ExposedData.context;
 }
 
 COGLES2Driver::~COGLES2Driver()
@@ -94,14 +92,6 @@ COGLES2Driver::~COGLES2Driver()
 	delete MaterialRenderer2DTexture;
 	delete MaterialRenderer2DNoTexture;
 	delete CacheHandler;
-
-	if (ContextManager)
-	{
-		ContextManager->destroyContext();
-		ContextManager->destroySurface();
-		ContextManager->terminate();
-		ContextManager->drop();
-	}
 }
 
 	bool COGLES2Driver::genericDriverInit(const core::dimension2d<u32>& screenSize, bool stencilBuffer)
@@ -424,10 +414,19 @@ COGLES2Driver::~COGLES2Driver()
 		IRR_PROFILE(CProfileScope p1(EPID_ES2_BEGIN_SCENE);)
 
 		CNullDriver::beginScene(clearFlag, clearColor, clearDepth, clearStencil, videoData, sourceRect);
-
-		if (ContextManager)
-			ContextManager->activateContext(videoData, true);
-
+		SDL_Window *window = ExposedData.window;
+		SDL_GLContext context = ExposedData.context;
+		if (videoData.window) {
+			window = videoData.window;
+			if (videoData.context)
+				context = videoData.context;
+		}
+		if (SDL_GL_MakeCurrent(window, context) != 0) {
+			os::Printer::log("Render Context switch failed.");
+			return false;
+		}
+		Window = window;
+		Context = context;
 		clearBuffers(clearFlag, clearColor, clearDepth, clearStencil);
 
 		return true;
@@ -440,10 +439,7 @@ COGLES2Driver::~COGLES2Driver()
 		CNullDriver::endScene();
 
 		glFlush();
-
-		if (ContextManager)
-			return ContextManager->swapBuffers();
-
+		SDL_GL_SwapWindow(Window);
 		return false;
 	}
 
@@ -3000,10 +2996,10 @@ class IVideoDriver;
 class IContextManager;
 #endif
 
-IVideoDriver* createOGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager)
+IVideoDriver* createOGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 {
 #ifdef _IRR_COMPILE_WITH_OGLES2_
-	COGLES2Driver* driver = new COGLES2Driver(params, io, contextManager);
+	COGLES2Driver* driver = new COGLES2Driver(params, io);
 	driver->genericDriverInit(params.WindowSize, params.Stencilbuffer);	// don't call in constructor, it uses virtual function calls of driver
 	return driver;
 #else

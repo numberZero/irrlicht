@@ -29,10 +29,10 @@ namespace irr
 namespace video
 {
 
-COGLES1Driver::COGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager) :
+COGLES1Driver::COGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io) :
 	CNullDriver(io, params.WindowSize), COGLES1ExtensionHandler(), CacheHandler(0), CurrentRenderMode(ERM_NONE),
 	ResetRenderStates(true), Transformation3DChanged(true), AntiAlias(params.AntiAlias),
-	ColorFormat(ECF_R8G8B8), Params(params), ContextManager(contextManager)
+	ColorFormat(ECF_R8G8B8), Params(params)
 {
 #ifdef _DEBUG
 	setDebugName("COGLESDriver");
@@ -40,14 +40,11 @@ COGLES1Driver::COGLES1Driver(const SIrrlichtCreationParameters& params, io::IFil
 
 	core::dimension2d<u32> windowSize(0, 0);
 
-	if (!ContextManager)
-		return;
-
-	ContextManager->grab();
-	ContextManager->generateSurface();
-	ContextManager->generateContext();
-	ExposedData = ContextManager->getContext();
-	ContextManager->activateContext(ExposedData, false);
+	ExposedData.context = SDL_GL_GetCurrentContext();
+	ExposedData.window = SDL_GL_GetCurrentWindow();
+	SDL_GL_MakeCurrent(ExposedData.window, ExposedData.context);
+	Window = ExposedData.window;
+	Context = ExposedData.context;
 
 	windowSize = params.WindowSize;
 
@@ -68,14 +65,6 @@ COGLES1Driver::~COGLES1Driver()
 	removeAllHardwareBuffers();
 
 	delete CacheHandler;
-
-	if (ContextManager)
-	{
-		ContextManager->destroyContext();
-		ContextManager->destroySurface();
-		ContextManager->terminate();
-		ContextManager->drop();
-	}
 }
 
 // -----------------------------------------------------------------------
@@ -204,10 +193,19 @@ bool COGLES1Driver::beginScene(u16 clearFlag, SColor clearColor, f32 clearDepth,
 	IRR_PROFILE(CProfileScope p1(EPID_ES2_BEGIN_SCENE);)
 
 	CNullDriver::beginScene(clearFlag, clearColor, clearDepth, clearStencil, videoData, sourceRect);
-
-	if (ContextManager)
-		ContextManager->activateContext(videoData, true);
-
+	SDL_Window *window = ExposedData.window;
+	SDL_GLContext context = ExposedData.context;
+	if (videoData.window) {
+		window = videoData.window;
+		if (videoData.context)
+			context = videoData.context;
+	}
+	if (SDL_GL_MakeCurrent(window, context) != 0) {
+		os::Printer::log("Render Context switch failed.");
+		return false;
+	}
+	Window = window;
+	Context = context;
 	clearBuffers(clearFlag, clearColor, clearDepth, clearStencil);
 
 	return true;
@@ -220,10 +218,7 @@ bool COGLES1Driver::endScene()
 	CNullDriver::endScene();
 
 	glFlush();
-
-	if (ContextManager)
-		return ContextManager->swapBuffers();
-
+	SDL_GL_SwapWindow(Window);
 	return false;
 }
 
@@ -1621,10 +1616,6 @@ void COGLES1Driver::setBasicRenderStates(const SMaterial& material, const SMater
 		if ((material.Shininess != 0.0f) &&
 			(material.ColorMaterial != video::ECM_SPECULAR))
 		{
-#ifdef GL_EXT_separate_specular_color
-			if (FeatureAvailable[IRR_EXT_separate_specular_color])
-				glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR);
-#endif
 			glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.Shininess);
 			color[0] = material.SpecularColor.getRed() * inv;
 			color[1] = material.SpecularColor.getGreen() * inv;
@@ -1632,11 +1623,6 @@ void COGLES1Driver::setBasicRenderStates(const SMaterial& material, const SMater
 			color[3] = material.SpecularColor.getAlpha() * inv;
 			glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, color);
 		}
-#ifdef GL_EXT_separate_specular_color
-		else
-			if (FeatureAvailable[IRR_EXT_separate_specular_color])
-				glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);
-#endif
 	}
 
 // TODO ogl-es
@@ -1919,33 +1905,7 @@ void COGLES1Driver::setTextureRenderStates(const SMaterial& material, bool reset
 		if (resetAllRenderstates)
 			statesCache.IsCached = false;
 
-#ifdef GL_VERSION_2_1
-		if (Version >= 210)
-		{
-			if (!statesCache.IsCached || material.TextureLayer[i].LODBias != statesCache.LODBias)
-			{
-				if (material.TextureLayer[i].LODBias)
-				{
-					const float tmp = core::clamp(material.TextureLayer[i].LODBias * 0.125f, -MaxTextureLODBias, MaxTextureLODBias);
-					glTexParameterf(tmpTextureType, GL_TEXTURE_LOD_BIAS, tmp);
-				}
-				else
-					glTexParameterf(tmpTextureType, GL_TEXTURE_LOD_BIAS, 0.f);
-
-				statesCache.LODBias = material.TextureLayer[i].LODBias;
-			}
-		}
-		else if (FeatureAvailable[IRR_EXT_texture_lod_bias])
-		{
-			if (material.TextureLayer[i].LODBias)
-			{
-				const float tmp = core::clamp(material.TextureLayer[i].LODBias * 0.125f, -MaxTextureLODBias, MaxTextureLODBias);
-				glTexEnvf(GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, tmp);
-			}
-			else
-				glTexEnvf(GL_TEXTURE_FILTER_CONTROL_EXT, GL_TEXTURE_LOD_BIAS_EXT, 0.f);
-		}
-#elif defined(GL_EXT_texture_lod_bias)
+#if defined(GL_EXT_texture_lod_bias)
 		if (FeatureAvailable[COGLESCoreExtensionHandler::IRR_GL_EXT_texture_lod_bias])
 		{
 			if (material.TextureLayer[i].LODBias)
@@ -2513,11 +2473,6 @@ void COGLES1Driver::setFog(SColor c, E_FOG_TYPE fogType, f32 start,
 	CNullDriver::setFog(c, fogType, start, end, density, pixelFog, rangeFog);
 
 	glFogf(GL_FOG_MODE, GLfloat((fogType==EFT_FOG_LINEAR)? GL_LINEAR : (fogType==EFT_FOG_EXP)?GL_EXP:GL_EXP2));
-
-#ifdef GL_EXT_fog_coord
-	if (FeatureAvailable[IRR_EXT_fog_coord])
-		glFogi(GL_FOG_COORDINATE_SOURCE, GL_FRAGMENT_DEPTH);
-#endif
 
 	if (fogType==EFT_FOG_LINEAR)
 	{
@@ -3282,15 +3237,10 @@ namespace irr
 namespace video
 {
 
-#ifndef _IRR_COMPILE_WITH_OGLES1_
-class IVideoDriver;
-class IContextManager;
-#endif
-
-IVideoDriver* createOGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager)
+IVideoDriver* createOGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 {
 #ifdef _IRR_COMPILE_WITH_OGLES1_
-	return new COGLES1Driver(params, io, contextManager);
+	return new COGLES1Driver(params, io);
 #else
 	return 0;
 #endif //  _IRR_COMPILE_WITH_OGLES1_

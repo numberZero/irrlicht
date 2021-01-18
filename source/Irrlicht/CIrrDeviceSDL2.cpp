@@ -45,8 +45,9 @@ namespace irr
 {
 	namespace video
 	{
-		IVideoDriver* createOpenGLDriver(const SIrrlichtCreationParameters& params,
-				io::IFileSystem* io, CIrrDeviceSDL2* device);
+		IVideoDriver* createOpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
+		IVideoDriver* createOGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
+		IVideoDriver* createOGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
 	}
 } // end namespace irr
 
@@ -189,32 +190,45 @@ bool CIrrDeviceSDL2::createWindow()
 	if (CreationParams.Fullscreen)
 		windowFlags |= SDL_WINDOW_FULLSCREEN;
 
-	if (CreationParams.DriverType == video::EDT_OPENGL) {
-		windowFlags |= SDL_WINDOW_OPENGL;
-		if (CreationParams.Bits==16)
-		{
-			SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 4 );
-			SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 4 );
-			SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 4 );
-			SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE, CreationParams.WithAlphaChannel?1:0 );
-		}
-		else
-		{
-			SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
-			SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
-			SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );
-			SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE, CreationParams.WithAlphaChannel?8:0 );
-		}
-		SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, CreationParams.ZBufferBits);
-		if (CreationParams.Doublebuffer)
-			SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-		if (CreationParams.Stereobuffer)
-			SDL_GL_SetAttribute( SDL_GL_STEREO, 1 );
-		if (CreationParams.AntiAlias>1)
-		{
-			SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 );
-			SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, CreationParams.AntiAlias );
-		}
+	windowFlags |= SDL_WINDOW_OPENGL;
+	if (CreationParams.Bits==16)
+	{
+		SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 4 );
+		SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 4 );
+		SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 4 );
+		SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE, CreationParams.WithAlphaChannel?1:0 );
+	}
+	else
+	{
+		SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
+		SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
+		SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );
+		SDL_GL_SetAttribute( SDL_GL_ALPHA_SIZE, CreationParams.WithAlphaChannel?8:0 );
+	}
+	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, CreationParams.ZBufferBits);
+	if (CreationParams.Doublebuffer)
+		SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+	if (CreationParams.Stereobuffer)
+		SDL_GL_SetAttribute( SDL_GL_STEREO, 1 );
+	if (CreationParams.AntiAlias>1)
+	{
+		SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 );
+		SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, CreationParams.AntiAlias );
+	}
+
+	switch (CreationParams.DriverType) {
+		case video::EDT_OPENGL:
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+			break;
+		case video::EDT_OGLES1:
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
+			break;
+		case video::EDT_OGLES2:
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+			break;
+		default:;
 	}
 
 	window = SDL_CreateWindow(
@@ -228,13 +242,20 @@ bool CIrrDeviceSDL2::createWindow()
 	if (!window)
 	{
 		os::Printer::log("Could not create window", SDL_GetError(), ELL_ERROR);
-		exit(-1);
 		return false;
 	}
 	WindowMinimized = false;
 	WindowHasFocus = true;
-	if (CreationParams.DriverType == video::EDT_OPENGL)
+	Context = SDL_GL_CreateContext(window);
+	if (!Context) {
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		Context = SDL_GL_CreateContext(window);
+		if (Context)
+			return true;
+		os::Printer::log("Could not create context", SDL_GetError(), ELL_ERROR);
+		SDL_DestroyWindow(window);
+		return false;
+	}
 	return true;
 }
 
@@ -246,9 +267,25 @@ void CIrrDeviceSDL2::createDriver()
 	{
 	case video::EDT_OPENGL:
 		#ifdef _IRR_COMPILE_WITH_OPENGL_
-		VideoDriver = video::createOpenGLDriver(CreationParams, FileSystem, this);
+		VideoDriver = video::createOpenGLDriver(CreationParams, FileSystem);
 		#else
 		os::Printer::log("No OpenGL support compiled in.", ELL_ERROR);
+		#endif
+		break;
+
+	case video::EDT_OGLES1:
+		#ifdef _IRR_COMPILE_WITH_OGLES1_
+		VideoDriver = video::createOGLES1Driver(CreationParams, FileSystem);
+		#else
+		os::Printer::log("No OpenGL ES 1 support compiled in.", ELL_ERROR);
+		#endif
+		break;
+
+	case video::EDT_OGLES2:
+		#ifdef _IRR_COMPILE_WITH_OGLES2_
+		VideoDriver = video::createOGLES2Driver(CreationParams, FileSystem);
+		#else
+		os::Printer::log("No OpenGL ES 2 support compiled in.", ELL_ERROR);
 		#endif
 		break;
 

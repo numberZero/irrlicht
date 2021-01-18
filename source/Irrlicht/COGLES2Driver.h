@@ -19,18 +19,6 @@
 #include "COGLES2ExtensionHandler.h"
 #include "IContextManager.h"
 
-#if defined(_IRR_WINDOWS_API_)
-// include windows headers for HWND
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <windows.h>
-#endif
-
-#ifdef _MSC_VER
-#pragma comment(lib, "libGLESv2.lib")
-#endif
-
 namespace irr
 {
 namespace video
@@ -44,13 +32,10 @@ namespace video
 	class COGLES2Driver : public CNullDriver, public IMaterialRendererServices, public COGLES2ExtensionHandler
 	{
 		friend class COpenGLCoreTexture<COGLES2Driver>;
-		friend IVideoDriver* createOGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
-
-	protected:
-		//! constructor (use createOGLES2Driver instead)
-		COGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
 
 	public:
+		//! constructor (use createOGLES2Driver instead)
+		COGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
 
 		//! destructor
 		virtual ~COGLES2Driver();
@@ -334,10 +319,10 @@ namespace video
 
 		COGLES2CacheHandler* getCacheHandler() const;
 
-	protected:
 		//! inits the opengl-es driver
 		virtual bool genericDriverInit(const core::dimension2d<u32>& screenSize, bool stencilBuffer);
 
+	protected:
 		void chooseMaterial2D();
 
 		virtual ITexture* createDeviceDependentTexture(const io::path& name, IImage* image) _IRR_OVERRIDE_;
@@ -437,7 +422,8 @@ private:
 
 		core::array<RequestedLight> RequestedLights;
 
-		IContextManager* ContextManager;
+		SDL_Window *Window = nullptr;
+		SDL_GLContext Context = 0;
 	};
 
 } // end namespace video
