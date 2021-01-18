@@ -11,19 +11,16 @@
 
 namespace irr
 {
-	class CIrrDeviceWin32;
-	class CIrrDeviceLinux;
-	class CIrrDeviceSDL;
-	class CIrrDeviceMacOSX;
+	class CIrrDeviceSDL2;
 }
 
 #ifdef _IRR_COMPILE_WITH_OPENGL_
 
+#include <SDL2/SDL_video.h>
 #include "IMaterialRendererServices.h"
 #include "CNullDriver.h"
 
 #include "COpenGLExtensionHandler.h"
-#include "IContextManager.h"
 
 namespace irr
 {
@@ -44,15 +41,7 @@ namespace video
 			EOFPS_DISABLE_TO_ENABLE // switch from programmable to fixed pipeline.
 		};
 
-#if defined(_IRR_COMPILE_WITH_WINDOWS_DEVICE_) || defined(_IRR_COMPILE_WITH_X11_DEVICE_) || defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
-		COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_SDL_DEVICE_
-		COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, CIrrDeviceSDL* device);
-#endif
-
-		bool initDriver();
+		COpenGLDriver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, CIrrDeviceSDL2* device);
 
 		//! destructor
 		virtual ~COpenGLDriver();
@@ -514,11 +503,9 @@ namespace video
 		S3DVertex Quad2DVertices[4];
 		static const u16 Quad2DIndices[4];
 
-		#ifdef _IRR_COMPILE_WITH_SDL_DEVICE_
-			CIrrDeviceSDL *SDLDevice;
-		#endif
-
-		IContextManager* ContextManager;
+		CIrrDeviceSDL2 *SDLDevice;
+		SDL_Window *Window;
+		SDL_GLContext Context;
 
 		E_DEVICE_TYPE DeviceType;
 	};

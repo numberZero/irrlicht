@@ -4,6 +4,7 @@
 
 #ifndef __S_EXPOSED_VIDEO_DATA_H_INCLUDED__
 #define __S_EXPOSED_VIDEO_DATA_H_INCLUDED__
+#include <SDL2/SDL_video.h>
 
 namespace irr
 {
@@ -89,6 +90,10 @@ struct SExposedVideoData
 		SOpenGLFB OpenGLFB;
 		SOpenGLiOS OpenGLiOS;
 		SOGLESAndroid OGLESAndroid;
+		struct {
+			SDL_Window *window;
+			SDL_GLContext context;
+		};
 	};
 };
 

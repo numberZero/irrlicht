@@ -7,36 +7,10 @@
 #include "IrrCompileConfig.h"
 #include "irrMath.h"
 
-#if defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
-	#include <SDL/SDL_endian.h>
-	#define bswap_16(X) SDL_Swap16(X)
-	#define bswap_32(X) SDL_Swap32(X)
-	#define bswap_64(X) SDL_Swap64(X)
-#elif defined(_IRR_WINDOWS_API_) && defined(_MSC_VER) && (_MSC_VER > 1298)
-	#include <stdlib.h>
-	#define bswap_16(X) _byteswap_ushort(X)
-	#define bswap_32(X) _byteswap_ulong(X)
-	#define bswap_64(X) _byteswap_uint64(X)
-#if (_MSC_VER >= 1400)
-	#define localtime _localtime_s
-#endif
-#elif defined(_IRR_OSX_PLATFORM_) || defined(_IRR_IOS_PLATFORM_)
-	#include <libkern/OSByteOrder.h>
-	#define bswap_16(X) OSReadSwapInt16(&X,0)
-	#define bswap_32(X) OSReadSwapInt32(&X,0)
-	#define bswap_64(X) OSReadSwapInt64(&X,0)
-#elif defined(__FreeBSD__) || defined(__OpenBSD__)
-	#include <sys/endian.h>
-	#define bswap_16(X) bswap16(X)
-	#define bswap_32(X) bswap32(X)
-	#define bswap_64(X) bswap64(X)
-#elif !defined(_IRR_SOLARIS_PLATFORM_) && !defined(__PPC__) && !defined(_IRR_WINDOWS_API_)
-	#include <byteswap.h>
-#else
-	#define bswap_16(X) ((((X)&0xFF) << 8) | (((X)&0xFF00) >> 8))
-	#define bswap_32(X) ((((X)&0x000000FF) << 24) | (((X)&0xFF000000) >> 24) | (((X)&0x0000FF00) << 8) | (((X) &0x00FF0000) >> 8))
-	#define bswap_64(X) ((((X)&0x00000000000000FF) << 56) | (((X)&0xFF00000000000000) >> 56) | (((X)&0x000000000000FF00) << 40) | (((X)&0x00FF000000000000) >> 40) | (((X)&0x0000000000FF0000) << 24) | (((X)&0x0000FF0000000000) >> 24) | (((X)&0x00000000FF000000) << 8) | (((X) &0x000000FF00000000) >> 8))
-#endif
+#include <SDL2/SDL_endian.h>
+#define bswap_16(X) SDL_Swap16(X)
+#define bswap_32(X) SDL_Swap32(X)
+#define bswap_64(X) SDL_Swap64(X)
 
 namespace irr
 {

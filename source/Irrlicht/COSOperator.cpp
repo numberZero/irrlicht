@@ -19,9 +19,7 @@
 #endif
 #endif
 
-#if defined(_IRR_COMPILE_WITH_X11_DEVICE_)
-#include "CIrrDeviceLinux.h"
-#endif
+#include "CIrrDeviceSDL2.h"
 #if defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
 #import <Cocoa/Cocoa.h>
 #endif
@@ -30,14 +28,6 @@
 
 namespace irr
 {
-
-#if defined(_IRR_COMPILE_WITH_X11_DEVICE_)
-// constructor  linux
-	COSOperator::COSOperator(const core::stringc& osVersion, CIrrDeviceLinux* device)
-: OperatingSystem(osVersion), IrrDeviceLinux(device)
-{
-}
-#endif
 
 // constructor
 COSOperator::COSOperator(const core::stringc& osVersion) : OperatingSystem(osVersion)
@@ -54,51 +44,12 @@ const core::stringc& COSOperator::getOperatingSystemVersion() const
 	return OperatingSystem;
 }
 
-
 //! copies text to the clipboard
 void COSOperator::copyToClipboard(const c8* text) const
 {
 	if (strlen(text)==0)
 		return;
-
-// Windows version
-#if defined(_IRR_XBOX_PLATFORM_)
-#elif defined(_IRR_WINDOWS_API_)
-	if (!OpenClipboard(NULL) || text == 0)
-		return;
-
-	EmptyClipboard();
-
-	HGLOBAL clipbuffer;
-	char * buffer;
-
-	clipbuffer = GlobalAlloc(GMEM_DDESHARE, strlen(text)+1);
-	buffer = (char*)GlobalLock(clipbuffer);
-
-	strcpy(buffer, text);
-
-	GlobalUnlock(clipbuffer);
-	SetClipboardData(CF_TEXT, clipbuffer);
-	CloseClipboard();
-
-#elif defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
-	NSString *str = nil;
-	NSPasteboard *board = nil;
-
-	if ((text != NULL) && (strlen(text) > 0))
-	{
-		str = [NSString stringWithCString:text encoding:NSWindowsCP1252StringEncoding];
-		board = [NSPasteboard generalPasteboard];
-		[board declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:NSApp];
-		[board setString:str forType:NSStringPboardType];
-	}
-
-#elif defined(_IRR_COMPILE_WITH_X11_DEVICE_)
-	if ( IrrDeviceLinux )
-		IrrDeviceLinux->copyToClipboard(text);
-#else
-
-#endif
+	SDL_SetClipboardText(text);
 }
 
 
@@ -106,42 +57,10 @@ void COSOperator::copyToClipboard(const c8* text) const
 //! \return Returns 0 if no string is in there.
 const c8* COSOperator::getTextFromClipboard() const
 {
-#if defined(_IRR_XBOX_PLATFORM_)
-		return 0;
-#elif defined(_IRR_WINDOWS_API_)
-	if (!OpenClipboard(NULL))
-		return 0;
-
-	char * buffer = 0;
-
-	HANDLE hData = GetClipboardData( CF_TEXT );
-	buffer = (char*)GlobalLock( hData );
-	GlobalUnlock( hData );
-	CloseClipboard();
-	return buffer;
-
-#elif defined(_IRR_COMPILE_WITH_OSX_DEVICE_)
-	NSString* str = nil;
-	NSPasteboard* board = nil;
-	char* result = 0;
-
-	board = [NSPasteboard generalPasteboard];
-	str = [board stringForType:NSStringPboardType];
-
-	if (str != nil)
-		result = (char*)[str cStringUsingEncoding:NSWindowsCP1252StringEncoding];
-
-	return (result);
-
-#elif defined(_IRR_COMPILE_WITH_X11_DEVICE_)
-	if ( IrrDeviceLinux )
-		return IrrDeviceLinux->getTextFromClipboard();
-	return 0;
-
-#else
-
-	return 0;
-#endif
+	char *clipboardText = SDL_GetClipboardText();
+	Clipboard = clipboardText;
+	SDL_free(clipboardText);
+	return Clipboard.c_str();
 }
 
 

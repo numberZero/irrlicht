@@ -14,37 +14,7 @@ static const char* const copyright = "Irrlicht Engine (c) 2002-2017 Nikolaus Geb
 #endif
 
 #include "irrlicht.h"
-#ifdef _IRR_COMPILE_WITH_WINDOWS_DEVICE_
-#include "CIrrDeviceWin32.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_X11_DEVICE_
-#include "CIrrDeviceLinux.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_OSX_DEVICE_
-#include "CIrrDeviceOSX.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_FB_DEVICE_
-#include "CIrrDeviceFB.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_SDL_DEVICE_
-#include "CIrrDeviceSDL.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_CONSOLE_DEVICE_
-#include "CIrrDeviceConsole.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_IOS_DEVICE_
-#include "CIrrDeviceiOS.h"
-#endif
-
-#ifdef _IRR_COMPILE_WITH_ANDROID_DEVICE_
-#include "Android/CIrrDeviceAndroid.h"
-#endif
+#include "CIrrDeviceSDL2.h"
 
 namespace irr
 {
@@ -70,58 +40,7 @@ namespace irr
 
 	extern "C" IRRLICHT_API IrrlichtDevice* IRRCALLCONV createDeviceEx(const SIrrlichtCreationParameters& params)
 	{
-
-		IrrlichtDevice* dev = 0;
-
-#ifdef _IRR_COMPILE_WITH_WINDOWS_DEVICE_
-		if (params.DeviceType == EIDT_WIN32 || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceWin32(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_OSX_DEVICE_
-		if (params.DeviceType == EIDT_OSX || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceMacOSX(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_X11_DEVICE_
-		if (params.DeviceType == EIDT_X11 || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceLinux(params);
-#endif
-		
-#ifdef _IRR_COMPILE_WITH_IOS_DEVICE_
-		if (params.DeviceType == EIDT_IOS || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceiOS(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_ANDROID_DEVICE_
-		if (params.DeviceType == EIDT_ANDROID || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceAndroid(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_SDL_DEVICE_
-		if (params.DeviceType == EIDT_SDL || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceSDL(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_FB_DEVICE_
-		if (params.DeviceType == EIDT_FRAMEBUFFER || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceFB(params);
-#endif
-
-#ifdef _IRR_COMPILE_WITH_CONSOLE_DEVICE_
-		if (params.DeviceType == EIDT_CONSOLE || (!dev && params.DeviceType == EIDT_BEST))
-			dev = new CIrrDeviceConsole(params);
-#endif
-
-		if (dev && !dev->getVideoDriver() && params.DriverType != video::EDT_NULL)
-		{
-			dev->closeDevice(); // destroy window
-			dev->run(); // consume quit message
-			dev->drop();
-			dev = 0;
-		}
-
-		return dev;
+		return new CIrrDeviceSDL2(params);
 	}
 
 namespace core

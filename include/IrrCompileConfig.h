@@ -27,32 +27,11 @@
 //! _IRR_POSIX_API_ for Posix compatible systems
 //! Note: PLATFORM defines the OS specific layer, API can group several platforms
 
-//! DEVICE is the windowing system used, several PLATFORMs support more than one DEVICE
-//! Irrlicht can be compiled with more than one device
-//! _IRR_COMPILE_WITH_WINDOWS_DEVICE_ for Windows API based device
-//! _IRR_COMPILE_WITH_OSX_DEVICE_ for Cocoa native windowing on OSX
-//! _IRR_COMPILE_WITH_X11_DEVICE_ for Linux X11 based device
-//! _IRR_COMPILE_WITH_SDL_DEVICE_ for platform independent SDL framework
-//! _IRR_COMPILE_WITH_CONSOLE_DEVICE_ for no windowing system, used as a fallback
-//! _IRR_COMPILE_WITH_FB_DEVICE_ for framebuffer systems
-
 //! Passing defines to the compiler which have NO in front of the _IRR definename is an alternative
 //! way which can be used to disable defines (instead of outcommenting them in this header).
 //! So defines can be controlled from Makefiles or Projectfiles which allows building
 //! different library versions without having to change the sources.
 //! Example: NO_IRR_COMPILE_WITH_X11_ would disable X11
-
-//! Uncomment this line to compile with the SDL device
-//#define _IRR_COMPILE_WITH_SDL_DEVICE_
-#ifdef NO_IRR_COMPILE_WITH_SDL_DEVICE_
-#undef _IRR_COMPILE_WITH_SDL_DEVICE_
-#endif
-
-//! Comment this line to compile without the fallback console device.
-//#define _IRR_COMPILE_WITH_CONSOLE_DEVICE_
-#ifdef NO_IRR_COMPILE_WITH_CONSOLE_DEVICE_
-#undef _IRR_COMPILE_WITH_CONSOLE_DEVICE_
-#endif
 
 //! WIN32 for Windows32
 //! WIN64 for Windows64
@@ -60,7 +39,6 @@
 #if defined(_WIN32) || defined(_WIN64) || defined(WIN32) || defined(WIN64)
 #define _IRR_WINDOWS_
 #define _IRR_WINDOWS_API_
-#define _IRR_COMPILE_WITH_WINDOWS_DEVICE_
 #endif
 
 #if defined(_MSC_VER) && (_MSC_VER < 1500)
@@ -72,10 +50,6 @@
 	#undef _IRR_WINDOWS_
 	#define _IRR_XBOX_PLATFORM_	// deprecated
 	#define _IRR_WINDOWS_API_
-	//#define _IRR_COMPILE_WITH_WINDOWS_DEVICE_
-	#undef _IRR_COMPILE_WITH_WINDOWS_DEVICE_
-	//#define _IRR_COMPILE_WITH_SDL_DEVICE_
-
 	#include <xtl.h>
 #endif
 
@@ -94,7 +68,6 @@
 #define _IRR_COMPILE_WITH_IOS_BUILTIN_MAIN_
 #else
 #define _IRR_OSX_PLATFORM_
-#define _IRR_COMPILE_WITH_OSX_DEVICE_
 #define NO_IRR_COMPILE_WITH_OGLES1_
 #define NO_IRR_COMPILE_WITH_OGLES2_
 #define NO_IRR_COMPILE_WITH_WEBGL1_
@@ -133,7 +106,6 @@
 #define _IRR_LINUX_PLATFORM_
 #endif
 #define _IRR_POSIX_API_
-#define _IRR_COMPILE_WITH_X11_DEVICE_
 #endif
 
 
