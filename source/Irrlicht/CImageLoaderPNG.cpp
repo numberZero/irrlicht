@@ -4,8 +4,6 @@
 
 #include "CImageLoaderPNG.h"
 
-#ifdef _IRR_COMPILE_WITH_PNG_LOADER_
-
 #ifdef _IRR_COMPILE_WITH_LIBPNG_
 	#ifndef _IRR_USE_NON_SYSTEM_LIB_PNG_
 	#include <png.h> // use system lib png
@@ -282,6 +280,3 @@ IImageLoader* createImageLoaderPNG()
 
 }// end namespace irr
 }//end namespace video
-
-#endif
-

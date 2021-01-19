@@ -6,7 +6,6 @@
 #define _C_IMAGE_WRITER_PPM_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_PPM_WRITER_
 
 #include "IImageWriter.h"
 
@@ -31,6 +30,5 @@ public:
 } // namespace video
 } // namespace irr
 
-#endif // _C_IMAGE_WRITER_PPM_H_INCLUDED__
 #endif
 

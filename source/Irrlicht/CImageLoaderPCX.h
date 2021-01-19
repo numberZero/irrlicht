@@ -13,8 +13,6 @@ namespace irr
 namespace video
 {
 
-#if defined(_IRR_COMPILE_WITH_PCX_LOADER_) || defined(_IRR_COMPILE_WITH_PCX_WRITER_)
-
 // byte-align structures
 #include "irrpack.h"
 
@@ -44,10 +42,6 @@ namespace video
 // Default alignment
 #include "irrunpack.h"
 
-#endif // compile with loader or writer
-
-#ifdef _IRR_COMPILE_WITH_PCX_LOADER_
-
 /*!
 	Image Loader for Windows PCX bitmaps.
 	This loader was written and sent in by Dean P. Macri. I modified
@@ -71,8 +65,6 @@ public:
 	virtual IImage* loadImage(io::IReadFile* file) const _IRR_OVERRIDE_;
 
 };
-
-#endif // compile with loader
 
 } // end namespace video
 } // end namespace irr

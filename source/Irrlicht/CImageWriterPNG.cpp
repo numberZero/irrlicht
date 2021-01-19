@@ -4,8 +4,6 @@
 
 #include "CImageWriterPNG.h"
 
-#ifdef _IRR_COMPILE_WITH_PNG_WRITER_
-
 #include "CImageLoaderPNG.h"
 #include "CColorConverter.h"
 #include "IWriteFile.h"
@@ -217,6 +215,3 @@ bool CImageWriterPNG::writeImage(io::IWriteFile* file, IImage* image,u32 param) 
 
 } // namespace video
 } // namespace irr
-
-#endif
-

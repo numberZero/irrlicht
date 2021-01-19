@@ -14,7 +14,6 @@ namespace irr
 namespace video
 {
 
-#if defined(_IRR_COMPILE_WITH_TGA_LOADER_) || defined(_IRR_COMPILE_WITH_TGA_WRITER_)
 
 // byte-align structures
 #include "irrpack.h"
@@ -45,9 +44,7 @@ namespace video
 // Default alignment
 #include "irrunpack.h"
 
-#endif // compiled with loader or reader
 
-#ifdef _IRR_COMPILE_WITH_TGA_LOADER_
 
 /*!
 	Surface Loader for targa images
@@ -72,7 +69,6 @@ private:
 	u8* loadCompressedImage(io::IReadFile *file, const STGAHeader& header) const;
 };
 
-#endif // compiled with loader
 
 } // end namespace video
 } // end namespace irr

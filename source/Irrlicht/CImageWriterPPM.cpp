@@ -4,7 +4,6 @@
 
 #include "CImageWriterPPM.h"
 
-#ifdef _IRR_COMPILE_WITH_PPM_WRITER_
 
 #include "IWriteFile.h"
 #include "IImage.h"
@@ -109,5 +108,4 @@ bool CImageWriterPPM::writeImage(io::IWriteFile *file, IImage *image, u32 param)
 } // namespace video
 } // namespace irr
 
-#endif
 

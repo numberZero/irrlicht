@@ -6,8 +6,6 @@
 #define __C_IMAGE_LOADER_PSD_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_PSD_LOADER_
-
 #include "IImageLoader.h"
 
 namespace irr
@@ -67,5 +65,3 @@ private:
 } // end namespace irr
 
 #endif
-#endif
-

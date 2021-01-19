@@ -5,9 +5,6 @@
 #ifndef _C_IMAGE_WRITER_PNG_H_INCLUDED__
 #define _C_IMAGE_WRITER_PNG_H_INCLUDED__
 
-
-#ifdef _IRR_COMPILE_WITH_PNG_WRITER_
-
 #include "IImageWriter.h"
 
 namespace irr
@@ -32,5 +29,3 @@ public:
 } // namespace irr
 
 #endif // _C_IMAGE_WRITER_PNG_H_INCLUDED__
-#endif
-

@@ -4,7 +4,6 @@
 
 #include "CImageWriterBMP.h"
 
-#ifdef _IRR_COMPILE_WITH_BMP_WRITER_
 
 #include "CImageLoaderBMP.h"
 #include "IWriteFile.h"
@@ -133,5 +132,4 @@ bool CImageWriterBMP::writeImage(io::IWriteFile* file, IImage* image, u32 param)
 } // namespace video
 } // namespace irr
 
-#endif
 

@@ -109,8 +109,11 @@ add_library(ANIMOBJ OBJECT
 	CSceneNodeAnimatorTexture.cpp
 	)
 
-add_library(DRVROBJ OBJECT
+add_library(NullDriver OBJECT
 	CNullDriver.cpp
+	)
+
+add_library(DRVROBJ OBJECT
 	COpenGLCacheHandler.cpp
 	COpenGLDriver.cpp
 	COpenGLShaderMaterialRenderer.cpp
@@ -129,25 +132,41 @@ add_library(DRVROBJ OBJECT
 add_library(IMAGEOBJ OBJECT
 	CColorConverter.cpp
 	CImage.cpp
-	CImageLoaderBMP.cpp
-	CImageLoaderDDS.cpp
-	CImageLoaderJPG.cpp
-	CImageLoaderPCX.cpp
-	CImageLoaderPNG.cpp
-	CImageLoaderPSD.cpp
-	CImageLoaderTGA.cpp
-	CImageLoaderPPM.cpp
-	CImageLoaderPVR.cpp
-	CImageLoaderWAL.cpp
-	CImageLoaderRGB.cpp
-	CImageWriterBMP.cpp
-	CImageWriterJPG.cpp
-	CImageWriterPCX.cpp
-	CImageWriterPNG.cpp
-	CImageWriterPPM.cpp
-	CImageWriterPSD.cpp
-	CImageWriterTGA.cpp
 	)
+
+option(IRRLICHT_IMAGE_WRITERS "Build with image writing support" ON)
+option(IRRLICHT_MESH_WRITERS "Build with mesh writing support" OFF)
+
+function(AddImageFormat name mode default)
+	set(varname "IRRLICHT_IMAGE_FORMAT_${name}")
+	option(${varname} "Build with ${name} image format support" ${default})
+	if(${varname}) # indirect variable reference
+		target_sources(IMAGEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CImageLoader${name}.cpp")
+		target_compile_definitions(NullDriver PUBLIC "_IRR_COMPILE_WITH_${name}_LOADER_")
+		if(mode STREQUAL "RW")
+			if(IRRLICHT_IMAGE_WRITERS)
+				target_sources(IMAGEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CImageWriter${name}.cpp")
+				target_compile_definitions(NullDriver PUBLIC "_IRR_COMPILE_WITH_${name}_WRITER_")
+			endif()
+		elseif(mode STREQUAL "RO")
+		else()
+			message(SEND_ERROR "Invalid image format support mode: [${mode}]")
+		endif()
+	endif()
+endfunction()
+
+AddImageFormat(BMP RW OFF)
+AddImageFormat(DDS RO OFF) # _IRR_COMPILE_WITH_DDS_DECODER_LOADER_ patended
+AddImageFormat(JPG RW ON)
+AddImageFormat(LMP RO OFF)
+AddImageFormat(PCX RW OFF)
+AddImageFormat(PNG RW ON)
+AddImageFormat(PPM RW OFF)
+AddImageFormat(PSD RW OFF)
+AddImageFormat(PVR RO OFF)
+AddImageFormat(RGB RO OFF)
+AddImageFormat(TGA RW OFF)
+AddImageFormat(WAL RO OFF)
 
 add_library(VIDEOOBJ OBJECT
 	CVideoModeList.cpp
@@ -238,6 +257,7 @@ target_sources(Irrlicht PRIVATE
 	$<TARGET_OBJECTS:PARTICLEOBJ>
 	$<TARGET_OBJECTS:ANIMOBJ>
 	$<TARGET_OBJECTS:VIDEOOBJ>
+		$<TARGET_OBJECTS:NullDriver>
 		$<TARGET_OBJECTS:DRVROBJ>
 		$<TARGET_OBJECTS:IMAGEOBJ>
 	$<TARGET_OBJECTS:IOOBJ>

@@ -6,8 +6,6 @@
 #define __C_IMAGE_LOADER_PPM_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_PPM_LOADER_
-
 #include "IImageLoader.h"
 #include "irrString.h"
 
@@ -50,5 +48,3 @@ private:
 
 
 #endif
-#endif
-

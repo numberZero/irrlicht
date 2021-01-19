@@ -4,7 +4,6 @@
 
 #include "CImageWriterTGA.h"
 
-#ifdef _IRR_COMPILE_WITH_TGA_WRITER_
 
 #include "CImageLoaderTGA.h"
 #include "IWriteFile.h"
@@ -141,5 +140,4 @@ bool CImageWriterTGA::writeImage(io::IWriteFile *file, IImage *image,u32 param) 
 } // namespace video
 } // namespace irr
 
-#endif
 

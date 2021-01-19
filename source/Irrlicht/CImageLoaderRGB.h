@@ -21,7 +21,6 @@
 #define _IRR_RGB_FILE_INVERTED_IMAGE_
 
 
-#ifdef _IRR_COMPILE_WITH_RGB_LOADER_
 
 #include "IImageLoader.h"
 
@@ -158,6 +157,5 @@ private:
 } // end namespace video
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_RGB_LOADER_
 #endif // __C_IMAGE_LOADER_RGB_H_INCLUDED__
 

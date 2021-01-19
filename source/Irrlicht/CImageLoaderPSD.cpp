@@ -4,8 +4,6 @@
 
 #include "CImageLoaderPSD.h"
 
-#ifdef _IRR_COMPILE_WITH_PSD_LOADER_
-
 #include "IReadFile.h"
 #include "os.h"
 #include "CImage.h"
@@ -370,6 +368,4 @@ IImageLoader* createImageLoaderPSD()
 
 } // end namespace video
 } // end namespace irr
-
-#endif
 

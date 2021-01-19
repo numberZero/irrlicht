@@ -4,7 +4,6 @@
 
 #include "CImageWriterPSD.h"
 
-#ifdef _IRR_COMPILE_WITH_PSD_WRITER_
 
 #include "CImageLoaderPSD.h"
 #include "IWriteFile.h"
@@ -42,5 +41,4 @@ bool CImageWriterPSD::writeImage(io::IWriteFile *file, IImage *image,u32 param) 
 } // namespace video
 } // namespace irr
 
-#endif
 

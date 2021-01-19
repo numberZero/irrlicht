@@ -4,7 +4,6 @@
 
 #include "CImageLoaderTGA.h"
 
-#ifdef _IRR_COMPILE_WITH_TGA_LOADER_
 
 #include "IReadFile.h"
 #include "os.h"
@@ -233,5 +232,4 @@ IImageLoader* createImageLoaderTGA()
 } // end namespace video
 } // end namespace irr
 
-#endif
 

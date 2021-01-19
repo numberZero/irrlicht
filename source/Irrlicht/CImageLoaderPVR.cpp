@@ -4,8 +4,6 @@
 
 #include "CImageLoaderPVR.h"
 
-#ifdef _IRR_COMPILE_WITH_PVR_LOADER_
-
 #include "IReadFile.h"
 #include "os.h"
 #include "CImage.h"
@@ -262,5 +260,3 @@ IImageLoader* createImageLoaderPVR()
 
 }
 }
-
-#endif

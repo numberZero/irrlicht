@@ -6,8 +6,6 @@
 #define __C_IMAGE_LOADER_PVR_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_PVR_LOADER_
-
 #include "IImageLoader.h"
 
 namespace irr
@@ -50,5 +48,4 @@ public:
 }
 }
 
-#endif
 #endif

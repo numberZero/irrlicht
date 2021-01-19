@@ -4,7 +4,6 @@
 
 #include "CImageLoaderPCX.h"
 
-#ifdef _IRR_COMPILE_WITH_PCX_LOADER_
 
 #include "IReadFile.h"
 #include "SColor.h"
@@ -225,5 +224,4 @@ IImageLoader* createImageLoaderPCX()
 } // end namespace video
 } // end namespace irr
 
-#endif
 

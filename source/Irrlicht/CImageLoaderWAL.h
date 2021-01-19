@@ -18,33 +18,6 @@ namespace irr
 namespace video
 {
 
-#ifdef _IRR_COMPILE_WITH_LMP_LOADER_
-
-// byte-align structures
-#include "irrpack.h"
-
-	struct SLMPHeader {
-		u32	width;	// width
-		u32	height;	// height
-		// variably sized
-	} PACK_STRUCT;
-
-// Default alignment
-#include "irrunpack.h"
-
-//! An Irrlicht image loader for Quake1,2 engine lmp textures/palette
-class CImageLoaderLMP : public irr::video::IImageLoader
-{
-public:
-	virtual bool isALoadableFileExtension(const io::path& filename) const _IRR_OVERRIDE_;
-	virtual bool isALoadableFileFormat(irr::io::IReadFile* file) const _IRR_OVERRIDE_;
-	virtual irr::video::IImage* loadImage(irr::io::IReadFile* file) const _IRR_OVERRIDE_;
-};
-
-#endif
-
-#ifdef _IRR_COMPILE_WITH_WAL_LOADER_
-
 //! An Irrlicht image loader for quake2 wal engine textures
 class CImageLoaderWAL : public irr::video::IImageLoader
 {
@@ -90,10 +63,7 @@ public:
 // Default alignment
 #include "irrunpack.h"
 
-#endif
-
 }
 }
 
 #endif
-

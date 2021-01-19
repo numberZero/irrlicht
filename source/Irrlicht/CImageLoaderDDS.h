@@ -6,8 +6,6 @@
 #define __C_IMAGE_LOADER_DDS_H_INCLUDED__
 
 
-#if defined(_IRR_COMPILE_WITH_DDS_LOADER_) || defined(_IRR_COMPILE_WITH_DDS_DECODER_LOADER_)
-
 #include "IImageLoader.h"
 
 namespace irr
@@ -210,5 +208,4 @@ public:
 } // end namespace irr
 
 #endif // compiled with DDS loader
-#endif
 

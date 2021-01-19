@@ -5,9 +5,6 @@
 #ifndef __C_IMAGE_LOADER_JPG_H_INCLUDED__
 #define __C_IMAGE_LOADER_JPG_H_INCLUDED__
 
-
-#ifdef _IRR_COMPILE_WITH_JPG_LOADER_
-
 #include "IImageLoader.h"
 
 #include <stdio.h> // required for jpeglib.h
@@ -111,5 +108,3 @@ private:
 
 
 #endif
-#endif
-

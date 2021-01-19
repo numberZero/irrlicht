@@ -123,7 +123,6 @@ DUMMY -		This 404 bytes of data should be set to 0. This makes the Header exactl
 
 #include "CImageLoaderRGB.h"
 
-#ifdef _IRR_COMPILE_WITH_RGB_LOADER_
 
 #include "IReadFile.h"
 #include "SColor.h"
@@ -647,5 +646,4 @@ IImageLoader* createImageLoaderRGB()
 } // end namespace video
 } // end namespace irr
 
-#endif
 

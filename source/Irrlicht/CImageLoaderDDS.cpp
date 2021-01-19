@@ -14,7 +14,6 @@
 
 #include "CImageLoaderDDS.h"
 
-#if defined(_IRR_COMPILE_WITH_DDS_LOADER_) || defined(_IRR_COMPILE_WITH_DDS_DECODER_LOADER_)
 
 #include "IReadFile.h"
 #include "os.h"
@@ -883,5 +882,4 @@ IImageLoader* createImageLoaderDDS()
 } // end namespace video
 } // end namespace irr
 
-#endif
 

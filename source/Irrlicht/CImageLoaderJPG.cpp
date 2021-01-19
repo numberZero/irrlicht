@@ -4,8 +4,6 @@
 
 #include "CImageLoaderJPG.h"
 
-#ifdef _IRR_COMPILE_WITH_JPG_LOADER_
-
 #include "IReadFile.h"
 #include "CImage.h"
 #include "os.h"
@@ -297,6 +295,3 @@ IImageLoader* createImageLoaderJPG()
 
 } // end namespace video
 } // end namespace irr
-
-#endif
-
