@@ -2,7 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_OCTREE_SCENENODE_
 
 #include "COctreeSceneNode.h"
 #include "Octree.h"
@@ -673,4 +672,3 @@ bool COctreeSceneNode::isReadOnlyMaterials() const
 } // end namespace scene
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_OCTREE_SCENENODE_

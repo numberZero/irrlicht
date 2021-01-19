@@ -3,7 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 // Code for this scene node has been contributed by Anders la Cour-Harbo (alc)
 
-#ifdef _IRR_COMPILE_WITH_SKYDOME_SCENENODE_
 #include "CSkyDomeSceneNode.h"
 #include "IVideoDriver.h"
 #include "ISceneManager.h"
@@ -260,4 +259,3 @@ ISceneNode* CSkyDomeSceneNode::clone(ISceneNode* newParent, ISceneManager* newMa
 } // namespace scene
 } // namespace irr
 
-#endif // _IRR_COMPILE_WITH_SKYDOME_SCENENODE_

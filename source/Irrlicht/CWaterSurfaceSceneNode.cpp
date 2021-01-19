@@ -2,7 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_WATER_SURFACE_SCENENODE_
 #include "CWaterSurfaceSceneNode.h"
 #include "ISceneManager.h"
 #include "IMeshManipulator.h"
@@ -136,4 +135,3 @@ f32 CWaterSurfaceSceneNode::addWave(const core::vector3df &source, f32 time) con
 } // end namespace scene
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_WATER_SURFACE_SCENENODE_

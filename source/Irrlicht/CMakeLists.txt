@@ -62,9 +62,6 @@ AddMeshFormat(X RO ON)
 
 add_library(MESHOBJ OBJECT
 	CMeshSceneNode.cpp
-	)
-
-add_library(AnimatedMeshSceneNode OBJECT
 	CAnimatedMeshSceneNode.cpp
 	)
 
@@ -90,7 +87,7 @@ if(IRRLICHT_SKINNED_MESH)
 		"${CMAKE_CURRENT_SOURCE_DIR}/CBoneSceneNode.cpp"
 		)
 	target_compile_definitions(SceneManager PRIVATE _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_)
-	target_compile_definitions(AnimatedMeshSceneNode PRIVATE _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_)
+	target_compile_definitions(MESHOBJ PRIVATE _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_)
 endif()
 
 if(IRRLICHT_MESH_FORMAT_HALFLIFE)
@@ -113,7 +110,6 @@ if(IRRLICHT_MESH_FORMAT_BSP)
 endif()
 
 add_library(SCENEOBJ OBJECT
-	CBillboardSceneNode.cpp
 	CCameraSceneNode.cpp
 	CDummyTransformationSceneNode.cpp
 	CEmptySceneNode.cpp
@@ -124,18 +120,11 @@ add_library(SCENEOBJ OBJECT
 	COctreeSceneNode.cpp
 	COctreeTriangleSelector.cpp
 	CSceneCollisionManager.cpp
-	CShadowVolumeSceneNode.cpp
 	CSkyBoxSceneNode.cpp
-	CSkyDomeSceneNode.cpp
-	CTerrainSceneNode.cpp
-	CTerrainTriangleSelector.cpp
 	CVolumeLightSceneNode.cpp
-	CCubeSceneNode.cpp
-	CSphereSceneNode.cpp
 	CTextSceneNode.cpp
 	CTriangleBBSelector.cpp
 	CTriangleSelector.cpp
-	CWaterSurfaceSceneNode.cpp
 	CMeshCache.cpp
 	CDefaultSceneNodeAnimatorFactory.cpp
 	CDefaultSceneNodeFactory.cpp
@@ -145,6 +134,36 @@ option(IRRLICHT_SCENE_LOADER "Build with scene load support" OFF)
 if(IRRLICHT_SCENE_LOADER)
 	target_sources(SCENEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CSceneLoaderIrr.cpp")
 	target_compile_definitions(SceneManager PUBLIC "_IRR_COMPILE_WITH_IRR_SCENE_LOADER_")
+endif()
+
+function(AddSceneNode name default)
+	string(REPLACE " " "" classname "${name}")
+	set(classname "C${classname}SceneNode")
+	string(REPLACE " " "_" ucname "${name}")
+	string(TOUPPER "${ucname}" ucname)
+	set(varname "IRRLICHT_SCENE_NODE_${ucname}")
+	option(${varname} "Build with ${name} scene node support" ${default})
+	if(${varname}) # indirect variable reference
+		target_sources(SCENEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${classname}.cpp")
+		target_compile_definitions(SceneManager PRIVATE "_IRR_COMPILE_WITH_${ucname}_SCENENODE_")
+	endif()
+endfunction()
+
+AddSceneNode(Billboard ON)
+AddSceneNode(Cube ON)
+AddSceneNode(Octree OFF)
+AddSceneNode("Shadow Volume" OFF)
+AddSceneNode(SkyDome OFF)
+AddSceneNode(Sphere ON)
+AddSceneNode(Terrain OFF)
+AddSceneNode("Water Surface" OFF)
+
+if(IRRLICHT_SCENE_NODE_TERRAIN)
+	target_sources(SCENEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CTerrainTriangleSelector.cpp")
+endif()
+
+if(IRRLICHT_SCENE_NODE_SHADOW_VOLUME)
+	target_compile_definitions(MESHOBJ PRIVATE _IRR_COMPILE_WITH_SHADOW_VOLUME_SCENENODE_)
 endif()
 
 add_library(PARTICLEOBJ OBJECT
@@ -337,7 +356,6 @@ target_sources(Irrlicht PRIVATE
 		$<TARGET_OBJECTS:MeshFormats>
 	$<TARGET_OBJECTS:SCENEOBJ>
 		$<TARGET_OBJECTS:SceneManager>
-		$<TARGET_OBJECTS:AnimatedMeshSceneNode>
 	$<TARGET_OBJECTS:PARTICLEOBJ>
 	$<TARGET_OBJECTS:ANIMOBJ>
 	$<TARGET_OBJECTS:VIDEOOBJ>

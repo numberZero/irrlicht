@@ -8,7 +8,6 @@
 // go to him.
 
 
-#ifdef _IRR_COMPILE_WITH_TERRAIN_SCENENODE_
 
 #include "CTerrainSceneNode.h"
 #include "CTerrainTriangleSelector.h"
@@ -1514,4 +1513,3 @@ namespace scene
 } // end namespace scene
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_TERRAIN_SCENENODE_

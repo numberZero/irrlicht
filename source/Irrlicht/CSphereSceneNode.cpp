@@ -2,7 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_SPHERE_SCENENODE_
 #include "CSphereSceneNode.h"
 #include "IVideoDriver.h"
 #include "ISceneManager.h"
@@ -202,4 +201,3 @@ ISceneNode* CSphereSceneNode::clone(ISceneNode* newParent, ISceneManager* newMan
 } // end namespace scene
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_SPHERE_SCENENODE_
