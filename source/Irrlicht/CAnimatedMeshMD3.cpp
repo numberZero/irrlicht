@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_MD3_LOADER_
-
 #include "CAnimatedMeshMD3.h"
 #include "os.h"
 
@@ -463,5 +461,3 @@ E_ANIMATED_MESH_TYPE CAnimatedMeshMD3::getMeshType() const
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_MD3_LOADER_

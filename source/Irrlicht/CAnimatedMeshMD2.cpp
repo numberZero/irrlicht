@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_MD2_LOADER_
-
 #include "CAnimatedMeshMD2.h"
 #include "SColor.h"
 #include "irrMath.h"
@@ -460,5 +458,3 @@ const c8* CAnimatedMeshMD2::getAnimationName(s32 nr) const
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_MD2_LOADER_

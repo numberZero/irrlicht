@@ -8,7 +8,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 option(IRRLICHT_MESH_WRITERS "Build with mesh writing support" OFF)
 
 function(AddMeshFormat name mode default)
-	set(varname "IRRLICHT_MESH_FORMAT_${name}")
+	string(TOUPPER "${name}" ucname)
+	set(varname "IRRLICHT_MESH_FORMAT_${ucname}")
 	option(${varname} "Build with ${name} mesh format support" ${default})
 	if(${varname}) # indirect variable reference
 		set(loader_name "C${name}MeshFileLoader")
@@ -16,13 +17,12 @@ function(AddMeshFormat name mode default)
 		if(ARGV3)
 			set(loader_name "${ARGV3}")
 		endif()
-		string(TOUPPER "${name}" ucname)
 		target_sources(MeshFormats PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${loader_name}.cpp")
-		target_compile_definitions(SceneManager PUBLIC "_IRR_COMPILE_WITH_${ucname}_LOADER_")
+		target_compile_definitions(SceneManager PRIVATE "_IRR_COMPILE_WITH_${ucname}_LOADER_")
 		if(mode STREQUAL "RW")
 			if(IRRLICHT_MESH_WRITERS)
 				target_sources(MeshFormats PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${writer_name}.cpp")
-				target_compile_definitions(SceneManager PUBLIC "_IRR_COMPILE_WITH_${ucname}_WRITER_")
+				target_compile_definitions(SceneManager PRIVATE "_IRR_COMPILE_WITH_${ucname}_WRITER_")
 			endif()
 		elseif(mode STREQUAL "RO")
 		else()
@@ -65,12 +65,26 @@ add_library(MESHOBJ OBJECT
 	CBoneSceneNode.cpp
 	CMeshSceneNode.cpp
 	CAnimatedMeshSceneNode.cpp
-	CAnimatedMeshMD2.cpp
-	CAnimatedMeshMD3.cpp
-	CQ3LevelMesh.cpp
-	CQuake3ShaderSceneNode.cpp
-	CAnimatedMeshHalfLife.cpp
 	)
+
+if(IRRLICHT_MESH_FORMAT_HALFLIFE)
+	target_sources(MESHOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CAnimatedMeshHalfLife.cpp")
+endif()
+
+if(IRRLICHT_MESH_FORMAT_MD2)
+	target_sources(MESHOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CAnimatedMeshMD2.cpp")
+endif()
+
+if(IRRLICHT_MESH_FORMAT_MD3)
+	target_sources(MESHOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CAnimatedMeshMD3.cpp")
+endif()
+
+if(IRRLICHT_MESH_FORMAT_BSP)
+	target_sources(MESHOBJ PUBLIC
+		"${CMAKE_CURRENT_SOURCE_DIR}/CQ3LevelMesh.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CQuake3ShaderSceneNode.cpp"
+		)
+endif()
 
 add_library(SCENEOBJ OBJECT
 	CBillboardSceneNode.cpp
@@ -167,11 +181,11 @@ function(AddImageFormat name mode default)
 	option(${varname} "Build with ${name} image format support" ${default})
 	if(${varname}) # indirect variable reference
 		target_sources(IMAGEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CImageLoader${name}.cpp")
-		target_compile_definitions(NullDriver PUBLIC "_IRR_COMPILE_WITH_${name}_LOADER_")
+		target_compile_definitions(NullDriver PRIVATE "_IRR_COMPILE_WITH_${name}_LOADER_")
 		if(mode STREQUAL "RW")
 			if(IRRLICHT_IMAGE_WRITERS)
 				target_sources(IMAGEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CImageWriter${name}.cpp")
-				target_compile_definitions(NullDriver PUBLIC "_IRR_COMPILE_WITH_${name}_WRITER_")
+				target_compile_definitions(NullDriver PRIVATE "_IRR_COMPILE_WITH_${name}_WRITER_")
 			endif()
 		elseif(mode STREQUAL "RO")
 		else()
