@@ -1,6 +1,8 @@
 include_directories(${CMAKE_SOURCE_DIR}/include)
 add_definitions(-DIRRLICHT_EXPORTS=1)
-add_compile_options(-Wall -pipe -fno-exceptions -fno-rtti -fstrict-aliasing)
+if(GCC OR CLANG)
+	add_compile_options(-Wall -pipe -fno-exceptions -fno-rtti -fstrict-aliasing -fvisibility=hidden)
+endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 add_library(MESHLOADER OBJECT

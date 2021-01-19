@@ -8,7 +8,6 @@
 #include "IFileSystem.h"
 #include "IGUIEnvironment.h"
 #include "os.h"
-#include "IrrCompileConfig.h"
 #include "CTimer.h"
 #include "CLogger.h"
 #include "irrString.h"

@@ -19,6 +19,7 @@
 #include "CColorConverter.h"
 #include "SIrrCreationParameters.h"
 #include "IGUISpriteBank.h"
+#include <utf8.h>
 
 #if defined _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
 #include <fcntl.h>
@@ -35,7 +36,6 @@
 #define _INPUT_H
 #include <sys/ioctl.h> // Would normally be included in linux/input.h
 #include <linux/joystick.h>
-#include <utf8.h>
 #undef _INPUT_H
 #endif
 

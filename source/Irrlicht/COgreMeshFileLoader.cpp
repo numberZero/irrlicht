@@ -3,7 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 // Originally written by Christian Stehno, modified by Nikolaus Gebhardt
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_OGRE_LOADER_
 
 #include "COgreMeshFileLoader.h"

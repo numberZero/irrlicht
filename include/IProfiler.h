@@ -5,7 +5,6 @@
 #ifndef __I_PROFILER_H_INCLUDED__
 #define __I_PROFILER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 #include "irrString.h"
 #include "irrArray.h"
 #include "ITimer.h"

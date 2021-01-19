@@ -5,7 +5,6 @@
 #ifndef __C_PAK_READER_H_INCLUDED__
 #define __C_PAK_READER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef __IRR_COMPILE_WITH_PAK_ARCHIVE_LOADER_
 

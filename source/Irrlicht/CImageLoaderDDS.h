@@ -5,7 +5,6 @@
 #ifndef __C_IMAGE_LOADER_DDS_H_INCLUDED__
 #define __C_IMAGE_LOADER_DDS_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #if defined(_IRR_COMPILE_WITH_DDS_LOADER_) || defined(_IRR_COMPILE_WITH_DDS_DECODER_LOADER_)
 

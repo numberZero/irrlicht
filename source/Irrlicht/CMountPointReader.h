@@ -5,7 +5,6 @@
 #ifndef __C_MOUNT_READER_H_INCLUDED__
 #define __C_MOUNT_READER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef __IRR_COMPILE_WITH_MOUNT_ARCHIVE_LOADER_
 

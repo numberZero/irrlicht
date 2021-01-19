@@ -83,7 +83,7 @@ namespace video
 #endif
 #endif
 		//! Only used internally
-		ETS_COUNT = ETS_TEXTURE_0 + _IRR_MATERIAL_MAX_TEXTURES_
+		ETS_COUNT = ETS_TEXTURE_0 + MATERIAL_MAX_TEXTURES
 	};
 
 	//! Special render targets, which usually map to dedicated hardware

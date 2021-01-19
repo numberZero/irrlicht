@@ -7,7 +7,6 @@
 // distributed under this licence. I only modified some parts. A lot of thanks
 // go to him.
 
-#include "IrrCompileConfig.h"
 
 #ifdef _IRR_COMPILE_WITH_TERRAIN_SCENENODE_
 

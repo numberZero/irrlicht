@@ -5,7 +5,6 @@
 #ifndef __C_WAD_READER_H_INCLUDED__
 #define __C_WAD_READER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 #ifdef __IRR_COMPILE_WITH_WAD_ARCHIVE_LOADER_
 
 #include "IReferenceCounted.h"

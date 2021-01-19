@@ -9,7 +9,6 @@
 //
 // See the header file for additional information including use and distribution rights.
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_OCT_LOADER_
 
 #include "COCTLoader.h"

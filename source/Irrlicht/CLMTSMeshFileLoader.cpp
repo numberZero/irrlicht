@@ -65,7 +65,6 @@ Version 1.0 - 29 July 2004
 */
 //////////////////////////////////////////////////////////////////////
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_LMTS_LOADER_
 
 #include "CLMTSMeshFileLoader.h"

@@ -3,7 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 // Code contributed by skreamz
 
-#include "IrrCompileConfig.h"
 
 #ifdef __IRR_COMPILE_WITH_WAD_ARCHIVE_LOADER_
 

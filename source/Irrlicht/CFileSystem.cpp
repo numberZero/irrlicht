@@ -2,7 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#include "IrrCompileConfig.h"
 
 #include "CFileSystem.h"
 #include "IReadFile.h"
@@ -35,16 +34,14 @@
 		#include <io.h> // for _access
 		#include <tchar.h>
 	#endif
-#elif (defined(_IRR_POSIX_API_) || defined(_IRR_OSX_PLATFORM_) || defined(_IRR_IOS_PLATFORM_) || defined(_IRR_ANDROID_PLATFORM_))
-		#include <stdio.h>
-		#include <stdlib.h>
-		#include <string.h>
-		#include <limits.h>
-		#include <sys/types.h>
-		#include <dirent.h>
-		#include <sys/stat.h>
-		#include <unistd.h>
-#elif defined(_IRR_EMSCRIPTEN_PLATFORM_)
+#else
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	#include <limits.h>
+	#include <sys/types.h>
+	#include <dirent.h>
+	#include <sys/stat.h>
 	#include <unistd.h>
 #endif
 

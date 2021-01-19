@@ -4,7 +4,6 @@
 
 #include "os.h"
 #include "irrString.h"
-#include "IrrCompileConfig.h"
 #include "irrMath.h"
 
 #include <SDL2/SDL_endian.h>

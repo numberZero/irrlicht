@@ -4,7 +4,6 @@
 #ifndef E_PROFILE_IDS_H_INCLUDED__
 #define E_PROFILE_IDS_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 #include "limits.h"
 
 namespace irr

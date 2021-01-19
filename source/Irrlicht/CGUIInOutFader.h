@@ -5,7 +5,6 @@
 #ifndef __C_GUI_IN_OUT_FADER_H_INCLUDED__
 #define __C_GUI_IN_OUT_FADER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUIInOutFader.h"

@@ -5,7 +5,6 @@
 #ifndef __C_ZIP_READER_H_INCLUDED__
 #define __C_ZIP_READER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef __IRR_COMPILE_WITH_ZIP_ARCHIVE_LOADER_
 

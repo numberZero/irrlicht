@@ -5,6 +5,7 @@
 #ifndef __IRR_STRING_H_INCLUDED__
 #define __IRR_STRING_H_INCLUDED__
 
+#include "irr.h"
 #include "irrTypes.h"
 #include "irrAllocator.h"
 #include "irrMath.h"

@@ -5,7 +5,6 @@
 #ifndef __C_IMAGE_LOADER_PVR_H_INCLUDED__
 #define __C_IMAGE_LOADER_PVR_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef _IRR_COMPILE_WITH_PVR_LOADER_
 

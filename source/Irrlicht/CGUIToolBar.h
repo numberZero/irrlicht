@@ -5,7 +5,6 @@
 #ifndef __C_GUI_TOOL_BAR_H_INCLUDED__
 #define __C_GUI_TOOL_BAR_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUIToolbar.h"

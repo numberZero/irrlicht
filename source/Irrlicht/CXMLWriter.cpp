@@ -8,7 +8,6 @@
 
 #include <wchar.h>
 #include "irrString.h"
-#include "IrrCompileConfig.h"
 
 namespace irr
 {

@@ -5,8 +5,6 @@
 #ifndef __C_IRR_DEVICE_LINUX_H_INCLUDED__
 #define __C_IRR_DEVICE_LINUX_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
-
 #include "CIrrDeviceStub.h"
 #include "IrrlichtDevice.h"
 #include "IImagePresenter.h"
@@ -291,7 +289,6 @@ namespace irr
 
 			gui::ECURSOR_PLATFORM_BEHAVIOR PlatformBehavior;
 			u32 lastQuery;
-			Cursor invisCursor;
 
 			struct CursorFrameX11
 			{

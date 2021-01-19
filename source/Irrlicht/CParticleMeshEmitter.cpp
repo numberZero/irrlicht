@@ -4,7 +4,6 @@
 
 #include "CParticleMeshEmitter.h"
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_PARTICLES_
 
 #include "os.h"

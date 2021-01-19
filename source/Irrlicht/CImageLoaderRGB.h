@@ -20,7 +20,6 @@
 // commenting this out will invert the inverted image,resulting in the image being upright
 #define _IRR_RGB_FILE_INVERTED_IMAGE_
 
-#include "IrrCompileConfig.h"
 
 #ifdef _IRR_COMPILE_WITH_RGB_LOADER_
 

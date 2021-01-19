@@ -6,7 +6,6 @@
 #ifndef __C_NPK_READER_H_INCLUDED__
 #define __C_NPK_READER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef __IRR_COMPILE_WITH_NPK_ARCHIVE_LOADER_
 

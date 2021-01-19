@@ -8,7 +8,6 @@
 // This tool created by ZDimitor everyone can use it as wants
 //-----------------------------------------------------------------------------
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_MY3D_LOADER_
 
 #include "CMY3DMeshFileLoader.h"

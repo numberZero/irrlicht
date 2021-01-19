@@ -5,7 +5,6 @@
 #ifndef __S_VIDEO_2_SOFTWARE_COMPILE_CONFIG_H_INCLUDED__
 #define __S_VIDEO_2_SOFTWARE_COMPILE_CONFIG_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 // Generic Render Flags for burning's video rasterizer
 // defined now in irrlicht compile config

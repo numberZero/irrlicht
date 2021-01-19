@@ -4,7 +4,6 @@
 
 // TODO: replace printf's by logging messages
 
-#include "IrrCompileConfig.h"
 
 #ifdef _IRR_COMPILE_WITH_B3D_WRITER_
 

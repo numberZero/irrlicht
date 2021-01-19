@@ -280,7 +280,7 @@ namespace video
 	/** SMaterial might ignore some textures in most function, like assignment and comparison,
 		when SIrrlichtCreationParameters::MaxTextureUnits is set to a lower number.
 	*/
-	const u32 MATERIAL_MAX_TEXTURES = _IRR_MATERIAL_MAX_TEXTURES_;
+	constexpr u32 MATERIAL_MAX_TEXTURES = 2;
 
 	//! By default this is identical to MATERIAL_MAX_TEXTURES
 	/** Users can modify this value if they are certain they don't need all

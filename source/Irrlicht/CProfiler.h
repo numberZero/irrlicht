@@ -5,7 +5,6 @@
 #ifndef __C_PROFILER_H_INCLUDED__
 #define __C_PROFILER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 #include "IProfiler.h"
 
 namespace irr

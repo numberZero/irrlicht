@@ -5,7 +5,6 @@
 #ifndef _C_IMAGE_WRITER_PSD_H_INCLUDED__
 #define _C_IMAGE_WRITER_PSD_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef _IRR_COMPILE_WITH_PSD_WRITER_
 

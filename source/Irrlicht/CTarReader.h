@@ -5,7 +5,6 @@
 #ifndef __C_TAR_READER_H_INCLUDED__
 #define __C_TAR_READER_H_INCLUDED__
 
-#include "IrrCompileConfig.h"
 
 #ifdef __IRR_COMPILE_WITH_TAR_ARCHIVE_LOADER_
 

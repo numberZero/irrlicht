@@ -4,8 +4,6 @@
 
 #ifndef __LEAK_HUNTER_INCLUDEED__
 
-#include "IrrCompileConfig.h"
-
 #ifdef _IRR_COMPILE_WITH_LEAK_HUNTER_
 
 #include "irrArray.h"

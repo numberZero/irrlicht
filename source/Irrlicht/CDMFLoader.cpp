@@ -13,7 +13,6 @@
   See the header file for additional information including use and distribution rights.
 */
 
-#include "IrrCompileConfig.h"
 #ifdef _IRR_COMPILE_WITH_DMF_LOADER_
 
 #ifdef _DEBUG
