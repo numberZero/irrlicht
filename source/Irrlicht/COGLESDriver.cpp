@@ -149,43 +149,24 @@ void COGLES1Driver::createMaterialRenderers()
 {
 	// create OGLES1 material renderers
 
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID_2_LAYER(this));
-
-	// add the same renderer for all lightmap types
-	COGLES1MaterialRenderer_LIGHTMAP* lmr = new COGLES1MaterialRenderer_LIGHTMAP(this);
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_ADD:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_M2:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_M4:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_LIGHTING:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_LIGHTING_M2:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_LIGHTING_M4:
-	lmr->drop();
-
-	// add remaining material renderer
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_DETAIL_MAP(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SPHERE_MAP(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_REFLECTION_2_LAYER(this));
+	auto solid = new COGLES1MaterialRenderer_SOLID(this);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	solid->drop();
 	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_TRANSPARENT_ADD_COLOR(this));
 	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_TRANSPARENT_ALPHA_CHANNEL(this));
 	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_TRANSPARENT_ALPHA_CHANNEL_REF(this));
 	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_TRANSPARENT_VERTEX_ALPHA(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_TRANSPARENT_REFLECTION_2_LAYER(this));
-
-	// add normal map renderers
-// TODO ogl-es
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-
-	// add parallax map renderers
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_SOLID(this));
-
-	// add basic 1 texture blending
-	addAndDropMaterialRenderer(new COGLES1MaterialRenderer_ONETEXTURE_BLEND(this));
 }
 
 bool COGLES1Driver::beginScene(u16 clearFlag, SColor clearColor, f32 clearDepth, u8 clearStencil, const SExposedVideoData& videoData, core::rect<s32>* sourceRect)
@@ -1786,9 +1767,7 @@ void COGLES1Driver::setBasicRenderStates(const SMaterial& material, const SMater
 	}
 
 	// Blend Factor
-	if (IR(material.BlendFactor) & 0xFFFFFFFF	// TODO: why the & 0xFFFFFFFF?
-			&& material.MaterialType != EMT_ONETEXTURE_BLEND
-		)
+	if (IR(material.BlendFactor) & 0xFFFFFFFF)	// TODO: why the & 0xFFFFFFFF?
 	{
 		E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
 		E_BLEND_FACTOR dstRGBFact = EBF_ZERO;

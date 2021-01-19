@@ -58,17 +58,10 @@ COpenGLSLMaterialRenderer::COpenGLSLMaterialRenderer(video::COpenGLDriver* drive
 	{
 	case EMT_TRANSPARENT_VERTEX_ALPHA:
 	case EMT_TRANSPARENT_ALPHA_CHANNEL:
-	case EMT_NORMAL_MAP_TRANSPARENT_VERTEX_ALPHA:
-	case EMT_PARALLAX_MAP_TRANSPARENT_VERTEX_ALPHA:
 		Alpha = true;
 		break;
 	case EMT_TRANSPARENT_ADD_COLOR:
-	case EMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR:
-	case EMT_PARALLAX_MAP_TRANSPARENT_ADD_COLOR:
 		FixedBlending = true;
-		break;
-	case EMT_ONETEXTURE_BLEND:
-		Blending = true;
 		break;
 	case EMT_TRANSPARENT_ALPHA_CHANNEL_REF:
 		AlphaTest = true;
@@ -98,17 +91,10 @@ COpenGLSLMaterialRenderer::COpenGLSLMaterialRenderer(COpenGLDriver* driver,
 	{
 	case EMT_TRANSPARENT_VERTEX_ALPHA:
 	case EMT_TRANSPARENT_ALPHA_CHANNEL:
-	case EMT_NORMAL_MAP_TRANSPARENT_VERTEX_ALPHA:
-	case EMT_PARALLAX_MAP_TRANSPARENT_VERTEX_ALPHA:
 		Alpha = true;
 		break;
 	case EMT_TRANSPARENT_ADD_COLOR:
-	case EMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR:
-	case EMT_PARALLAX_MAP_TRANSPARENT_ADD_COLOR:
 		FixedBlending = true;
-		break;
-	case EMT_ONETEXTURE_BLEND:
-		Blending = true;
 		break;
 	case EMT_TRANSPARENT_ALPHA_CHANNEL_REF:
 		AlphaTest = true;

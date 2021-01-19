@@ -13,8 +13,6 @@
 #include "COpenGLMaterialRenderer.h"
 #include "COpenGLShaderMaterialRenderer.h"
 #include "COpenGLSLMaterialRenderer.h"
-#include "COpenGLNormalMapRenderer.h"
-#include "COpenGLParallaxMapRenderer.h"
 
 #include "COpenGLCoreTexture.h"
 #include "COpenGLCoreRenderTarget.h"
@@ -188,50 +186,24 @@ void COpenGLDriver::createMaterialRenderers()
 {
 	// create OpenGL material renderers
 
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_SOLID(this));
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_SOLID_2_LAYER(this));
-
-	// add the same renderer for all lightmap types
-	COpenGLMaterialRenderer_LIGHTMAP* lmr = new COpenGLMaterialRenderer_LIGHTMAP(this);
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_ADD:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_M2:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_M4:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_LIGHTING:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_LIGHTING_M2:
-	addMaterialRenderer(lmr); // for EMT_LIGHTMAP_LIGHTING_M4:
-	lmr->drop();
-
-	// add remaining material renderer
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_DETAIL_MAP(this));
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_SPHERE_MAP(this));
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_REFLECTION_2_LAYER(this));
+	auto solid = new COpenGLMaterialRenderer_SOLID(this);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid); // EMT_SOLID_2_LAYERS
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP:
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP_ADD:
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP_M2:
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP_M4:
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP_LIGHTING:
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP_LIGHTING_M2:
+	addMaterialRenderer(solid); // for EMT_LIGHTMAP_LIGHTING_M4:
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
+	addMaterialRenderer(solid);
 	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_TRANSPARENT_ADD_COLOR(this));
 	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_TRANSPARENT_ALPHA_CHANNEL(this));
 	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_TRANSPARENT_ALPHA_CHANNEL_REF(this));
 	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_TRANSPARENT_VERTEX_ALPHA(this));
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_TRANSPARENT_REFLECTION_2_LAYER(this));
-
-	// add normal map renderers
-	s32 tmp = 0;
-	video::IMaterialRenderer* renderer = 0;
-	renderer = new COpenGLNormalMapRenderer(this, tmp, EMT_SOLID);
-	renderer->drop();
-	renderer = new COpenGLNormalMapRenderer(this, tmp, EMT_TRANSPARENT_ADD_COLOR);
-	renderer->drop();
-	renderer = new COpenGLNormalMapRenderer(this, tmp, EMT_TRANSPARENT_VERTEX_ALPHA);
-	renderer->drop();
-
-	// add parallax map renderers
-	renderer = new COpenGLParallaxMapRenderer(this, tmp, EMT_SOLID);
-	renderer->drop();
-	renderer = new COpenGLParallaxMapRenderer(this, tmp, EMT_TRANSPARENT_ADD_COLOR);
-	renderer->drop();
-	renderer = new COpenGLParallaxMapRenderer(this, tmp, EMT_TRANSPARENT_VERTEX_ALPHA);
-	renderer->drop();
-
-	// add basic 1 texture blending
-	addAndDropMaterialRenderer(new COpenGLMaterialRenderer_ONETEXTURE_BLEND(this));
+	solid->drop();
 }
 
 bool COpenGLDriver::beginScene(u16 clearFlag, SColor clearColor, f32 clearDepth, u8 clearStencil, const SExposedVideoData& videoData, core::rect<s32>* sourceRect)
@@ -1090,17 +1062,7 @@ void COpenGLDriver::draw2DVertexPrimitiveList(const void* vertices, u32 vertexCo
 
 	// draw everything
 	CacheHandler->getTextureCache().set(0, Material.getTexture(0));
-	if (Material.MaterialType==EMT_ONETEXTURE_BLEND)
-	{
-		E_BLEND_FACTOR srcFact;
-		E_BLEND_FACTOR dstFact;
-		E_MODULATE_FUNC modulo;
-		u32 alphaSource;
-		unpack_textureBlendFunc ( srcFact, dstFact, modulo, alphaSource, Material.MaterialTypeParam);
-		setRenderStates2DMode(alphaSource&video::EAS_VERTEX_COLOR, (Material.getTexture(0) != 0), (alphaSource&video::EAS_TEXTURE) != 0);
-	}
-	else
-		setRenderStates2DMode(Material.MaterialType==EMT_TRANSPARENT_VERTEX_ALPHA, (Material.getTexture(0) != 0), Material.MaterialType==EMT_TRANSPARENT_ALPHA_CHANNEL);
+	setRenderStates2DMode(Material.MaterialType==EMT_TRANSPARENT_VERTEX_ALPHA, (Material.getTexture(0) != 0), Material.MaterialType==EMT_TRANSPARENT_ALPHA_CHANNEL);
 
 	if ((pType!=scene::EPT_POINTS) && (pType!=scene::EPT_POINT_SPRITES))
 		CacheHandler->setClientState(true, false, true, true);
@@ -2528,9 +2490,7 @@ void COpenGLDriver::setBasicRenderStates(const SMaterial& material, const SMater
 	}
 
 	// Blend Factor
-	if (IR(material.BlendFactor) & 0xFFFFFFFF	// TODO: why the & 0xFFFFFFFF?
-		&& material.MaterialType != EMT_ONETEXTURE_BLEND
-		)
+	if (IR(material.BlendFactor) & 0xFFFFFFFF)	// TODO: why the & 0xFFFFFFFF?
 	{
 		E_BLEND_FACTOR srcRGBFact = EBF_ZERO;
 		E_BLEND_FACTOR dstRGBFact = EBF_ZERO;
