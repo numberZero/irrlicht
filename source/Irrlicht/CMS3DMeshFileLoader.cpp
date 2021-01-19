@@ -3,8 +3,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_MS3D_LOADER_
-
 #include "IReadFile.h"
 #include "os.h"
 #include "CMS3DMeshFileLoader.h"
@@ -867,5 +865,3 @@ core::stringc CMS3DMeshFileLoader::stripPathFromString(const core::stringc& inSt
 
 } // end namespace scene
 } // end namespace irr
-
-#endif

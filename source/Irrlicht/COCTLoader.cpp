@@ -9,8 +9,6 @@
 //
 // See the header file for additional information including use and distribution rights.
 
-#ifdef _IRR_COMPILE_WITH_OCT_LOADER_
-
 #include "COCTLoader.h"
 #include "CMeshTextureLoader.h"
 #include "IVideoDriver.h"
@@ -329,6 +327,4 @@ bool COCTLoader::isALoadableFileExtension(const io::path& filename) const
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_OCT_LOADER_
 

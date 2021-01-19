@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_IRR_MESH_LOADER_
-
 #include "CIrrMeshFileLoader.h"
 #include "os.h"
 #include "IXMLReader.h"
@@ -551,5 +549,3 @@ void CIrrMeshFileLoader::readFloatsInsideElement(io::IXMLReader* reader, f32* fl
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_IRR_MESH_LOADER_

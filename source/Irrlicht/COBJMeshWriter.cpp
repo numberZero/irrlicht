@@ -3,8 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 
-#ifdef _IRR_COMPILE_WITH_OBJ_WRITER_
-
 #include "COBJMeshWriter.h"
 #include "os.h"
 #include "IMesh.h"
@@ -276,6 +274,4 @@ void COBJMeshWriter::getColorAsStringLine(const video::SColor& color, const c8* 
 
 } // end namespace
 } // end namespace
-
-#endif
 

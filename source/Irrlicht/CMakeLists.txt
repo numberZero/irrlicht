@@ -5,38 +5,60 @@ if(GCC OR CLANG)
 endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
-add_library(MESHLOADER OBJECT
-	CBSPMeshFileLoader.cpp
-	CMD2MeshFileLoader.cpp
-	CMD3MeshFileLoader.cpp
-	CMS3DMeshFileLoader.cpp
-	CB3DMeshFileLoader.cpp
-	C3DSMeshFileLoader.cpp
-	COgreMeshFileLoader.cpp
-	COBJMeshFileLoader.cpp
-	CColladaFileLoader.cpp
-	CCSMLoader.cpp
-	CDMFLoader.cpp
-	CLMTSMeshFileLoader.cpp
-	CMY3DMeshFileLoader.cpp
-	COCTLoader.cpp
-	CXMeshFileLoader.cpp
-	CIrrMeshFileLoader.cpp
-	CSTLMeshFileLoader.cpp
-	CLWOMeshFileLoader.cpp
-	CPLYMeshFileLoader.cpp
-	CSMFMeshFileLoader.cpp
+option(IRRLICHT_MESH_WRITERS "Build with mesh writing support" OFF)
+
+function(AddMeshFormat name mode default)
+	set(varname "IRRLICHT_MESH_FORMAT_${name}")
+	option(${varname} "Build with ${name} mesh format support" ${default})
+	if(${varname}) # indirect variable reference
+		set(loader_name "C${name}MeshFileLoader")
+		set(writer_name "C${name}MeshWriter")
+		if(ARGV3)
+			set(loader_name "${ARGV3}")
+		endif()
+		string(TOUPPER "${name}" ucname)
+		target_sources(MeshFormats PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${loader_name}.cpp")
+		target_compile_definitions(SceneManager PUBLIC "_IRR_COMPILE_WITH_${ucname}_LOADER_")
+		if(mode STREQUAL "RW")
+			if(IRRLICHT_MESH_WRITERS)
+				target_sources(MeshFormats PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${writer_name}.cpp")
+				target_compile_definitions(SceneManager PUBLIC "_IRR_COMPILE_WITH_${ucname}_WRITER_")
+			endif()
+		elseif(mode STREQUAL "RO")
+		else()
+			message(SEND_ERROR "Invalid mesh format support mode: [${mode}]")
+		endif()
+	endif()
+endfunction()
+
+add_library(MeshFormats OBJECT
 	CMeshTextureLoader.cpp
 	)
 
-add_library(MESHWRITER OBJECT
-	CColladaMeshWriter.cpp
-	CIrrMeshWriter.cpp
-	CSTLMeshWriter.cpp
-	COBJMeshWriter.cpp
-	CPLYMeshWriter.cpp
-	CB3DMeshWriter.cpp
+add_library(SceneManager OBJECT
+	CSceneManager.cpp
 	)
+
+AddMeshFormat(3DS RO ON)
+AddMeshFormat(B3D RW ON)
+AddMeshFormat(BSP RO OFF)
+AddMeshFormat(CSM RO OFF "CCSMLoader")
+AddMeshFormat(Collada RW OFF "CColladaFileLoader")
+AddMeshFormat(DMF RO OFF "CDMFLoader")
+AddMeshFormat(Irr RW OFF)
+AddMeshFormat(LMTS RO OFF)
+AddMeshFormat(LWO RO OFF)
+AddMeshFormat(MD2 RO OFF)
+AddMeshFormat(MD3 RO OFF)
+AddMeshFormat(MS3D RO OFF)
+AddMeshFormat(MY3D RO OFF)
+AddMeshFormat(OBJ RW ON)
+AddMeshFormat(OCT RO OFF "COCTLoader")
+AddMeshFormat(Ogre RO OFF)
+AddMeshFormat(PLY RW OFF)
+AddMeshFormat(SMF RO OFF)
+AddMeshFormat(STL RW OFF)
+AddMeshFormat(X RO ON)
 
 add_library(MESHOBJ OBJECT
 	CSkinnedMesh.cpp
@@ -62,7 +84,6 @@ add_library(SCENEOBJ OBJECT
 	COctreeSceneNode.cpp
 	COctreeTriangleSelector.cpp
 	CSceneCollisionManager.cpp
-	CSceneManager.cpp
 	CShadowVolumeSceneNode.cpp
 	CSkyBoxSceneNode.cpp
 	CSkyDomeSceneNode.cpp
@@ -135,7 +156,6 @@ add_library(IMAGEOBJ OBJECT
 	)
 
 option(IRRLICHT_IMAGE_WRITERS "Build with image writing support" ON)
-option(IRRLICHT_MESH_WRITERS "Build with mesh writing support" OFF)
 
 function(AddImageFormat name mode default)
 	set(varname "IRRLICHT_IMAGE_FORMAT_${name}")
@@ -251,9 +271,9 @@ add_library(Irrlicht SHARED
 
 target_sources(Irrlicht PRIVATE
 	$<TARGET_OBJECTS:MESHOBJ>
-		$<TARGET_OBJECTS:MESHLOADER>
-		$<TARGET_OBJECTS:MESHWRITER>
+		$<TARGET_OBJECTS:MeshFormats>
 	$<TARGET_OBJECTS:SCENEOBJ>
+		$<TARGET_OBJECTS:SceneManager>
 	$<TARGET_OBJECTS:PARTICLEOBJ>
 	$<TARGET_OBJECTS:ANIMOBJ>
 	$<TARGET_OBJECTS:VIDEOOBJ>

@@ -6,8 +6,6 @@
 // File format designed by Mark Sibly for the Blitz3D engine and has been
 // declared public domain
 
-#ifdef _IRR_COMPILE_WITH_B3D_LOADER_
-
 #include "CB3DMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 
@@ -1100,6 +1098,4 @@ void CB3DMeshFileLoader::readFloats(f32* vec, u32 count)
 } // end namespace scene
 } // end namespace irr
 
-
-#endif // _IRR_COMPILE_WITH_B3D_LOADER_
 

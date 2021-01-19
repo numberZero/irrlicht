@@ -3,8 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 
-#ifdef _IRR_COMPILE_WITH_PLY_WRITER_
-
 #include "CPLYMeshWriter.h"
 #include "os.h"
 #include "IMesh.h"
@@ -214,6 +212,4 @@ bool CPLYMeshWriter::writeMesh(io::IWriteFile* file, scene::IMesh* mesh, s32 fla
 
 } // end namespace
 } // end namespace
-
-#endif // _IRR_COMPILE_WITH_PLY_WRITER_
 

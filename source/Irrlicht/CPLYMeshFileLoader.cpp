@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_PLY_LOADER_
-
 #include "CPLYMeshFileLoader.h"
 #include "IMeshManipulator.h"
 #include "SMesh.h"
@@ -815,6 +813,4 @@ u32 CPLYMeshFileLoader::getInt(E_PLY_PROPERTY_TYPE t)
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_PLY_LOADER_
 

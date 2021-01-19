@@ -3,8 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 
-#ifdef _IRR_COMPILE_WITH_SMF_LOADER_
-
 #include "CSMFMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 #include "SAnimatedMesh.h"
@@ -236,6 +234,3 @@ void BinaryFile::read(io::IReadFile* file, core::stringc &outString, bool bigEnd
 } // namespace io
 
 } // namespace irr
-
-#endif // compile with SMF loader
-

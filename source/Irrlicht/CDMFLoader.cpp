@@ -13,8 +13,6 @@
   See the header file for additional information including use and distribution rights.
 */
 
-#ifdef _IRR_COMPILE_WITH_DMF_LOADER_
-
 #ifdef _DEBUG
 #define _IRR_DMF_DEBUG_
 #include "os.h"
@@ -425,6 +423,4 @@ bool CDMFLoader::isALoadableFileExtension(const io::path& filename) const
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_DMF_LOADER_
 

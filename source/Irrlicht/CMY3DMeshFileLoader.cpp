@@ -8,8 +8,6 @@
 // This tool created by ZDimitor everyone can use it as wants
 //-----------------------------------------------------------------------------
 
-#ifdef _IRR_COMPILE_WITH_MY3D_LOADER_
-
 #include "CMY3DMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 
@@ -880,6 +878,4 @@ const core::array<ISceneNode*>& CMY3DMeshFileLoader::getChildNodes() const
 
 } // end namespace scnene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_MY3D_LOADER_
 

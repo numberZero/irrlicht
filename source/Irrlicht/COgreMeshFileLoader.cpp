@@ -3,8 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 // Originally written by Christian Stehno, modified by Nikolaus Gebhardt
 
-#ifdef _IRR_COMPILE_WITH_OGRE_LOADER_
-
 #include "COgreMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 #include "os.h"
@@ -1601,6 +1599,4 @@ void COgreMeshFileLoader::clearMeshes()
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_OGRE_LOADER_
 

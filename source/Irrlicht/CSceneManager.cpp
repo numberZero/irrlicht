@@ -25,7 +25,7 @@
 #include "CSkinnedMesh.h"
 #endif
 
-#ifdef _IRR_COMPILE_WITH_IRR_MESH_LOADER_
+#ifdef _IRR_COMPILE_WITH_IRR_LOADER_
 #include "CIrrMeshFileLoader.h"
 #endif
 
@@ -303,7 +303,7 @@ CSceneManager::CSceneManager(video::IVideoDriver* driver, io::IFileSystem* fs,
 	#ifdef _IRR_COMPILE_WITH_MD2_LOADER_
 	MeshLoaderList.push_back(new CMD2MeshFileLoader());
 	#endif
-	#ifdef _IRR_COMPILE_WITH_IRR_MESH_LOADER_
+	#ifdef _IRR_COMPILE_WITH_IRR_LOADER_
 	MeshLoaderList.push_back(new CIrrMeshFileLoader(this, FileSystem));
 	#endif
 	#ifdef _IRR_COMPILE_WITH_BSP_LOADER_

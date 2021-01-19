@@ -5,8 +5,6 @@
 // TODO: second UV-coordinates currently ignored in textures
 
 
-#ifdef _IRR_COMPILE_WITH_COLLADA_WRITER_
-
 #include "CColladaMeshWriter.h"
 #include "os.h"
 #include "IFileSystem.h"
@@ -2303,6 +2301,4 @@ void CColladaMeshWriter::writeMatrixElement(const irr::core::matrix4& matrixIrr)
 
 } // end namespace
 } // end namespace
-
-#endif
 

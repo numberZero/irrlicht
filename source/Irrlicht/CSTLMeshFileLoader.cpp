@@ -3,8 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 
-#ifdef _IRR_COMPILE_WITH_STL_LOADER_
-
 #include "CSTLMeshFileLoader.h"
 #include "SMesh.h"
 #include "SMeshBuffer.h"
@@ -247,6 +245,4 @@ void CSTLMeshFileLoader::goNextLine(io::IReadFile* file) const
 } // end namespace scene
 } // end namespace irr
 
-
-#endif // _IRR_COMPILE_WITH_STL_LOADER_
 

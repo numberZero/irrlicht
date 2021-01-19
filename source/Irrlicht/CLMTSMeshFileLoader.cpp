@@ -65,8 +65,6 @@ Version 1.0 - 29 July 2004
 */
 //////////////////////////////////////////////////////////////////////
 
-#ifdef _IRR_COMPILE_WITH_LMTS_LOADER_
-
 #include "CLMTSMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 #include "SMeshBufferLightMap.h"
@@ -376,4 +374,3 @@ void CLMTSMeshFileLoader::loadTextures(SMesh* mesh)
 } // end namespace scene
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_LMTS_LOADER_

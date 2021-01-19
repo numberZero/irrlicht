@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_3DS_LOADER_
-
 #include "C3DSMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 #include "os.h"
@@ -1365,6 +1363,4 @@ void C3DSMeshFileLoader::readString(io::IReadFile* file, ChunkData& data, core::
 
 } // end namespace scene
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_3DS_LOADER_
 

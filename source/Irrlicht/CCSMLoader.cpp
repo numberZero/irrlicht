@@ -5,8 +5,6 @@
 // This file was written by Saurav Mohapatra and modified by Nikolaus Gebhardt.
 // See CCSMLoader.h for details.
 
-#ifdef _IRR_COMPILE_WITH_CSM_LOADER_
-
 #include "CCSMLoader.h"
 #include "CMeshTextureLoader.h"
 #include "os.h"
@@ -854,5 +852,3 @@ namespace scene
 
 } // end namespace
 } // end namespace
-
-#endif // _IRR_COMPILE_WITH_CSM_LOADER_

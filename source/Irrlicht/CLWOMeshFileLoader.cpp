@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_LWO_LOADER_
-
 #include "CLWOMeshFileLoader.h"
 #include "CMeshTextureLoader.h"
 #include "os.h"
@@ -2111,4 +2109,3 @@ video::ITexture* CLWOMeshFileLoader::loadTexture(const core::stringc& file)
 } // end namespace scene
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_LWO_LOADER_

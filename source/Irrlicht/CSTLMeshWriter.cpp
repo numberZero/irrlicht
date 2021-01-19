@@ -3,8 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 
-#ifdef _IRR_COMPILE_WITH_STL_WRITER_
-
 #include "CSTLMeshWriter.h"
 #include "os.h"
 #include "IMesh.h"
@@ -181,6 +179,4 @@ void CSTLMeshWriter::writeFace(io::IWriteFile* file,
 
 } // end namespace
 } // end namespace
-
-#endif
 
