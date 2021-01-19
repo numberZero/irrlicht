@@ -61,11 +61,37 @@ AddMeshFormat(STL RW OFF)
 AddMeshFormat(X RO ON)
 
 add_library(MESHOBJ OBJECT
-	CSkinnedMesh.cpp
-	CBoneSceneNode.cpp
 	CMeshSceneNode.cpp
+	)
+
+add_library(AnimatedMeshSceneNode OBJECT
 	CAnimatedMeshSceneNode.cpp
 	)
+
+function(require_if option)
+	if(${option})
+		return()
+	endif()
+	list(POP_FRONT ARGV)
+	foreach(requirer ${ARGV})
+		if(${requirer})
+			message(NOTICE "Enabling ${option} as required for ${requirer}")
+			set(${option} ON PARENT_SCOPE)
+		endif()
+	endforeach()
+endfunction()
+
+option(IRRLICHT_SKINNED_MESH "Support skinned mesh" ON)
+require_if(IRRLICHT_SKINNED_MESH IRRLICHT_MESH_FORMAT_B3D IRRLICHT_MESH_FORMAT_MS3D IRRLICHT_MESH_FORMAT_X IRRLICHT_MESH_FORMAT_OGRE)
+
+if(IRRLICHT_SKINNED_MESH)
+	target_sources(MESHOBJ PUBLIC
+		"${CMAKE_CURRENT_SOURCE_DIR}/CSkinnedMesh.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CBoneSceneNode.cpp"
+		)
+	target_compile_definitions(SceneManager PRIVATE _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_)
+	target_compile_definitions(AnimatedMeshSceneNode PRIVATE _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_)
+endif()
 
 if(IRRLICHT_MESH_FORMAT_HALFLIFE)
 	target_sources(MESHOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CAnimatedMeshHalfLife.cpp")
@@ -293,6 +319,7 @@ target_sources(Irrlicht PRIVATE
 		$<TARGET_OBJECTS:MeshFormats>
 	$<TARGET_OBJECTS:SCENEOBJ>
 		$<TARGET_OBJECTS:SceneManager>
+		$<TARGET_OBJECTS:AnimatedMeshSceneNode>
 	$<TARGET_OBJECTS:PARTICLEOBJ>
 	$<TARGET_OBJECTS:ANIMOBJ>
 	$<TARGET_OBJECTS:VIDEOOBJ>

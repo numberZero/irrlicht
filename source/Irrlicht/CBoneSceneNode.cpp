@@ -2,8 +2,6 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifdef _IRR_COMPILE_WITH_SKINNED_MESH_SUPPORT_
-
 #include "CBoneSceneNode.h"
 
 namespace irr
@@ -123,6 +121,3 @@ void CBoneSceneNode::deserializeAttributes(io::IAttributes* in, io::SAttributeRe
 
 } // namespace scene
 } // namespace irr
-
-#endif
-
