@@ -99,8 +99,13 @@ add_library(SCENEOBJ OBJECT
 	CMeshCache.cpp
 	CDefaultSceneNodeAnimatorFactory.cpp
 	CDefaultSceneNodeFactory.cpp
-	CSceneLoaderIrr.cpp
 	)
+
+option(IRRLICHT_SCENE_LOADER "Build with scene load support" OFF)
+if(IRRLICHT_SCENE_LOADER)
+	target_sources(SCENEOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/CSceneLoaderIrr.cpp")
+	target_compile_definitions(SceneManager PUBLIC "_IRR_COMPILE_WITH_IRR_SCENE_LOADER_")
+endif()
 
 add_library(PARTICLEOBJ OBJECT
 	CParticleAnimatedMeshSceneNodeEmitter.cpp
