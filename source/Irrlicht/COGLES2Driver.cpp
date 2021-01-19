@@ -5,7 +5,6 @@
 
 #include "COGLES2Driver.h"
 #include "CNullDriver.h"
-#include "IContextManager.h"
 
 #ifdef _IRR_COMPILE_WITH_OGLES2_
 
@@ -2879,7 +2878,6 @@ namespace video
 
 #ifndef _IRR_COMPILE_WITH_OGLES2_
 class IVideoDriver;
-class IContextManager;
 #endif
 
 IVideoDriver* createOGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)

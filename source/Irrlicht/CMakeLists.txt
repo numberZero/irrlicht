@@ -122,9 +122,6 @@ add_library(DRVROBJ OBJECT
 	COGLES2MaterialRenderer.cpp
 	COGLES2Renderer2D.cpp
 	CWebGL1Driver.cpp
-	CGLXManager.cpp
-	CWGLManager.cpp
-	CEGLManager.cpp
 	)
 
 add_library(IMAGEOBJ OBJECT

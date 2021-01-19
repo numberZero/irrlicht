@@ -25,11 +25,11 @@ namespace video
 	class CWebGL1Driver : public COGLES2Driver
 	{
 		friend class COpenGLCoreTexture<CWebGL1Driver>;
-		friend IVideoDriver* createWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
+		friend IVideoDriver* createWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
 
 	protected:
 		//! constructor
-		CWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager);
+		CWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io);
 
 	public:
 

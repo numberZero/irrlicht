@@ -4,7 +4,6 @@
 
 #include "COGLESDriver.h"
 #include "CNullDriver.h"
-#include "IContextManager.h"
 
 #ifdef _IRR_COMPILE_WITH_OGLES1_
 

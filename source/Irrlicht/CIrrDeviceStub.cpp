@@ -21,7 +21,7 @@ CIrrDeviceStub::CIrrDeviceStub(const SIrrlichtCreationParameters& params)
 : IrrlichtDevice(), VideoDriver(0), GUIEnvironment(0), SceneManager(0),
 	Timer(0), CursorControl(0), UserReceiver(params.EventReceiver),
 	Logger(0), Operator(0), Randomizer(0), FileSystem(0),
-	InputReceivingSceneManager(0), VideoModeList(0), ContextManager(0),
+	InputReceivingSceneManager(0), VideoModeList(0),
 	CreationParams(params), Close(false)
 {
 	Timer = new CTimer(params.UsePerformanceTimer);
@@ -64,9 +64,6 @@ CIrrDeviceStub::~CIrrDeviceStub()
 
 	if (VideoDriver)
 		VideoDriver->drop();
-
-	if (ContextManager)
-		ContextManager->drop();
 
 	if ( FileSystem )
 		FileSystem->drop();
@@ -163,12 +160,6 @@ gui::ICursorControl* CIrrDeviceStub::getCursorControl()
 video::IVideoModeList* CIrrDeviceStub::getVideoModeList()
 {
 	return VideoModeList;
-}
-
-//! return the context manager
-video::IContextManager* CIrrDeviceStub::getContextManager()
-{
-	return ContextManager;
 }
 
 //! checks version of sdk and prints warning if there might be a problem

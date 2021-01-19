@@ -17,7 +17,6 @@
 #include "EDriverFeatures.h"
 #include "fast_atof.h"
 #include "COGLES2ExtensionHandler.h"
-#include "IContextManager.h"
 
 namespace irr
 {

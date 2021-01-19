@@ -16,8 +16,8 @@ namespace irr
 namespace video
 {
 
-CWebGL1Driver::CWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager) :
-	COGLES2Driver(params, io, contextManager)
+CWebGL1Driver::CWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io) :
+	COGLES2Driver(params, io)
 	, MBTriangleFanSize4(0), MBLinesSize2(0), MBPointsSize1(0)
 {
 #ifdef _DEBUG
@@ -1120,13 +1120,12 @@ namespace video
 
 #ifndef _IRR_COMPILE_WITH_WEBGL1_
 class IVideoDriver;
-class IContextManager;
 #endif
 
-IVideoDriver* createWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io, IContextManager* contextManager)
+IVideoDriver* createWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 {
 #ifdef _IRR_COMPILE_WITH_WEBGL1_
-	CWebGL1Driver* driver = new CWebGL1Driver(params, io, contextManager);
+	CWebGL1Driver* driver = new CWebGL1Driver(params, io);
 	driver->genericDriverInit(params.WindowSize, params.Stencilbuffer);	// don't call in constructor, it uses virtual function calls of driver
 	return driver;
 #else

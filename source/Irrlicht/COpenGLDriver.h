@@ -21,7 +21,6 @@ namespace irr
 
 namespace video
 {
-	class IContextManager;
 
 	class COpenGLDriver : public CNullDriver, public IMaterialRendererServices, public COpenGLExtensionHandler
 	{
