@@ -10,7 +10,6 @@
 #include "irrString.h"
 #include "os.h"
 
-#ifdef _IRR_COMPILE_WITH_LIBJPEG_
 #include <stdio.h> // required for jpeglib.h
 extern "C"
 {
@@ -184,7 +183,6 @@ static bool writeJPEGFile(io::IWriteFile* file, IImage* image, u32 quality)
 } // namespace video
 } // namespace irr
 
-#endif // _IRR_COMPILE_WITH_LIBJPEG_
 
 namespace irr
 {
@@ -212,11 +210,7 @@ bool CImageWriterJPG::isAWriteableFileExtension(const io::path& filename) const
 
 bool CImageWriterJPG::writeImage(io::IWriteFile *file, IImage *image, u32 quality) const
 {
-#ifndef _IRR_COMPILE_WITH_LIBJPEG_
-	return false;
-#else
 	return writeJPEGFile(file, image, quality);
-#endif
 }
 
 } // namespace video

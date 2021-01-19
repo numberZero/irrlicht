@@ -10,13 +10,11 @@
 #include "irrString.h"
 #include "os.h" // for logging
 
-#ifdef _IRR_COMPILE_WITH_LIBPNG_
 #ifndef _IRR_USE_NON_SYSTEM_LIB_PNG_
 	#include <png.h> // use system lib png
 #else // _IRR_USE_NON_SYSTEM_LIB_PNG_
 	#include "libpng/png.h" // use irrlicht included lib png
 #endif // _IRR_USE_NON_SYSTEM_LIB_PNG_
-#endif // _IRR_COMPILE_WITH_LIBPNG_
 
 namespace irr
 {
@@ -28,7 +26,6 @@ IImageWriter* createImageWriterPNG()
 	return new CImageWriterPNG;
 }
 
-#ifdef _IRR_COMPILE_WITH_LIBPNG_
 // PNG function for error handling
 static void png_cpexcept_error(png_structp png_ptr, png_const_charp msg)
 {
@@ -53,7 +50,6 @@ void PNGAPI user_write_data_fcn(png_structp png_ptr, png_bytep data, png_size_t 
 	if (check != length)
 		png_error(png_ptr, "Write Error");
 }
-#endif // _IRR_COMPILE_WITH_LIBPNG_
 
 CImageWriterPNG::CImageWriterPNG()
 {
@@ -64,16 +60,11 @@ CImageWriterPNG::CImageWriterPNG()
 
 bool CImageWriterPNG::isAWriteableFileExtension(const io::path& filename) const
 {
-#ifdef _IRR_COMPILE_WITH_LIBPNG_
 	return core::hasFileExtension ( filename, "png" );
-#else
-	return false;
-#endif
 }
 
 bool CImageWriterPNG::writeImage(io::IWriteFile* file, IImage* image,u32 param) const
 {
-#ifdef _IRR_COMPILE_WITH_LIBPNG_
 	if (!file || !image)
 		return false;
 
@@ -208,9 +199,6 @@ bool CImageWriterPNG::writeImage(io::IWriteFile* file, IImage* image,u32 param) 
 	delete [] tmpImage;
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 	return true;
-#else
-	return false;
-#endif
 }
 
 } // namespace video

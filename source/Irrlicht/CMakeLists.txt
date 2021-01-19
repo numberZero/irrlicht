@@ -267,11 +267,19 @@ target_sources(Irrlicht PRIVATE
 target_link_libraries(Irrlicht PRIVATE
 	AESGM
 	z
-	jpeg
-	png
 	bz2
 	SDL2
 )
+
+if (IRRLICHT_IMAGE_FORMAT_PNG)
+	find_package(PNG REQUIRED)
+	target_link_libraries(Irrlicht PUBLIC PNG::PNG)
+endif()
+
+if (IRRLICHT_IMAGE_FORMAT_JPG)
+	find_package(JPEG REQUIRED)
+	target_link_libraries(Irrlicht PUBLIC JPEG::JPEG)
+endif()
 
 set(VERSION "${IRRLICHT_VERSION_MAJOR}.${IRRLICHT_VERSION_MINOR}.${IRRLICHT_VERSION_RELEASE}")
 set_target_properties(Irrlicht PROPERTIES

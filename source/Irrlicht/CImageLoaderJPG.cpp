@@ -14,10 +14,8 @@ namespace irr
 namespace video
 {
 
-#ifdef _IRR_COMPILE_WITH_LIBJPEG_
 // Static members
 io::path CImageLoaderJPG::Filename;
-#endif
 
 //! constructor
 CImageLoaderJPG::CImageLoaderJPG()
@@ -44,7 +42,6 @@ bool CImageLoaderJPG::isALoadableFileExtension(const io::path& filename) const
 }
 
 
-#ifdef _IRR_COMPILE_WITH_LIBJPEG_
 
 	// struct for handling jpeg errors
 	struct irr_jpeg_error_mgr
@@ -114,31 +111,20 @@ void CImageLoaderJPG::output_message(j_common_ptr cinfo)
 	errMsg += core::stringc(Filename);
 	os::Printer::log(errMsg.c_str(),temp1, ELL_ERROR);
 }
-#endif // _IRR_COMPILE_WITH_LIBJPEG_
 
 //! returns true if the file maybe is able to be loaded by this class
 bool CImageLoaderJPG::isALoadableFileFormat(io::IReadFile* file) const
 {
-	#ifndef _IRR_COMPILE_WITH_LIBJPEG_
-	return false;
-	#else
-
 	if (!(file && file->seek(0)))
 		return false;
 	unsigned char header[3];
 	size_t headerLen = file->read(header, sizeof(header));
 	return headerLen >= 3 && !memcmp(header, "\xFF\xD8\xFF", 3);
-	#endif
 }
 
 //! creates a surface from the file
 IImage* CImageLoaderJPG::loadImage(io::IReadFile* file) const
 {
-	#ifndef _IRR_COMPILE_WITH_LIBJPEG_
-	os::Printer::log("Can't load as not compiled with _IRR_COMPILE_WITH_LIBJPEG_:", file->getFileName(), ELL_DEBUG);
-	return 0;
-	#else
-
 	if (!file)
 		return 0;
 
@@ -281,8 +267,6 @@ IImage* CImageLoaderJPG::loadImage(io::IReadFile* file) const
 	delete [] input;
 
 	return image;
-
-	#endif
 }
 
 

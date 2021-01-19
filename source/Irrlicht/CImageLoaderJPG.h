@@ -8,16 +8,10 @@
 #include "IImageLoader.h"
 
 #include <stdio.h> // required for jpeglib.h
-#ifdef _IRR_COMPILE_WITH_LIBJPEG_
 extern "C" {
-	#ifndef _IRR_USE_NON_SYSTEM_JPEG_LIB_
 	#include <jpeglib.h> // use system lib
-	#else
-	#include "jpeglib/jpeglib.h" // use irrlicht jpeglib
-	#endif
 	#include <setjmp.h>
 }
-#endif // _IRR_COMPILE_WITH_LIBJPEG_
 
 
 namespace irr
@@ -49,7 +43,6 @@ public:
 
 private:
 
-#ifdef _IRR_COMPILE_WITH_LIBJPEG_
 	// several methods used via function pointers by jpeglib
 
 	/* Receives control for a fatal error. Information sufficient to
@@ -98,13 +91,10 @@ private:
 
 	// Copy filename to have it around for error-messages
 	static io::path Filename;
-
-	#endif // _IRR_COMPILE_WITH_LIBJPEG_
 };
 
 
 } // end namespace video
 } // end namespace irr
-
 
 #endif
