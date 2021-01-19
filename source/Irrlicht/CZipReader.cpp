@@ -12,7 +12,6 @@ extern "C" void bz_internal_error(int errorCode)
 	irr::os::Printer::log("Error in bzip2 handling", irr::core::stringc(errorCode), irr::ELL_ERROR);
 }
 
-#ifdef __IRR_COMPILE_WITH_ZIP_ARCHIVE_LOADER_
 
 #include "CFileList.h"
 #include "CReadFile.h"
@@ -844,4 +843,3 @@ IReadFile* CZipReader::createAndOpenFile(u32 index)
 } // end namespace io
 } // end namespace irr
 
-#endif // __IRR_COMPILE_WITH_ZIP_ARCHIVE_LOADER_

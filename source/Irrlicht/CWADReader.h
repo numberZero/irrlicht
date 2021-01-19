@@ -5,7 +5,6 @@
 #ifndef __C_WAD_READER_H_INCLUDED__
 #define __C_WAD_READER_H_INCLUDED__
 
-#ifdef __IRR_COMPILE_WITH_WAD_ARCHIVE_LOADER_
 
 #include "IReferenceCounted.h"
 #include "IReadFile.h"
@@ -169,7 +168,3 @@ namespace io
 } // end namespace irr
 
 #endif
-
-
-#endif // #ifdef __IRR_COMPILE_WITH_WAD_ARCHIVE_LOADER_
-

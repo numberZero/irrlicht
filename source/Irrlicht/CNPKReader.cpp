@@ -6,7 +6,6 @@
 
 #include "CNPKReader.h"
 
-#ifdef __IRR_COMPILE_WITH_NPK_ARCHIVE_LOADER_
 
 #include "os.h"
 #include "coreutil.h"
@@ -273,5 +272,4 @@ void CNPKReader::readString(core::stringc& name)
 } // end namespace io
 } // end namespace irr
 
-#endif // __IRR_COMPILE_WITH_NPK_ARCHIVE_LOADER_
 

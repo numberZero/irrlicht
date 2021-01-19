@@ -6,7 +6,6 @@
 #define __C_TAR_READER_H_INCLUDED__
 
 
-#ifdef __IRR_COMPILE_WITH_TAR_ARCHIVE_LOADER_
 
 #include "IReferenceCounted.h"
 #include "IReadFile.h"
@@ -131,5 +130,4 @@ namespace io
 } // end namespace io
 } // end namespace irr
 
-#endif // __IRR_COMPILE_WITH_TAR_ARCHIVE_LOADER_
 #endif // __C_TAR_READER_H_INCLUDED__

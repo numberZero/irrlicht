@@ -240,23 +240,41 @@ add_library(VIDEOOBJ OBJECT
 
 add_library(IOOBJ OBJECT
 	CFileList.cpp
-	CFileSystem.cpp
 	CLimitReadFile.cpp
 	CMemoryFile.cpp
 	CReadFile.cpp
 	CWriteFile.cpp
 	CXMLReader.cpp
 	CXMLWriter.cpp
-	CWADReader.cpp
-	CZipReader.cpp
-	CPakReader.cpp
-	CNPKReader.cpp
-	CTarReader.cpp
-	CMountPointReader.cpp
 	irrXML.cpp
 	CAttributes.cpp
 	lzma/LzmaDec.c
 	)
+
+add_library(FileSystem OBJECT
+	CFileSystem.cpp
+	)
+
+function(AddArchiveFormat name default)
+	string(TOUPPER "${name}" ucname)
+	set(varname "IRRLICHT_ARCHIVE_FORMAT_${ucname}")
+	option(${varname} "Build with ${name} archive format support" ${default})
+	if(${varname}) # indirect variable reference
+		set(reader_name "C${name}Reader")
+		if(ARGV2)
+			set(reader_name "${ARGV2}")
+		endif()
+		target_sources(IOOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${reader_name}.cpp")
+		target_compile_definitions(FileSystem PRIVATE "_IRR_COMPILE_WITH_${ucname}_ARCHIVE_LOADER_")
+	endif()
+endfunction()
+
+AddArchiveFormat(Mount OFF "CMountPointReader")
+AddArchiveFormat(NPK OFF)
+AddArchiveFormat(Pak OFF)
+AddArchiveFormat(Tar OFF)
+AddArchiveFormat(WAD OFF)
+AddArchiveFormat(Zip OFF)
 
 add_library(GUIOBJ OBJECT
 	CGUIButton.cpp
@@ -327,6 +345,7 @@ target_sources(Irrlicht PRIVATE
 		$<TARGET_OBJECTS:DRVROBJ>
 		$<TARGET_OBJECTS:IMAGEOBJ>
 	$<TARGET_OBJECTS:IOOBJ>
+		$<TARGET_OBJECTS:FileSystem>
 	$<TARGET_OBJECTS:GUIOBJ>
 	)
 

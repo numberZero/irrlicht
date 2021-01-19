@@ -4,7 +4,6 @@
 // Code contributed by skreamz
 
 
-#ifdef __IRR_COMPILE_WITH_WAD_ARCHIVE_LOADER_
 
 #include "CWADReader.h"
 #include "os.h"
@@ -258,5 +257,4 @@ IReadFile* CWADReader::createAndOpenFile(u32 index)
 } // end namespace irr
 
 
-#endif // __IRR_COMPILE_WITH_WAD_ARCHIVE_LOADER_
 
