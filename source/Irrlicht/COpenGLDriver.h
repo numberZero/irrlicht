@@ -8,7 +8,6 @@
 
 #include "SIrrCreationParameters.h"
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "IMaterialRendererServices.h"
 #include "CNullDriver.h"
@@ -503,6 +502,5 @@ namespace video
 } // end namespace irr
 
 
-#endif // _IRR_COMPILE_WITH_OPENGL_
 #endif
 

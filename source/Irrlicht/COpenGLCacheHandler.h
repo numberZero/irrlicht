@@ -6,7 +6,6 @@
 #define __C_OPENGL_CACHE_HANDLER_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "COpenGLCommon.h"
 
@@ -61,5 +60,4 @@ namespace video
 } // end namespace video
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_OPENGL_
 #endif

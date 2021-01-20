@@ -7,7 +7,6 @@
 #define __C_OGLES_EXTENSION_HANDLER_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OGLES1_
 
 #include "EDriverFeatures.h"
 #include "irrTypes.h"
@@ -235,5 +234,4 @@ namespace video
 }
 }
 
-#endif
 #endif

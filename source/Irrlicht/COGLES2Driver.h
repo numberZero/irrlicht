@@ -9,7 +9,6 @@
 
 #include "SIrrCreationParameters.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "CNullDriver.h"
 #include "IMaterialRendererServices.h"
@@ -427,6 +426,5 @@ private:
 } // end namespace video
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_OGLES2_
 
 #endif // __C_OGLES2_DRIVER_H_INCLUDED__

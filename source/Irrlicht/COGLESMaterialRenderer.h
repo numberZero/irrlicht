@@ -5,7 +5,6 @@
 #ifndef __C_OGLES1_MATERIAL_RENDERER_H_INCLUDED__
 #define __C_OGLES1_MATERIAL_RENDERER_H_INCLUDED__
 
-#ifdef _IRR_COMPILE_WITH_OGLES1_
 
 #include "COGLESDriver.h"
 #include "IMaterialRenderer.h"
@@ -221,5 +220,4 @@ public:
 } // end namespace video
 } // end namespace irr
 
-#endif
 #endif

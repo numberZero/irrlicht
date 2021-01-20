@@ -4,7 +4,6 @@
 
 #include "COpenGLCacheHandler.h"
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "COpenGLDriver.h"
 
@@ -128,4 +127,3 @@ void COpenGLCacheHandler::setClientActiveTexture(GLenum texture)
 } // end namespace
 } // end namespace
 
-#endif // _IRR_COMPILE_WITH_OPENGL_

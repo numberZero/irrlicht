@@ -8,7 +8,6 @@
 
 #include "SIrrCreationParameters.h"
 
-#ifdef _IRR_COMPILE_WITH_WEBGL1_
 
 #include "COGLES2Driver.h"
 #include "CWebGLExtensionHandler.h"
@@ -140,6 +139,5 @@ namespace video
 } // end namespace video
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_WEBGL1_
 
 #endif // __C_WEBGL1_DRIVER_H_INCLUDED__

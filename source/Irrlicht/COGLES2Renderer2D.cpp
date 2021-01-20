@@ -4,7 +4,6 @@
 
 #include "COGLES2Renderer2D.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "IGPUProgrammingServices.h"
 #include "os.h"
@@ -84,4 +83,3 @@ bool COGLES2Renderer2D::OnRender(IMaterialRendererServices* service, E_VERTEX_TY
 }
 }
 
-#endif

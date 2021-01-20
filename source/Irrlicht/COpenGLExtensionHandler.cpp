@@ -4,7 +4,6 @@
 
 #include "COpenGLExtensionHandler.h"
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "irrString.h"
 #include "SMaterial.h"
@@ -840,4 +839,3 @@ bool COpenGLExtensionHandler::queryFeature(E_VIDEO_DRIVER_FEATURE feature) const
 }
 }
 
-#endif

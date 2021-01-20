@@ -6,7 +6,6 @@
 #define __C_OPEN_GL_FEATURE_MAP_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "EDriverFeatures.h"
 #include "irrTypes.h"
@@ -3373,7 +3372,6 @@ inline void COpenGLExtensionHandler::extGlGenerateTextureMipmap(GLuint texture, 
 }
 }
 
-#endif
 
 #endif
 

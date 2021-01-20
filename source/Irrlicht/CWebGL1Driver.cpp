@@ -4,7 +4,6 @@
 
 #include "CWebGL1Driver.h"
 
-#ifdef _IRR_COMPILE_WITH_WEBGL1_
 
 #include "COpenGLCoreTexture.h"
 #include "COpenGLCoreRenderTarget.h"
@@ -1105,32 +1104,23 @@ void CWebGL1Driver::initWebGLExtensions()
 } // end namespace video
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_WEBGL1_
 
 namespace irr
 {
-#ifndef _IRR_COMPILE_WITH_WEBGL1_
 namespace io
 {
 	class IFileSystem;
 }
-#endif
 namespace video
 {
 
-#ifndef _IRR_COMPILE_WITH_WEBGL1_
 class IVideoDriver;
-#endif
 
 IVideoDriver* createWebGL1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 {
-#ifdef _IRR_COMPILE_WITH_WEBGL1_
 	CWebGL1Driver* driver = new CWebGL1Driver(params, io);
 	driver->genericDriverInit(params.WindowSize, params.Stencilbuffer);	// don't call in constructor, it uses virtual function calls of driver
 	return driver;
-#else
-	return 0;
-#endif //  _IRR_COMPILE_WITH_WEBGL1_
 }
 
 } // end namespace

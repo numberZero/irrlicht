@@ -6,7 +6,6 @@
 #define __C_OPENGL_COMMON_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #if defined(_IRR_OPENGL_USE_EXTPOINTER_)
 	#define GL_GLEXT_LEGACY 1
@@ -152,5 +151,4 @@ namespace video
 }
 }
 
-#endif
 #endif

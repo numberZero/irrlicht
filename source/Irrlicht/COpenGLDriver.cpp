@@ -5,7 +5,6 @@
 #include "COpenGLDriver.h"
 #include "CNullDriver.h"
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "os.h"
 
@@ -4347,7 +4346,6 @@ COpenGLCacheHandler* COpenGLDriver::getCacheHandler() const
 } // end namespace
 } // end namespace
 
-#endif // _IRR_COMPILE_WITH_OPENGL_
 
 namespace irr
 {
@@ -4357,11 +4355,7 @@ namespace video
 IVideoDriver* createOpenGLDriver(const SIrrlichtCreationParameters& params,
 		io::IFileSystem* io)
 {
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 	return new COpenGLDriver(params, io);
-#else
-	return 0;
-#endif //  _IRR_COMPILE_WITH_OPENGL_
 }
 
 } // end namespace

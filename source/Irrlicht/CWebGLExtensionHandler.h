@@ -6,7 +6,6 @@
 #define __E_WEGL_EXTENSION_HANDLER_H_INCLUDED__
 
 
-#if defined(_IRR_COMPILE_WITH_WEBGL1_)	// Note: should also work with WebGL2 once we add that to Irrlicht
 
 #include "COpenGLCoreFeature.h"
 
@@ -177,5 +176,4 @@ namespace video
 }
 }
 
-#endif // defined(_IRR_COMPILE_WITH_WEBGL1_)
 #endif // __E_WEGL1_EXTENSION_HANDLER_H_INCLUDED__

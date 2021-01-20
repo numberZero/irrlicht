@@ -4,7 +4,6 @@
 
 #include "COGLES2MaterialRenderer.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "EVertexAttributes.h"
 #include "IGPUProgrammingServices.h"
@@ -477,5 +476,4 @@ IVideoDriver* COGLES2MaterialRenderer::getVideoDriver()
 }
 
 
-#endif
 

@@ -5,7 +5,6 @@
 #include "COGLESDriver.h"
 #include "CNullDriver.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES1_
 
 #include "COpenGLCoreTexture.h"
 #include "COpenGLCoreRenderTarget.h"
@@ -18,10 +17,6 @@
 #include "os.h"
 #include "EProfileIDs.h"
 #include "IProfiler.h"
-
-#ifdef _IRR_COMPILE_WITH_ANDROID_DEVICE_
-#include "android_native_app_glue.h"
-#endif
 
 namespace irr
 {
@@ -3208,7 +3203,6 @@ COGLES1CacheHandler* COGLES1Driver::getCacheHandler() const
 } // end namespace
 } // end namespace
 
-#endif // _IRR_COMPILE_WITH_OGLES1_
 
 namespace irr
 {
@@ -3217,11 +3211,7 @@ namespace video
 
 IVideoDriver* createOGLES1Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 {
-#ifdef _IRR_COMPILE_WITH_OGLES1_
 	return new COGLES1Driver(params, io);
-#else
-	return 0;
-#endif //  _IRR_COMPILE_WITH_OGLES1_
 }
 
 } // end namespace

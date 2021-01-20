@@ -6,7 +6,6 @@
 #include "COGLES2Driver.h"
 #include "CNullDriver.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "COpenGLCoreTexture.h"
 #include "COpenGLCoreRenderTarget.h"
@@ -21,10 +20,6 @@
 #include "os.h"
 #include "EProfileIDs.h"
 #include "IProfiler.h"
-
-#ifdef _IRR_COMPILE_WITH_ANDROID_DEVICE_
-#include "android_native_app_glue.h"
-#endif
 
 namespace irr
 {
@@ -2869,26 +2864,19 @@ COGLES2Driver::~COGLES2Driver()
 } // end namespace
 } // end namespace
 
-#endif // _IRR_COMPILE_WITH_OGLES2_
 
 namespace irr
 {
 namespace video
 {
 
-#ifndef _IRR_COMPILE_WITH_OGLES2_
 class IVideoDriver;
-#endif
 
 IVideoDriver* createOGLES2Driver(const SIrrlichtCreationParameters& params, io::IFileSystem* io)
 {
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 	COGLES2Driver* driver = new COGLES2Driver(params, io);
 	driver->genericDriverInit(params.WindowSize, params.Stencilbuffer);	// don't call in constructor, it uses virtual function calls of driver
 	return driver;
-#else
-	return 0;
-#endif //  _IRR_COMPILE_WITH_OGLES2_
 }
 
 } // end namespace

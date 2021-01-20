@@ -6,7 +6,6 @@
 
 #include "COGLES2ExtensionHandler.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "irrString.h"
 #include "SMaterial.h"
@@ -55,4 +54,3 @@ namespace video
 } // end namespace irr
 
 
-#endif // _IRR_COMPILE_WITH_OGLES2_

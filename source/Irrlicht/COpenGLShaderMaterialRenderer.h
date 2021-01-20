@@ -6,7 +6,6 @@
 #define __C_OPENGL_SHADER_MATERIAL_RENDERER_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "IMaterialRenderer.h"
 
@@ -91,6 +90,5 @@ protected:
 } // end namespace video
 } // end namespace irr
 
-#endif
 #endif
 

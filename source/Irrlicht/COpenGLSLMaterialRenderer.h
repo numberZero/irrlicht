@@ -6,7 +6,6 @@
 #define __C_OPENGL_SHADER_LANGUAGE_MATERIAL_RENDERER_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "EMaterialTypes.h"
 #include "IMaterialRenderer.h"
@@ -130,6 +129,5 @@ protected:
 } // end namespace video
 } // end namespace irr
 
-#endif // compile with OpenGL
 #endif // if included
 

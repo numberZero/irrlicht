@@ -6,7 +6,6 @@
 #define __C_OGLES2_COMMON_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #ifndef _IRR_OGLES1_USE_EXTPOINTER_
 #define GL_GLEXT_PROTOTYPES 1
@@ -53,5 +52,4 @@ namespace video
 }
 }
 
-#endif
 #endif

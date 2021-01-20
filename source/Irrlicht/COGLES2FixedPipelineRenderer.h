@@ -6,7 +6,6 @@
 #define __C_OGLES2_FIXED_PIPELINE_SHADER_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "IShaderConstantSetCallBack.h"
 #include "IMaterialRendererServices.h"
@@ -200,6 +199,5 @@ protected:
 }
 }
 
-#endif
 #endif
 

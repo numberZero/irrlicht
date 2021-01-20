@@ -6,7 +6,6 @@
 #define __C_OGLES2_RENDERER_2D_H_INCLUDED__
 
 
-#ifdef _IRR_COMPILE_WITH_OGLES2_
 
 #include "COGLES2MaterialRenderer.h"
 
@@ -36,6 +35,5 @@ protected:
 }
 }
 
-#endif
 #endif
 

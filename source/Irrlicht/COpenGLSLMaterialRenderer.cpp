@@ -12,7 +12,6 @@
 
 #include "COpenGLSLMaterialRenderer.h"
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "IGPUProgrammingServices.h"
 #include "IShaderConstantSetCallBack.h"
@@ -749,5 +748,4 @@ IVideoDriver* COpenGLSLMaterialRenderer::getVideoDriver()
 } // end namespace irr
 
 
-#endif
 

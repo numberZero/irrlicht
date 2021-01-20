@@ -6,18 +6,13 @@
 
 #include "COGLESExtensionHandler.h"
 
-#ifdef _IRR_COMPILE_WITH_OGLES1_
 
 #include "irrString.h"
 #include "SMaterial.h"
 #include "fast_atof.h"
 
 #if defined(_IRR_OGLES1_USE_EXTPOINTER_)
-#if defined(_IRR_COMPILE_WITH_ANDROID_DEVICE_) || defined(_IRR_COMPILE_WITH_FB_DEVICE_) || defined(_IRR_COMPILE_WITH_WINDOWS_DEVICE_)
 #include <EGL/egl.h>
-#else
-#include <GLES/egl.h>
-#endif
 #endif
 
 namespace irr
@@ -101,4 +96,3 @@ namespace video
 } // end namespace irr
 
 
-#endif // _IRR_COMPILE_WITH_OGLES2_

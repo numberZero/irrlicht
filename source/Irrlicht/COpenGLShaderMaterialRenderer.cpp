@@ -4,7 +4,6 @@
 
 #include "COpenGLShaderMaterialRenderer.h"
 
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 
 #include "IGPUProgrammingServices.h"
 #include "IShaderConstantSetCallBack.h"
@@ -404,5 +403,4 @@ bool COpenGLShaderMaterialRenderer::createVertexShader(const c8* vtxsh)
 } // end namespace video
 } // end namespace irr
 
-#endif
 

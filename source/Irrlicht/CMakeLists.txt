@@ -198,20 +198,55 @@ add_library(NullDriver OBJECT
 	CNullDriver.cpp
 	)
 
-add_library(DRVROBJ OBJECT
+add_library(Device OBJECT
+	CIrrDeviceSDL2.cpp
+	)
+
+add_library(VIDEOOBJ OBJECT
+	CVideoModeList.cpp
+	CFPSCounter.cpp
+	)
+
+function(AddVideoDriver tag default name)
+	string(TOUPPER "${tag}" ucname)
+	list(SUBLIST ARGV 3 -1 files)
+	list(TRANSFORM files PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/")
+	set(varname "IRRLICHT_VIDEO_DRIVER_${ucname}")
+	option(${varname} "Build with ${name} support" ${default})
+	if(${varname}) # indirect variable reference
+		message(NOTICE "Building with ${name} support")
+		target_sources(VIDEOOBJ PUBLIC ${files})
+		target_compile_definitions(Device PRIVATE "_IRR_COMPILE_WITH_${ucname}_")
+	endif()
+endfunction()
+
+AddVideoDriver(WebGL1 OFF "WebGL (subset of OpenGL ES 2)"
+	CWebGL1Driver.cpp
+	)
+
+if(IRRLICHT_VIDEO_DRIVER_WEBGL1)
+	set(IRRLICHT_VIDEO_DRIVER_OGLES2 ON)
+endif()
+
+AddVideoDriver(OpenGL ON "desktop OpenGL"
 	COpenGLCacheHandler.cpp
 	COpenGLDriver.cpp
 	COpenGLShaderMaterialRenderer.cpp
 	COpenGLSLMaterialRenderer.cpp
 	COpenGLExtensionHandler.cpp
+	)
+
+AddVideoDriver(OGLES1 ON "OpenGL ES 1"
 	COGLESDriver.cpp
 	COGLESExtensionHandler.cpp
+	)
+
+AddVideoDriver(OGLES2 ON "OpenGL ES 2+"
 	COGLES2Driver.cpp
 	COGLES2ExtensionHandler.cpp
 	COGLES2FixedPipelineRenderer.cpp
 	COGLES2MaterialRenderer.cpp
 	COGLES2Renderer2D.cpp
-	CWebGL1Driver.cpp
 	)
 
 add_library(IMAGEOBJ OBJECT
@@ -251,11 +286,6 @@ AddImageFormat(PVR RO OFF)
 AddImageFormat(RGB RO OFF)
 AddImageFormat(TGA RW OFF)
 AddImageFormat(WAL RO OFF)
-
-add_library(VIDEOOBJ OBJECT
-	CVideoModeList.cpp
-	CFPSCounter.cpp
-	)
 
 add_library(IOOBJ OBJECT
 	CFileList.cpp
@@ -340,7 +370,6 @@ add_library(AESGM STATIC
 	)
 
 add_library(Irrlicht SHARED
-	CIrrDeviceSDL2.cpp
 	CIrrDeviceStub.cpp
 	CLogger.cpp
 	COSOperator.cpp
@@ -352,6 +381,7 @@ add_library(Irrlicht SHARED
 	)
 
 target_sources(Irrlicht PRIVATE
+	$<TARGET_OBJECTS:Device>
 	$<TARGET_OBJECTS:MESHOBJ>
 		$<TARGET_OBJECTS:MeshFormats>
 	$<TARGET_OBJECTS:SCENEOBJ>
@@ -360,7 +390,6 @@ target_sources(Irrlicht PRIVATE
 	$<TARGET_OBJECTS:ANIMOBJ>
 	$<TARGET_OBJECTS:VIDEOOBJ>
 		$<TARGET_OBJECTS:NullDriver>
-		$<TARGET_OBJECTS:DRVROBJ>
 		$<TARGET_OBJECTS:IMAGEOBJ>
 	$<TARGET_OBJECTS:IOOBJ>
 		$<TARGET_OBJECTS:FileSystem>

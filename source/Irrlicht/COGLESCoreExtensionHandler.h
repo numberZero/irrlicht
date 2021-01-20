@@ -8,7 +8,6 @@
 
 // Can be included from different ES versions
 // (this is also the reason why this file is header-only as correct OGL ES headers have to be included first)
-#if defined(_IRR_COMPILE_WITH_OGLES2_) || defined(_IRR_COMPILE_WITH_OGLES1_)
 
 #include "COpenGLCoreFeature.h"
 
@@ -773,5 +772,4 @@ namespace video
 }
 }
 
-#endif // defined(_IRR_COMPILE_WITH_OGLES2_) || defined(_IRR_COMPILE_WITH_OGLES1_)
 #endif // __E_OGLES_CORE_EXTENSION_HANDLER_H_INCLUDED__
