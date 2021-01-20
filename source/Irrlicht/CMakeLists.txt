@@ -298,7 +298,6 @@ add_library(IOOBJ OBJECT
 	CXMLWriter.cpp
 	irrXML.cpp
 	CAttributes.cpp
-	lzma/LzmaDec.c
 	)
 
 add_library(FileSystem OBJECT
@@ -311,10 +310,12 @@ function(AddArchiveFormat name default)
 	option(${varname} "Build with ${name} archive format support" ${default})
 	if(${varname}) # indirect variable reference
 		set(reader_name "C${name}Reader")
-		if(ARGV2)
+		if(NOT ("${ARGV2}" STREQUAL ""))
 			set(reader_name "${ARGV2}")
 		endif()
-		target_sources(IOOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${reader_name}.cpp")
+		if(reader_name)
+			target_sources(IOOBJ PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/${reader_name}.cpp")
+		endif()
 		target_compile_definitions(FileSystem PRIVATE "_IRR_COMPILE_WITH_${ucname}_ARCHIVE_LOADER_")
 	endif()
 endfunction()
@@ -324,7 +325,6 @@ AddArchiveFormat(NPK OFF)
 AddArchiveFormat(Pak OFF)
 AddArchiveFormat(Tar OFF)
 AddArchiveFormat(WAD OFF)
-AddArchiveFormat(Zip OFF)
 
 option(IRRLICHT_GUI "Build Irrlicht with GUI support" ON)
 if(IRRLICHT_GUI)
@@ -366,7 +366,7 @@ if(IRRLICHT_GUI)
 	target_compile_definitions(Device PRIVATE "_IRR_COMPILE_WITH_GUI_")
 endif()
 
-add_library(AESGM STATIC
+add_library(AESGM STATIC EXCLUDE_FROM_ALL
 	aesGladman/aescrypt.cpp
 	aesGladman/aeskey.cpp
 	aesGladman/aestab.cpp
@@ -407,10 +407,40 @@ if(IRRLICHT_GUI)
 	target_sources(Irrlicht PRIVATE $<TARGET_OBJECTS:GUIOBJ>)
 endif()
 
+AddArchiveFormat(Zip OFF FALSE)
+
+if(IRRLICHT_ARCHIVE_FORMAT_ZIP)
+	add_library(Zip OBJECT CZipReader.cpp )
+	target_sources(Irrlicht PRIVATE $<TARGET_OBJECTS:Zip>)
+
+	option(IRRLICHT_ZIP_ZLIB "Build Zip support with standard compression support" ON)
+	if(IRRLICHT_ZIP_ZLIB)
+		find_package(ZLIB REQUIRED)
+		target_compile_definitions(Zip PRIVATE "_IRR_COMPILE_WITH_ZLIB_")
+		target_link_libraries(Irrlicht PRIVATE ZLIB::ZLIB)
+	endif()
+
+	option(IRRLICHT_ZIP_BZIP2 "Build Zip support with BZip2 compression support" OFF)
+	if(IRRLICHT_ZIP_BZIP2)
+		find_package(BZip2 REQUIRED)
+		target_compile_definitions(Zip PRIVATE "_IRR_COMPILE_WITH_BZIP2_")
+		target_link_libraries(Irrlicht PRIVATE BZip2::BZip2)
+	endif()
+
+	option(IRRLICHT_ZIP_LZMA "Build Zip support with LZMA compression support" OFF)
+	if(IRRLICHT_ZIP_LZMA)
+		target_compile_definitions(Zip PRIVATE "_IRR_COMPILE_WITH_LZMA_")
+		target_sources(Irrlicht PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/lzma/LzmaDec.c")
+	endif()
+
+	option(IRRLICHT_ZIP_ENCRYPTION "Build Zip support with encrypted archive support" OFF)
+	if(IRRLICHT_ZIP_ENCRYPTION)
+		target_compile_definitions(Zip PRIVATE "_IRR_COMPILE_WITH_ZIP_ENCRYPTION_")
+		target_link_libraries(Irrlicht PRIVATE AESGM)
+	endif()
+endif()
+
 target_link_libraries(Irrlicht PRIVATE
-	AESGM
-	z
-	bz2
 	SDL2
 )
 
