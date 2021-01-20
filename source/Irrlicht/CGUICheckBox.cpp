@@ -4,7 +4,6 @@
 
 #include "CGUICheckBox.h"
 
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUISkin.h"
 #include "IGUIEnvironment.h"
@@ -250,5 +249,4 @@ void CGUICheckBox::deserializeAttributes(io::IAttributes* in, io::SAttributeRead
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 

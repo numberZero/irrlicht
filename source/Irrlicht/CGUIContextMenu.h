@@ -5,7 +5,6 @@
 #ifndef __C_GUI_CONTEXT_MENU_H_INCLUDED__
 #define __C_GUI_CONTEXT_MENU_H_INCLUDED__
 
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUIContextMenu.h"
 #include "irrString.h"
@@ -167,7 +166,6 @@ namespace gui
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 
 #endif // __C_GUI_CONTEXT_MENU_H_INCLUDED__
 

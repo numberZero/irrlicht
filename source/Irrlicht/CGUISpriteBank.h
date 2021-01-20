@@ -5,7 +5,6 @@
 #ifndef __C_GUI_SPRITE_BANK_H_INCLUDED__
 #define __C_GUI_SPRITE_BANK_H_INCLUDED__
 
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUISpriteBank.h"
 
@@ -98,7 +97,6 @@ protected:
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 
 #endif // __C_GUI_SPRITE_BANK_H_INCLUDED__
 

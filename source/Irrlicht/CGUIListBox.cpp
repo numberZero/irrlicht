@@ -3,7 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 #include "CGUIListBox.h"
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "CGUIListBox.h"
 #include "IGUISkin.h"
@@ -919,5 +918,4 @@ IGUIScrollBar* CGUIListBox::getVerticalScrollBar() const
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 

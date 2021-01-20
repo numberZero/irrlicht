@@ -5,7 +5,6 @@
 
 #include "CGUIEnvironment.h"
 
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IVideoDriver.h"
 
@@ -1714,5 +1713,4 @@ IGUIEnvironment* createGUIEnvironment(io::IFileSystem* fs,
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 

@@ -3,7 +3,6 @@
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 #include "CGUISpriteBank.h"
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUIEnvironment.h"
 #include "IVideoDriver.h"
@@ -250,4 +249,3 @@ void CGUISpriteBank::draw2DSpriteBatch(	const core::array<u32>& indices,
 } // namespace gui
 } // namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_

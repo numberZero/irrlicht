@@ -4,8 +4,6 @@
 
 #include "CDefaultGUIElementFactory.h"
 
-#ifdef _IRR_COMPILE_WITH_GUI_
-
 #include "IGUIEnvironment.h"
 
 #include "IGUIButton.h"
@@ -162,6 +160,4 @@ EGUI_ELEMENT_TYPE CDefaultGUIElementFactory::getTypeFromName(const c8* name) con
 
 } // end namespace gui
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_GUI_
 

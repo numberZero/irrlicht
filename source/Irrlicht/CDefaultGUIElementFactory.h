@@ -5,8 +5,6 @@
 #ifndef __C_DEFAULT_GUI_ELEMENT_FACTORY_H_INCLUDED__
 #define __C_DEFAULT_GUI_ELEMENT_FACTORY_H_INCLUDED__
 
-#ifdef _IRR_COMPILE_WITH_GUI_
-
 #include "IGUIElementFactory.h"
 
 namespace irr
@@ -63,7 +61,5 @@ namespace gui
 
 } // end namespace gui
 } // end namespace irr
-
-#endif // _IRR_COMPILE_WITH_GUI_
 
 #endif // __C_DEFAULT_GUI_ELEMENT_FACTORY_H_INCLUDED__

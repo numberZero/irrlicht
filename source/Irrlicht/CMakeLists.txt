@@ -199,6 +199,7 @@ add_library(NullDriver OBJECT
 	)
 
 add_library(Device OBJECT
+	CIrrDeviceStub.cpp
 	CIrrDeviceSDL2.cpp
 	)
 
@@ -274,7 +275,7 @@ function(AddImageFormat name mode default)
 	endif()
 endfunction()
 
-AddImageFormat(BMP RW OFF)
+AddImageFormat(BMP RW ON)
 AddImageFormat(DDS RO OFF) # _IRR_COMPILE_WITH_DDS_DECODER_LOADER_ patended
 AddImageFormat(JPG RW ON)
 AddImageFormat(LMP RO OFF)
@@ -325,37 +326,45 @@ AddArchiveFormat(Tar OFF)
 AddArchiveFormat(WAD OFF)
 AddArchiveFormat(Zip OFF)
 
-add_library(GUIOBJ OBJECT
-	CGUIButton.cpp
-	CGUICheckBox.cpp
-	CGUIComboBox.cpp
-	CGUIContextMenu.cpp
-	CGUIEditBox.cpp
-	CGUIEnvironment.cpp
-	CGUIFileOpenDialog.cpp
-	CGUIFont.cpp
-	CGUIImage.cpp
-	CGUIInOutFader.cpp
-	CGUIListBox.cpp
-	CGUIMenu.cpp
-	CGUIMeshViewer.cpp
-	CGUIMessageBox.cpp
-	CGUIModalScreen.cpp
-	CGUIScrollBar.cpp
-	CGUISpinBox.cpp
-	CGUISkin.cpp
-	CGUIStaticText.cpp
-	CGUITabControl.cpp
-	CGUITable.cpp
-	CGUIToolBar.cpp
-	CGUIWindow.cpp
-	CGUIColorSelectDialog.cpp
-	CDefaultGUIElementFactory.cpp
-	CGUISpriteBank.cpp
-	CGUIImageList.cpp
-	CGUITreeView.cpp
-	CGUIProfiler.cpp
-	)
+option(IRRLICHT_GUI "Build Irrlicht with GUI support" ON)
+if(IRRLICHT_GUI)
+	add_library(GUIOBJ OBJECT
+		BuiltInFont.cpp
+		CGUIButton.cpp
+		CGUICheckBox.cpp
+		CGUIComboBox.cpp
+		CGUIContextMenu.cpp
+		CGUIEditBox.cpp
+		CGUIEnvironment.cpp
+		CGUIFileOpenDialog.cpp
+		CGUIFont.cpp
+		CGUIImage.cpp
+		CGUIInOutFader.cpp
+		CGUIListBox.cpp
+		CGUIMenu.cpp
+		CGUIMeshViewer.cpp
+		CGUIMessageBox.cpp
+		CGUIModalScreen.cpp
+		CGUIScrollBar.cpp
+		CGUISpinBox.cpp
+		CGUISkin.cpp
+		CGUIStaticText.cpp
+		CGUITabControl.cpp
+		CGUITable.cpp
+		CGUIToolBar.cpp
+		CGUIWindow.cpp
+		CGUIColorSelectDialog.cpp
+		CDefaultGUIElementFactory.cpp
+		CGUISpriteBank.cpp
+		CGUIImageList.cpp
+		CGUITreeView.cpp
+		CGUIProfiler.cpp
+		)
+	if(NOT IRRLICHT_IMAGE_FORMAT_BMP)
+		message(WARNING "BMP loader is required for builtin font support")
+	endif()
+	target_compile_definitions(Device PRIVATE "_IRR_COMPILE_WITH_GUI_")
+endif()
 
 add_library(AESGM STATIC
 	aesGladman/aescrypt.cpp
@@ -370,7 +379,6 @@ add_library(AESGM STATIC
 	)
 
 add_library(Irrlicht SHARED
-	CIrrDeviceStub.cpp
 	CLogger.cpp
 	COSOperator.cpp
 	Irrlicht.cpp
@@ -393,8 +401,11 @@ target_sources(Irrlicht PRIVATE
 		$<TARGET_OBJECTS:IMAGEOBJ>
 	$<TARGET_OBJECTS:IOOBJ>
 		$<TARGET_OBJECTS:FileSystem>
-	$<TARGET_OBJECTS:GUIOBJ>
 	)
+
+if(IRRLICHT_GUI)
+	target_sources(Irrlicht PRIVATE $<TARGET_OBJECTS:GUIOBJ>)
+endif()
 
 target_link_libraries(Irrlicht PRIVATE
 	AESGM

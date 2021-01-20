@@ -4,7 +4,6 @@
 
 #include "CGUIContextMenu.h"
 
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUISkin.h"
 #include "IGUIEnvironment.h"
@@ -876,5 +875,4 @@ void CGUIContextMenu::closeAllSubMenus()
 } // end namespace
 } // end namespace
 
-#endif // _IRR_COMPILE_WITH_GUI_
 

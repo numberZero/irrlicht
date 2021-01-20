@@ -5,7 +5,6 @@
 #ifndef __C_GUI_BUTTON_H_INCLUDED__
 #define __C_GUI_BUTTON_H_INCLUDED__
 
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUIButton.h"
 #include "IGUISpriteBank.h"
@@ -249,7 +248,6 @@ namespace gui
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 
 #endif // __C_GUI_BUTTON_H_INCLUDED__
 

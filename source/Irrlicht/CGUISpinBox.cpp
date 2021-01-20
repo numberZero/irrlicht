@@ -2,7 +2,6 @@
 // This file uses the licence of the Irrlicht Engine.
 
 #include "CGUISpinBox.h"
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "CGUIEditBox.h"
 #include "CGUIButton.h"
@@ -342,5 +341,4 @@ void CGUISpinBox::deserializeAttributes(io::IAttributes* in, io::SAttributeReadW
 } // end namespace gui
 } // end namespace irr
 
-#endif // _IRR_COMPILE_WITH_GUI_
 

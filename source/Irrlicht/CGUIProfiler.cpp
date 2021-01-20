@@ -3,7 +3,6 @@
 // Written by Michael Zeilfelder
 
 #include "CGUIProfiler.h"
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUITable.h"
 #include "IGUIScrollBar.h"
@@ -328,4 +327,3 @@ void CGUIProfiler::setFilters(irr::u32 minCalls, irr::u32 minTimeSum, irr::f32 m
 } // end namespace irr
 
 
-#endif // _IRR_COMPILE_WITH_GUI_

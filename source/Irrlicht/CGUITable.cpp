@@ -6,7 +6,6 @@
 //                                          A_Buschhueter@gmx.de
 
 #include "CGUITable.h"
-#ifdef _IRR_COMPILE_WITH_GUI_
 
 #include "IGUISkin.h"
 #include "IGUIEnvironment.h"
@@ -1292,5 +1291,4 @@ void CGUITable::deserializeAttributes(io::IAttributes* in, io::SAttributeReadWri
 } // end namespace gui
 } // end namespace irr
 
-#endif
 
