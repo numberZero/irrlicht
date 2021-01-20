@@ -440,10 +440,6 @@ if(IRRLICHT_ARCHIVE_FORMAT_ZIP)
 	endif()
 endif()
 
-target_link_libraries(Irrlicht PRIVATE
-	SDL2
-)
-
 if (IRRLICHT_IMAGE_FORMAT_PNG)
 	find_package(PNG REQUIRED)
 	target_link_libraries(Irrlicht PUBLIC PNG::PNG)
@@ -453,6 +449,9 @@ if (IRRLICHT_IMAGE_FORMAT_JPG)
 	find_package(JPEG REQUIRED)
 	target_link_libraries(Irrlicht PUBLIC JPEG::JPEG)
 endif()
+
+find_package(SDL2 REQUIRED)
+target_link_libraries(Irrlicht PRIVATE SDL2::SDL2)
 
 set(VERSION "${IRRLICHT_VERSION_MAJOR}.${IRRLICHT_VERSION_MINOR}.${IRRLICHT_VERSION_RELEASE}")
 set_target_properties(Irrlicht PROPERTIES
