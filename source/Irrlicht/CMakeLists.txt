@@ -1,6 +1,6 @@
 include_directories(${CMAKE_SOURCE_DIR}/include)
 add_definitions(-DIRRLICHT_EXPORTS=1)
-if(GCC OR CLANG)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID  STREQUAL "Clang")
 	add_compile_options(-Wall -pipe -fno-exceptions -fno-rtti -fstrict-aliasing -fvisibility=hidden)
 endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
