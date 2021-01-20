@@ -2,8 +2,7 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifndef __C_IRR_DEVICE_LINUX_H_INCLUDED__
-#define __C_IRR_DEVICE_LINUX_H_INCLUDED__
+#pragma once
 
 #include "CIrrDeviceStub.h"
 #include "IrrlichtDevice.h"
@@ -328,9 +327,7 @@ namespace irr
 		bool WindowHasFocus;
 		bool WindowMinimized;
 
-#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
 		core::array<SDL_Joystick*> Joysticks;
-#endif
 
 		s32 MouseX, MouseY;
 		u32 MouseButtonStates = 0;
@@ -355,7 +352,6 @@ namespace irr
 		core::array<SKeyMap> KeyMap;
 		u16 KeyMode = 0;
 
-#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
 		struct JoystickInfo
 		{
 			int	fd;
@@ -367,10 +363,7 @@ namespace irr
 			JoystickInfo() : fd(-1), axes(0), buttons(0) { }
 		};
 		core::array<JoystickInfo> ActiveJoysticks;
-#endif
 	};
 
 
 } // end namespace irr
-
-#endif // __C_IRR_DEVICE_LINUX_H_INCLUDED__

@@ -21,7 +21,6 @@
 #include "IGUISpriteBank.h"
 #include <utf8.h>
 
-#if defined _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -38,8 +37,6 @@
 #include <linux/joystick.h>
 #undef _INPUT_H
 #endif
-
-#endif // _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
 
 namespace irr
 {
@@ -59,12 +56,8 @@ const char* wmDeleteWindow = "WM_DELETE_WINDOW";
 //! constructor
 CIrrDeviceSDL2::CIrrDeviceSDL2(const SIrrlichtCreationParameters& param)
 	: CIrrDeviceStub(param),
-#ifdef _IRR_COMPILE_WITH_X11_
-#ifdef _IRR_COMPILE_WITH_OPENGL_
 	window(0),
 	Context(0),
-#endif
-#endif
 	Width(param.WindowSize.Width), Height(param.WindowSize.Height),
 	WindowHasFocus(false), WindowMinimized(false)
 {
@@ -118,7 +111,6 @@ CIrrDeviceSDL2::CIrrDeviceSDL2(const SIrrlichtCreationParameters& param)
 //! destructor
 CIrrDeviceSDL2::~CIrrDeviceSDL2()
 {
-#ifdef _IRR_COMPILE_WITH_X11_
 	// Disable cursor (it is drop'ed in stub)
 	if (CursorControl)
 	{
@@ -143,21 +135,16 @@ CIrrDeviceSDL2::~CIrrDeviceSDL2()
 		VideoDriver = NULL;
 	}
 
-	#ifdef _IRR_COMPILE_WITH_OPENGL_
 	if (Context)
 	{
 		SDL_GL_DeleteContext(Context);
 	}
-	#endif // #ifdef _IRR_COMPILE_WITH_OPENGL_
 
 	// Reset fullscreen resolution change
 	switchToFullscreen(true);
 
 	SDL_DestroyWindow(window);
 
-#endif // #ifdef _IRR_COMPILE_WITH_X11_
-
-#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
 	for (u32 joystick = 0; joystick < ActiveJoysticks.size(); ++joystick)
 	{
 		if (ActiveJoysticks[joystick].fd >= 0)
@@ -165,7 +152,6 @@ CIrrDeviceSDL2::~CIrrDeviceSDL2()
 			close(ActiveJoysticks[joystick].fd);
 		}
 	}
-#endif
 }
 
 bool CIrrDeviceSDL2::switchToFullscreen(bool reset)
@@ -703,13 +689,11 @@ void CIrrDeviceSDL2::sleep(u32 timeMs, bool pauseTimer=false)
 //! sets the caption of the window
 void CIrrDeviceSDL2::setWindowCaption(const wchar_t* text)
 {
-#ifdef _IRR_COMPILE_WITH_X11_
 	if (CreationParams.DriverType == video::EDT_NULL)
 		return;
 
 	core::stringc textc = text;
 	SDL_SetWindowTitle(window, textc.c_str());
-#endif
 }
 
 
@@ -1026,7 +1010,6 @@ void CIrrDeviceSDL2::createKeyMap()
 
 bool CIrrDeviceSDL2::activateJoysticks(core::array<SJoystickInfo> & joystickInfo)
 {
-#if defined(_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
 	joystickInfo.clear();
 
 	// we can name up to 256 different joysticks
@@ -1060,16 +1043,11 @@ bool CIrrDeviceSDL2::activateJoysticks(core::array<SJoystickInfo> & joystickInfo
 	}
 
 	return true;
-
-#endif // _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
-
-	return false;
 }
 
 
 void CIrrDeviceSDL2::pollJoysticks()
 {
-#if defined (_IRR_COMPILE_WITH_JOYSTICK_EVENTS_)
 	if (0 == ActiveJoysticks.size())
 		return;
 
@@ -1112,7 +1090,6 @@ void CIrrDeviceSDL2::pollJoysticks()
 		// Send an irrlicht joystick event once per ::run() even if no new data were received.
 		(void)postEventFromUser(info.persistentData);
 	}
-#endif // _IRR_COMPILE_WITH_JOYSTICK_EVENTS_
 }
 
 
@@ -1135,20 +1112,6 @@ bool CIrrDeviceSDL2::getGammaRamp( f32 &red, f32 &green, f32 &blue, f32 &brightn
 	//SDL_GetWindowGammaRamp(window, red_, green_, blue_);
 	return false;
 }
-
-
-#ifdef _IRR_COMPILE_WITH_X11_
-// return true if the passed event has the type passed in parameter arg
-Bool PredicateIsEventType(Display *display, XEvent *event, XPointer arg)
-{
-	if ( event && event->type == *(int*)arg )
-	{
-//		os::Printer::log("remove event:", core::stringc((int)arg).c_str(), ELL_INFORMATION);
-		return True;
-	}
-	return False;
-}
-#endif //_IRR_COMPILE_WITH_X11_
 
 //! Remove all messages pending in the system message loop
 void CIrrDeviceSDL2::clearSystemMessages()
