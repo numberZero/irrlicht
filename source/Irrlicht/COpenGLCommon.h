@@ -12,8 +12,8 @@
 #else
 	#define GL_GLEXT_PROTOTYPES 1
 #endif
-#include <SDL2/SDL_video.h>
-#include <SDL2/SDL_opengl.h>
+#include "SDL_video.h"
+#include "SDL_opengl.h"
 
 #ifndef GL_ARB_shader_objects
 typedef char GLcharARB;

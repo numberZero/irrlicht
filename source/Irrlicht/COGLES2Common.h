@@ -10,8 +10,8 @@
 #ifndef _IRR_OGLES1_USE_EXTPOINTER_
 #define GL_GLEXT_PROTOTYPES 1
 #endif
-#include <SDL2/SDL_video.h>
-#include <SDL2/SDL_opengles2.h>
+#include "SDL_video.h"
+#include "SDL_opengles2.h"
 
 #ifndef GL_BGRA
 #define GL_BGRA 0x80E1;

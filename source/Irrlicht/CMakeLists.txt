@@ -5,6 +5,9 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID  STREQUAL "Clan
 endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR})
+
 option(IRRLICHT_MESH_WRITERS "Build with mesh writing support" OFF)
 
 function(AddMeshFormat name mode default)
@@ -450,7 +453,6 @@ if (IRRLICHT_IMAGE_FORMAT_JPG)
 	target_link_libraries(Irrlicht PUBLIC JPEG::JPEG)
 endif()
 
-find_package(SDL2 REQUIRED)
 target_link_libraries(Irrlicht PRIVATE SDL2::SDL2)
 
 set(VERSION "${IRRLICHT_VERSION_MAJOR}.${IRRLICHT_VERSION_MINOR}.${IRRLICHT_VERSION_RELEASE}")

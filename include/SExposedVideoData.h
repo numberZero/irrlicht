@@ -4,7 +4,7 @@
 
 #ifndef __S_EXPOSED_VIDEO_DATA_H_INCLUDED__
 #define __S_EXPOSED_VIDEO_DATA_H_INCLUDED__
-#include <SDL2/SDL_video.h>
+#include "SDL_video.h"
 
 namespace irr
 {

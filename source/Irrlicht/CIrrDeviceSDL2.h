@@ -10,7 +10,7 @@
 #include "ICursorControl.h"
 #include "os.h"
 
-#include <SDL2/SDL.h>
+#include "SDL.h"
 
 #ifdef _IRR_COMPILE_WITH_OPENGL_
 #include <GL/gl.h>
