@@ -363,6 +363,18 @@ namespace irr
 			JoystickInfo() : fd(-1), axes(0), buttons(0) { }
 		};
 		core::array<JoystickInfo> ActiveJoysticks;
+
+		struct TouchInfo {
+			SDL_TouchID device;
+			SDL_FingerID touch;
+			size_t id;
+		};
+		core::array<TouchInfo> CurrentTouches;
+		size_t LastTouchId = 0;
+
+		size_t findTouch(SDL_TouchID device, SDL_FingerID touch);
+		size_t addTouch(SDL_TouchID device, SDL_FingerID touch);
+		void removeTouch(size_t id);
 	};
 
 

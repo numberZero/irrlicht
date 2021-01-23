@@ -324,6 +324,8 @@ bool CIrrDeviceSDL2::run()
 				break;
 
 			case SDL_MOUSEMOTION:
+				if (SDL_event.motion.which == SDL_TOUCH_MOUSEID)
+					break; // syntetic mouse event; the real one was SDL_FINGERMOTION
 				irrevent.EventType = irr::EET_MOUSE_INPUT_EVENT;
 				irrevent.MouseInput.Event = irr::EMIE_MOUSE_MOVED;
 				MouseX = irrevent.MouseInput.X = SDL_event.motion.x;
@@ -337,7 +339,8 @@ bool CIrrDeviceSDL2::run()
 
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_MOUSEBUTTONUP:
-
+				if (SDL_event.button.which == SDL_TOUCH_MOUSEID)
+					break; // syntetic mouse event; the real one was SDL_FINGER*
 				irrevent.EventType = irr::EET_MOUSE_INPUT_EVENT;
 				irrevent.MouseInput.X = SDL_event.button.x;
 				irrevent.MouseInput.Y = SDL_event.button.y;
@@ -545,6 +548,24 @@ bool CIrrDeviceSDL2::run()
 			case SDL_FINGERDOWN:
 			case SDL_FINGERUP:
 			case SDL_FINGERMOTION:
+			{
+				irrevent.EventType = irr::EET_TOUCH_INPUT_EVENT;
+				if (SDL_event.tfinger.type == SDL_FINGERDOWN)
+					irrevent.TouchInput.ID = addTouch(SDL_event.tfinger.touchId, SDL_event.tfinger.fingerId);
+				else
+					irrevent.TouchInput.ID = findTouch(SDL_event.tfinger.touchId, SDL_event.tfinger.fingerId);
+				irrevent.TouchInput.X = SDL_event.tfinger.x * Width;
+				irrevent.TouchInput.Y = SDL_event.tfinger.y * Height;
+				irrevent.TouchInput.touchedCount = CurrentTouches.size();
+				switch (SDL_event.tfinger.type) {
+					case SDL_FINGERDOWN: irrevent.TouchInput.Event = irr::ETIE_PRESSED_DOWN; break;
+					case SDL_FINGERUP: irrevent.TouchInput.Event = irr::ETIE_LEFT_UP; break;
+					case SDL_FINGERMOTION: irrevent.TouchInput.Event = irr::ETIE_MOVED; break;
+				}
+				if (SDL_event.tfinger.type == SDL_FINGERUP)
+					removeTouch(irrevent.TouchInput.ID);
+				postEventFromUser(irrevent);
+			}
 
 			/* Gesture events */
 			case SDL_DOLLARGESTURE:
@@ -659,6 +680,28 @@ bool CIrrDeviceSDL2::run()
 	return !Close;
 }
 
+
+size_t CIrrDeviceSDL2::findTouch(SDL_TouchID device, SDL_FingerID touch) {
+	for (unsigned k = 0; k < CurrentTouches.size(); k++)
+		if (CurrentTouches[k].device == device && CurrentTouches[k].touch == touch)
+			return CurrentTouches[k].id;
+	os::Printer::log("Touch not found by device/finger id", ELL_WARNING);
+	return addTouch(device, touch);
+}
+
+size_t CIrrDeviceSDL2::addTouch(SDL_TouchID device, SDL_FingerID touch) {
+	CurrentTouches.push_back({device, touch, ++LastTouchId});
+	return LastTouchId;
+}
+
+void CIrrDeviceSDL2::removeTouch(size_t id) {
+	for (unsigned k = 0; k < CurrentTouches.size(); k++)
+		if (CurrentTouches[k].id == id) {
+			CurrentTouches.erase(k);
+			return;
+		}
+	os::Printer::log("Touch not found by internal id", ELL_ERROR);
+}
 
 //! Pause the current process for the minimum time allowed only to allow other processes to execute
 void CIrrDeviceSDL2::yield()
