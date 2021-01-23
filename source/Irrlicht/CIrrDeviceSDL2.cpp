@@ -918,7 +918,8 @@ void CIrrDeviceSDL2::createKeyMap()
 
 	KeyMap.reallocate(105);
 
-	// buttons missing
+	// buttons
+	KeyMap.push_back(SKeyMap(SDLK_AC_BACK, KEY_CANCEL));
 
 	KeyMap.push_back(SKeyMap(SDLK_BACKSPACE, KEY_BACK));
 	KeyMap.push_back(SKeyMap(SDLK_TAB, KEY_TAB));
