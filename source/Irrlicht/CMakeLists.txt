@@ -1,7 +1,7 @@
 include_directories(${CMAKE_SOURCE_DIR}/include)
 add_definitions(-DIRRLICHT_EXPORTS=1)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID  STREQUAL "Clang")
-	add_compile_options(-Wall -pipe -fno-exceptions -fno-rtti -fstrict-aliasing -fvisibility=hidden)
+	add_compile_options(-Wall -pipe -fno-rtti -fstrict-aliasing -fvisibility=hidden)
 endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
@@ -381,7 +381,7 @@ add_library(AESGM STATIC EXCLUDE_FROM_ALL
 	aesGladman/sha2.cpp
 	)
 
-add_library(Irrlicht SHARED
+add_library(Irrlicht STATIC
 	CLogger.cpp
 	COSOperator.cpp
 	Irrlicht.cpp
@@ -445,11 +445,13 @@ endif()
 
 if (IRRLICHT_IMAGE_FORMAT_PNG)
 	find_package(PNG REQUIRED)
+	target_link_libraries(IMAGEOBJ PUBLIC PNG::PNG)
 	target_link_libraries(Irrlicht PUBLIC PNG::PNG)
 endif()
 
 if (IRRLICHT_IMAGE_FORMAT_JPG)
 	find_package(JPEG REQUIRED)
+	target_link_libraries(IMAGEOBJ PUBLIC JPEG::JPEG)
 	target_link_libraries(Irrlicht PUBLIC JPEG::JPEG)
 endif()
 
